@@ -1,0 +1,35 @@
+[
+    {
+        "title": [
+            "天津-乌鲁木齐"
+        ],
+        "data": [
+            {
+                "value": 25,
+                "itemStyle": {
+                    "color": "#b6dcb6"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "深圳-重庆",
+            "天津-乌鲁木齐"
+        ],
+        "data": [
+            {
+                "value": 75,
+                "itemStyle": {
+                    "color": "#4f8c9d"
+                }
+            },
+            {
+                "value": 39,
+                "itemStyle": {
+                    "color": "#b6dcb6"
+                }
+            }
+        ]
+    }
+]

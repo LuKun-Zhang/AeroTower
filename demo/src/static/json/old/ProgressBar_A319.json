@@ -1,0 +1,7188 @@
+[
+    {
+        "title": [
+            "拉萨-丽江"
+        ],
+        "data": [
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-丽江"
+        ],
+        "data": [
+            {
+                "value": 4,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-丽江"
+        ],
+        "data": [
+            {
+                "value": 8,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "神农架-武汉",
+            "拉萨-丽江"
+        ],
+        "data": [
+            {
+                "value": 42,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 12,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "神农架-武汉",
+            "拉萨-丽江"
+        ],
+        "data": [
+            {
+                "value": 50,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 16,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "神农架-武汉",
+            "拉萨-丽江"
+        ],
+        "data": [
+            {
+                "value": 57,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 20,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "神农架-武汉",
+            "拉萨-丽江"
+        ],
+        "data": [
+            {
+                "value": 64,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 25,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "神农架-武汉",
+            "拉萨-丽江"
+        ],
+        "data": [
+            {
+                "value": 71,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 29,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "神农架-武汉",
+            "拉萨-丽江"
+        ],
+        "data": [
+            {
+                "value": 78,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 33,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "神农架-武汉",
+            "拉萨-丽江"
+        ],
+        "data": [
+            {
+                "value": 85,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 37,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "神农架-武汉",
+            "拉萨-丽江"
+        ],
+        "data": [
+            {
+                "value": 92,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 41,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "神农架-武汉",
+            "拉萨-丽江"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 45,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西昌-林芝",
+            "西安-拉萨",
+            "拉萨-丽江",
+            "南通-武汉"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 95,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 50,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 27,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "林芝-成都",
+            "西安-拉萨",
+            "拉萨-丽江",
+            "南通-武汉",
+            "拉萨-重庆"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 97,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 54,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 33,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 31,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西安-拉萨",
+            "林芝-重庆",
+            "南昌-重庆",
+            "拉萨-丽江",
+            "南通-武汉",
+            "拉萨-重庆"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 85,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 84,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 58,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 38,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 34,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "林芝-重庆",
+            "南昌-重庆",
+            "拉萨-丽江",
+            "南通-武汉",
+            "拉萨-重庆",
+            "揭阳-重庆"
+        ],
+        "data": [
+            {
+                "value": 89,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 88,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 62,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 44,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 37,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "林芝-重庆",
+            "南昌-重庆",
+            "拉萨-丽江",
+            "南通-武汉",
+            "拉萨-重庆",
+            "成都-济南",
+            "揭阳-重庆"
+        ],
+        "data": [
+            {
+                "value": 92,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 92,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 66,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 50,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 41,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 32,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 3,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "林芝-重庆",
+            "南昌-重庆",
+            "拉萨-丽江",
+            "南通-武汉",
+            "拉萨-重庆",
+            "成都-济南",
+            "揭阳-重庆"
+        ],
+        "data": [
+            {
+                "value": 96,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 96,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 70,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 55,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 44,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 35,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 6,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "林芝-重庆",
+            "南昌-重庆",
+            "拉萨-丽江",
+            "南通-武汉",
+            "拉萨-重庆",
+            "成都-济南",
+            "揭阳-重庆"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 75,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 61,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 48,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 39,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 10,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "南昌-重庆",
+            "拉萨-丽江",
+            "南通-武汉",
+            "拉萨-重庆",
+            "成都-济南",
+            "三亚-宜宾",
+            "揭阳-重庆"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#77d1fd"
+                }
+            },
+            {
+                "value": 79,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 66,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 51,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 42,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 36,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 13,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-丽江",
+            "南通-武汉",
+            "拉萨-重庆",
+            "成都-济南",
+            "三亚-宜宾",
+            "揭阳-重庆"
+        ],
+        "data": [
+            {
+                "value": 83,
+                "itemStyle": {
+                    "color": "#77d1fd"
+                }
+            },
+            {
+                "value": 72,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 55,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 46,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 40,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 16,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-丽江",
+            "南通-武汉",
+            "拉萨-重庆",
+            "成都-济南",
+            "三亚-宜宾",
+            "揭阳-重庆"
+        ],
+        "data": [
+            {
+                "value": 87,
+                "itemStyle": {
+                    "color": "#369094"
+                }
+            },
+            {
+                "value": 77,
+                "itemStyle": {
+                    "color": "#77d1fd"
+                }
+            },
+            {
+                "value": 58,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 50,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 44,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 20,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-丽江",
+            "南通-武汉",
+            "拉萨-重庆",
+            "成都-济南",
+            "三亚-宜宾",
+            "揭阳-重庆"
+        ],
+        "data": [
+            {
+                "value": 91,
+                "itemStyle": {
+                    "color": "#369094"
+                }
+            },
+            {
+                "value": 83,
+                "itemStyle": {
+                    "color": "#77d1fd"
+                }
+            },
+            {
+                "value": 62,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 53,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 48,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 23,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-丽江",
+            "南通-武汉",
+            "拉萨-重庆",
+            "成都-济南",
+            "三亚-宜宾",
+            "揭阳-重庆",
+            "武汉-重庆"
+        ],
+        "data": [
+            {
+                "value": 95,
+                "itemStyle": {
+                    "color": "#369094"
+                }
+            },
+            {
+                "value": 88,
+                "itemStyle": {
+                    "color": "#77d1fd"
+                }
+            },
+            {
+                "value": 65,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 57,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 52,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 26,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-丽江",
+            "南通-武汉",
+            "拉萨-重庆",
+            "成都-济南",
+            "三亚-宜宾",
+            "揭阳-重庆",
+            "武汉-重庆",
+            "拉萨-绵阳"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#369094"
+                }
+            },
+            {
+                "value": 94,
+                "itemStyle": {
+                    "color": "#77d1fd"
+                }
+            },
+            {
+                "value": 68,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 60,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 56,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 30,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 5,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-丽江",
+            "南通-武汉",
+            "拉萨-重庆",
+            "成都-济南",
+            "三亚-宜宾",
+            "揭阳-重庆",
+            "武汉-重庆",
+            "拉萨-绵阳"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#369094"
+                }
+            },
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#77d1fd"
+                }
+            },
+            {
+                "value": 72,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 64,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 60,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 33,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 10,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 4,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-重庆",
+            "成都-济南",
+            "三亚-宜宾",
+            "揭阳-重庆",
+            "武汉-重庆",
+            "拉萨-绵阳"
+        ],
+        "data": [
+            {
+                "value": 75,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 67,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 64,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 36,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 15,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 8,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-重庆",
+            "成都-济南",
+            "三亚-宜宾",
+            "揭阳-重庆",
+            "武汉-重庆",
+            "拉萨-绵阳",
+            "成都-吕梁"
+        ],
+        "data": [
+            {
+                "value": 79,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 71,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 68,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 40,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 20,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 12,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-重庆",
+            "成都-济南",
+            "三亚-宜宾",
+            "揭阳-重庆",
+            "武汉-重庆",
+            "拉萨-绵阳",
+            "成都-吕梁"
+        ],
+        "data": [
+            {
+                "value": 82,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 75,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 72,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 43,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 25,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 16,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 4,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-重庆",
+            "成都-济南",
+            "三亚-宜宾",
+            "揭阳-重庆",
+            "武汉-重庆",
+            "拉萨-绵阳",
+            "成都-吕梁"
+        ],
+        "data": [
+            {
+                "value": 86,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 78,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 76,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 46,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 30,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 20,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 9,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-重庆",
+            "成都-济南",
+            "三亚-宜宾",
+            "揭阳-重庆",
+            "拉萨-甘南",
+            "武汉-重庆",
+            "拉萨-绵阳",
+            "成都-吕梁"
+        ],
+        "data": [
+            {
+                "value": 89,
+                "itemStyle": {
+                    "color": "#77d1fd"
+                }
+            },
+            {
+                "value": 82,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 80,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 50,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 47,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 35,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 24,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 13,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-重庆",
+            "成都-济南",
+            "三亚-宜宾",
+            "揭阳-重庆",
+            "拉萨-甘南",
+            "武汉-重庆",
+            "拉萨-绵阳",
+            "成都-吕梁"
+        ],
+        "data": [
+            {
+                "value": 93,
+                "itemStyle": {
+                    "color": "#77d1fd"
+                }
+            },
+            {
+                "value": 85,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 84,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 53,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 52,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 40,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 28,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 18,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-重庆",
+            "成都-济南",
+            "三亚-宜宾",
+            "揭阳-重庆",
+            "拉萨-甘南",
+            "武汉-重庆",
+            "拉萨-绵阳",
+            "成都-吕梁"
+        ],
+        "data": [
+            {
+                "value": 96,
+                "itemStyle": {
+                    "color": "#77d1fd"
+                }
+            },
+            {
+                "value": 89,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 88,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 56,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 56,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 45,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 32,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 22,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-重庆",
+            "成都-济南",
+            "三亚-宜宾",
+            "揭阳-重庆",
+            "拉萨-甘南",
+            "武汉-重庆",
+            "拉萨-绵阳",
+            "成都-吕梁"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#77d1fd"
+                }
+            },
+            {
+                "value": 92,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 92,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 60,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 60,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 50,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 36,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 27,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "成都-济南",
+            "三亚-宜宾",
+            "拉萨-甘南",
+            "揭阳-重庆",
+            "武汉-重庆",
+            "拉萨-绵阳",
+            "成都-吕梁"
+        ],
+        "data": [
+            {
+                "value": 96,
+                "itemStyle": {
+                    "color": "#77d1fd"
+                }
+            },
+            {
+                "value": 96,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 65,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 63,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 55,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 40,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 31,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "成都-济南",
+            "三亚-宜宾",
+            "拉萨-甘南",
+            "揭阳-重庆",
+            "武汉-重庆",
+            "拉萨-绵阳",
+            "成都-吕梁"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#77d1fd"
+                }
+            },
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 69,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 66,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 60,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 44,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 36,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "三亚-宜宾",
+            "拉萨-甘南",
+            "揭阳-重庆",
+            "武汉-重庆",
+            "拉萨-绵阳",
+            "成都-吕梁"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#77d1fd"
+                }
+            },
+            {
+                "value": 73,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 70,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 65,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 48,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 40,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-甘南",
+            "揭阳-重庆",
+            "武汉-重庆",
+            "拉萨-绵阳",
+            "成都-吕梁",
+            "武汉-成都"
+        ],
+        "data": [
+            {
+                "value": 78,
+                "itemStyle": {
+                    "color": "#77d1fd"
+                }
+            },
+            {
+                "value": 73,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 70,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 52,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 45,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-甘南",
+            "揭阳-重庆",
+            "武汉-重庆",
+            "拉萨-绵阳",
+            "成都-吕梁",
+            "武汉-成都"
+        ],
+        "data": [
+            {
+                "value": 82,
+                "itemStyle": {
+                    "color": "#77d1fd"
+                }
+            },
+            {
+                "value": 76,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 75,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 56,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 50,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 4,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-甘南",
+            "揭阳-重庆",
+            "武汉-重庆",
+            "拉萨-绵阳",
+            "成都-吕梁",
+            "武汉-成都"
+        ],
+        "data": [
+            {
+                "value": 86,
+                "itemStyle": {
+                    "color": "#77d1fd"
+                }
+            },
+            {
+                "value": 80,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 80,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 60,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 54,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 8,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-甘南",
+            "揭阳-重庆",
+            "武汉-重庆",
+            "拉萨-绵阳",
+            "成都-吕梁",
+            "武汉-成都"
+        ],
+        "data": [
+            {
+                "value": 91,
+                "itemStyle": {
+                    "color": "#77d1fd"
+                }
+            },
+            {
+                "value": 83,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 85,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 64,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 59,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 12,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-甘南",
+            "武汉-重庆",
+            "揭阳-重庆",
+            "拉萨-绵阳",
+            "成都-吕梁",
+            "武汉-成都"
+        ],
+        "data": [
+            {
+                "value": 95,
+                "itemStyle": {
+                    "color": "#77d1fd"
+                }
+            },
+            {
+                "value": 90,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 86,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 68,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 63,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 16,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-甘南",
+            "武汉-重庆",
+            "揭阳-重庆",
+            "拉萨-绵阳",
+            "成都-吕梁",
+            "武汉-成都",
+            "成都-攀枝花"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#77d1fd"
+                }
+            },
+            {
+                "value": 95,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 90,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 72,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 68,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 20,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-甘南",
+            "武汉-重庆",
+            "揭阳-重庆",
+            "拉萨-绵阳",
+            "成都-吕梁",
+            "武汉-成都",
+            "成都-攀枝花"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#77d1fd"
+                }
+            },
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 93,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 76,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 72,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 24,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 6,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "武汉-重庆",
+            "揭阳-重庆",
+            "拉萨-绵阳",
+            "成都-吕梁",
+            "武汉-成都",
+            "成都-攀枝花"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#104b6d"
+                }
+            },
+            {
+                "value": 96,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 80,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 77,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 28,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 12,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "揭阳-重庆",
+            "拉萨-绵阳",
+            "成都-吕梁",
+            "武汉-成都",
+            "成都-攀枝花"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 84,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 81,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 32,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 18,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-绵阳",
+            "成都-吕梁",
+            "武汉-成都",
+            "成都-攀枝花",
+            "宜宾-西安"
+        ],
+        "data": [
+            {
+                "value": 88,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 86,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 36,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 25,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 10,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-绵阳",
+            "成都-吕梁",
+            "武汉-成都",
+            "成都-攀枝花",
+            "宜宾-西安"
+        ],
+        "data": [
+            {
+                "value": 92,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 90,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 40,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 31,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 15,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-绵阳",
+            "成都-吕梁",
+            "武汉-成都",
+            "成都-攀枝花",
+            "宜宾-西安"
+        ],
+        "data": [
+            {
+                "value": 96,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 95,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 44,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 37,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 21,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-绵阳",
+            "成都-吕梁",
+            "武汉-成都",
+            "成都-攀枝花",
+            "宜宾-西安",
+            "济南-成都"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 48,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 43,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 26,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "成都-吕梁",
+            "武汉-成都",
+            "成都-攀枝花",
+            "宜宾-西安",
+            "济南-成都"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#447cfe"
+                }
+            },
+            {
+                "value": 52,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 50,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 31,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 3,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "武汉-成都",
+            "成都-攀枝花",
+            "宜宾-西安",
+            "济南-成都",
+            "甘南-西安"
+        ],
+        "data": [
+            {
+                "value": 56,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 56,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 36,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 6,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "成都-攀枝花",
+            "武汉-成都",
+            "宜宾-西安",
+            "济南-成都",
+            "甘南-西安"
+        ],
+        "data": [
+            {
+                "value": 62,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 60,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 42,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 9,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 6,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "成都-攀枝花",
+            "武汉-成都",
+            "宜宾-西安",
+            "济南-成都",
+            "甘南-西安"
+        ],
+        "data": [
+            {
+                "value": 68,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 64,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 47,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 12,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 12,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "成都-攀枝花",
+            "武汉-成都",
+            "宜宾-西安",
+            "甘南-西安",
+            "济南-成都"
+        ],
+        "data": [
+            {
+                "value": 75,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 68,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 52,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 18,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 15,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "成都-攀枝花",
+            "武汉-成都",
+            "宜宾-西安",
+            "甘南-西安",
+            "济南-成都"
+        ],
+        "data": [
+            {
+                "value": 81,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 72,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 57,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 25,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 18,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "成都-攀枝花",
+            "武汉-成都",
+            "宜宾-西安",
+            "甘南-西安",
+            "济南-成都"
+        ],
+        "data": [
+            {
+                "value": 87,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 76,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 63,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 31,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 21,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "成都-攀枝花",
+            "武汉-成都",
+            "宜宾-西安",
+            "甘南-西安",
+            "济南-成都"
+        ],
+        "data": [
+            {
+                "value": 93,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 80,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 68,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 37,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 24,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "成都-攀枝花",
+            "武汉-成都",
+            "宜宾-西安",
+            "甘南-西安",
+            "济南-成都",
+            "绵阳-拉萨"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 84,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 73,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 43,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 27,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "成都-攀枝花",
+            "武汉-成都",
+            "宜宾-西安",
+            "甘南-西安",
+            "济南-成都",
+            "绵阳-拉萨",
+            "吕梁-大连"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#922eb1"
+                }
+            },
+            {
+                "value": 88,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 78,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 50,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 30,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 3,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "武汉-成都",
+            "宜宾-西安",
+            "甘南-西安",
+            "济南-成都",
+            "绵阳-拉萨",
+            "吕梁-大连"
+        ],
+        "data": [
+            {
+                "value": 92,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 84,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 56,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 33,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 6,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 5,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "武汉-成都",
+            "宜宾-西安",
+            "甘南-西安",
+            "济南-成都",
+            "绵阳-拉萨",
+            "吕梁-大连"
+        ],
+        "data": [
+            {
+                "value": 96,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 89,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 62,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 36,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 10,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 10,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "武汉-成都",
+            "宜宾-西安",
+            "甘南-西安",
+            "济南-成都",
+            "绵阳-拉萨",
+            "吕梁-大连"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 94,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 68,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 39,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 13,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 15,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "宜宾-西安",
+            "甘南-西安",
+            "济南-成都",
+            "吕梁-大连",
+            "绵阳-拉萨"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 75,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 42,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 20,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 16,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "甘南-西安",
+            "济南-成都",
+            "吕梁-大连",
+            "绵阳-拉萨"
+        ],
+        "data": [
+            {
+                "value": 81,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 45,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 25,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 20,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "甘南-西安",
+            "济南-成都",
+            "吕梁-大连",
+            "绵阳-拉萨"
+        ],
+        "data": [
+            {
+                "value": 87,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 48,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 30,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 23,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "甘南-西安",
+            "济南-成都",
+            "吕梁-大连",
+            "绵阳-拉萨",
+            "西安-沈阳"
+        ],
+        "data": [
+            {
+                "value": 93,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 51,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 35,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 26,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 16,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "甘南-西安",
+            "济南-成都",
+            "吕梁-大连",
+            "绵阳-拉萨",
+            "西安-沈阳"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 54,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 40,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 30,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 20,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "甘南-西安",
+            "济南-成都",
+            "吕梁-大连",
+            "绵阳-拉萨",
+            "西安-沈阳"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#c6c0fe"
+                }
+            },
+            {
+                "value": 57,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 45,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 33,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 23,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "济南-成都",
+            "吕梁-大连",
+            "绵阳-拉萨",
+            "西安-沈阳"
+        ],
+        "data": [
+            {
+                "value": 60,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 50,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 36,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 26,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "济南-成都",
+            "吕梁-大连",
+            "绵阳-拉萨",
+            "西安-沈阳"
+        ],
+        "data": [
+            {
+                "value": 63,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 55,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 40,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 30,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "济南-成都",
+            "吕梁-大连",
+            "绵阳-拉萨",
+            "西安-沈阳"
+        ],
+        "data": [
+            {
+                "value": 66,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 60,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 43,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 33,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "济南-成都",
+            "吕梁-大连",
+            "绵阳-拉萨",
+            "西安-沈阳"
+        ],
+        "data": [
+            {
+                "value": 69,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 65,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 46,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 36,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "济南-成都",
+            "吕梁-大连",
+            "绵阳-拉萨",
+            "西安-沈阳"
+        ],
+        "data": [
+            {
+                "value": 72,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 70,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 50,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 40,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "济南-成都",
+            "吕梁-大连",
+            "绵阳-拉萨",
+            "西安-沈阳",
+            "西安-昆明"
+        ],
+        "data": [
+            {
+                "value": 75,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 75,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 53,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 43,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "济南-成都",
+            "吕梁-大连",
+            "绵阳-拉萨",
+            "西安-沈阳",
+            "西安-昆明"
+        ],
+        "data": [
+            {
+                "value": 78,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 80,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 56,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 46,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 3,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "吕梁-大连",
+            "济南-成都",
+            "绵阳-拉萨",
+            "西安-沈阳",
+            "西安-昆明"
+        ],
+        "data": [
+            {
+                "value": 85,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 81,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 60,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 50,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 6,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "吕梁-大连",
+            "济南-成都",
+            "绵阳-拉萨",
+            "西安-沈阳",
+            "西安-昆明"
+        ],
+        "data": [
+            {
+                "value": 90,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 84,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 63,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 53,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 10,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "吕梁-大连",
+            "济南-成都",
+            "绵阳-拉萨",
+            "西安-沈阳",
+            "西安-昆明"
+        ],
+        "data": [
+            {
+                "value": 95,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 87,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 66,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 56,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 13,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "吕梁-大连",
+            "济南-成都",
+            "绵阳-拉萨",
+            "西安-沈阳",
+            "西安-昆明"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 90,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 70,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 60,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 17,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "济南-成都",
+            "绵阳-拉萨",
+            "西安-沈阳",
+            "西安-昆明"
+        ],
+        "data": [
+            {
+                "value": 93,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 73,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 63,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 20,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "济南-成都",
+            "绵阳-拉萨",
+            "西安-沈阳",
+            "西安-昆明"
+        ],
+        "data": [
+            {
+                "value": 96,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 76,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 66,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 24,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "济南-成都",
+            "绵阳-拉萨",
+            "西安-沈阳",
+            "西安-昆明",
+            "拉萨-成都",
+            "西安-青岛"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 80,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 70,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 27,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 11,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "绵阳-拉萨",
+            "西安-沈阳",
+            "西安-昆明",
+            "拉萨-成都",
+            "西安-青岛"
+        ],
+        "data": [
+            {
+                "value": 83,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 73,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 31,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 15,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 3,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "绵阳-拉萨",
+            "西安-沈阳",
+            "西安-昆明",
+            "拉萨-成都",
+            "西安-青岛"
+        ],
+        "data": [
+            {
+                "value": 86,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 76,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 34,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 19,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 6,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "绵阳-拉萨",
+            "西安-沈阳",
+            "西安-昆明",
+            "拉萨-成都",
+            "西安-青岛"
+        ],
+        "data": [
+            {
+                "value": 90,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 80,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 37,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 23,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 10,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "绵阳-拉萨",
+            "西安-沈阳",
+            "西安-昆明",
+            "拉萨-成都",
+            "西安-青岛"
+        ],
+        "data": [
+            {
+                "value": 93,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 83,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 41,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 26,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 13,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "绵阳-拉萨",
+            "西安-沈阳",
+            "西安-昆明",
+            "拉萨-成都",
+            "西安-青岛"
+        ],
+        "data": [
+            {
+                "value": 96,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 86,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 44,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 30,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 17,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "绵阳-拉萨",
+            "西安-沈阳",
+            "西安-昆明",
+            "拉萨-成都",
+            "西安-青岛"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 90,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 48,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 34,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 20,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "绵阳-拉萨",
+            "西安-沈阳",
+            "西安-昆明",
+            "拉萨-成都",
+            "西安-青岛"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#333a9e"
+                }
+            },
+            {
+                "value": 93,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 51,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 38,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 24,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西安-沈阳",
+            "西安-昆明",
+            "拉萨-成都",
+            "西安-青岛"
+        ],
+        "data": [
+            {
+                "value": 96,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 55,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 42,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 27,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西安-沈阳",
+            "西安-昆明",
+            "拉萨-成都",
+            "西安-青岛",
+            "大连-吕梁"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 58,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 46,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 31,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西安-沈阳",
+            "西安-昆明",
+            "拉萨-成都",
+            "西安-青岛",
+            "大连-吕梁"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#fc99d5"
+                }
+            },
+            {
+                "value": 62,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 50,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 34,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 4,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西安-昆明",
+            "拉萨-成都",
+            "西安-青岛",
+            "大连-吕梁"
+        ],
+        "data": [
+            {
+                "value": 65,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 53,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 37,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 9,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西安-昆明",
+            "拉萨-成都",
+            "西安-青岛",
+            "大连-吕梁"
+        ],
+        "data": [
+            {
+                "value": 68,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 57,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 41,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 13,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西安-昆明",
+            "拉萨-成都",
+            "西安-青岛",
+            "大连-吕梁"
+        ],
+        "data": [
+            {
+                "value": 72,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 61,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 44,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 18,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西安-昆明",
+            "拉萨-成都",
+            "西安-青岛",
+            "大连-吕梁"
+        ],
+        "data": [
+            {
+                "value": 75,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 65,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 48,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 22,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西安-昆明",
+            "拉萨-成都",
+            "西安-青岛",
+            "大连-吕梁",
+            "拉萨-西安"
+        ],
+        "data": [
+            {
+                "value": 79,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 69,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 51,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 27,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西安-昆明",
+            "拉萨-成都",
+            "西安-青岛",
+            "大连-吕梁",
+            "拉萨-西安"
+        ],
+        "data": [
+            {
+                "value": 82,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 73,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 55,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 31,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 2,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西安-昆明",
+            "拉萨-成都",
+            "西安-青岛",
+            "大连-吕梁",
+            "拉萨-西安"
+        ],
+        "data": [
+            {
+                "value": 86,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 76,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 58,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 36,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 5,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西安-昆明",
+            "拉萨-成都",
+            "西安-青岛",
+            "大连-吕梁",
+            "拉萨-西安"
+        ],
+        "data": [
+            {
+                "value": 89,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 80,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 62,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 40,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 8,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西安-昆明",
+            "拉萨-成都",
+            "西安-青岛",
+            "大连-吕梁",
+            "拉萨-西安"
+        ],
+        "data": [
+            {
+                "value": 93,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 84,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 65,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 45,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 11,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西安-昆明",
+            "拉萨-成都",
+            "西安-青岛",
+            "大连-吕梁",
+            "拉萨-西安"
+        ],
+        "data": [
+            {
+                "value": 96,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 88,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 68,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 50,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 13,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西安-昆明",
+            "拉萨-成都",
+            "西安-青岛",
+            "大连-吕梁",
+            "拉萨-西安"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 92,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 72,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 54,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 16,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-成都",
+            "西安-青岛",
+            "大连-吕梁",
+            "拉萨-西安"
+        ],
+        "data": [
+            {
+                "value": 96,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 75,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 59,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 19,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-成都",
+            "西安-青岛",
+            "大连-吕梁",
+            "拉萨-西安"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 79,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 63,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 22,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西安-青岛",
+            "大连-吕梁",
+            "常州-珠海",
+            "拉萨-西安"
+        ],
+        "data": [
+            {
+                "value": 82,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 68,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 63,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 25,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西安-青岛",
+            "大连-吕梁",
+            "常州-珠海",
+            "拉萨-西安"
+        ],
+        "data": [
+            {
+                "value": 86,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 72,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 66,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 27,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西安-青岛",
+            "大连-吕梁",
+            "常州-珠海",
+            "拉萨-西安"
+        ],
+        "data": [
+            {
+                "value": 89,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 77,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 69,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 30,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西安-青岛",
+            "大连-吕梁",
+            "常州-珠海",
+            "拉萨-西安"
+        ],
+        "data": [
+            {
+                "value": 93,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 81,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 72,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 33,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西安-青岛",
+            "大连-吕梁",
+            "常州-珠海",
+            "拉萨-西安",
+            "沈阳-西安",
+            "成都-兰州"
+        ],
+        "data": [
+            {
+                "value": 96,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 86,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 75,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 36,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西安-青岛",
+            "大连-吕梁",
+            "常州-珠海",
+            "拉萨-西安",
+            "沈阳-西安",
+            "成都-兰州"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 90,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 78,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 38,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 2,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 5,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西安-青岛",
+            "大连-吕梁",
+            "常州-珠海",
+            "拉萨-西安",
+            "成都-兰州",
+            "沈阳-西安"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#9d5374"
+                }
+            },
+            {
+                "value": 95,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 81,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 41,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 11,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 4,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "大连-吕梁",
+            "常州-珠海",
+            "拉萨-西安",
+            "成都-兰州",
+            "沈阳-西安"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 84,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 44,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 16,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 6,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "常州-珠海",
+            "拉萨-西安",
+            "成都-兰州",
+            "沈阳-西安",
+            "成都-文山"
+        ],
+        "data": [
+            {
+                "value": 87,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 47,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 22,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 8,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "常州-珠海",
+            "拉萨-西安",
+            "成都-兰州",
+            "沈阳-西安",
+            "成都-文山"
+        ],
+        "data": [
+            {
+                "value": 90,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 50,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 27,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 11,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 4,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "常州-珠海",
+            "拉萨-西安",
+            "成都-兰州",
+            "沈阳-西安",
+            "成都-文山"
+        ],
+        "data": [
+            {
+                "value": 93,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 52,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 33,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 13,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 9,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西宁-乌鲁木齐",
+            "常州-珠海",
+            "拉萨-西安",
+            "成都-兰州",
+            "沈阳-西安",
+            "成都-文山"
+        ],
+        "data": [
+            {
+                "value": 97,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 96,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 55,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 38,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 15,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 14,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西宁-乌鲁木齐",
+            "常州-珠海",
+            "拉萨-西安",
+            "成都-兰州",
+            "沈阳-西安",
+            "成都-文山"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 58,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 44,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 17,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 19,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "西宁-乌鲁木齐",
+            "常州-珠海",
+            "拉萨-西安",
+            "成都-兰州",
+            "成都-文山",
+            "沈阳-西安"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#fb5de7"
+                }
+            },
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#2524f9"
+                }
+            },
+            {
+                "value": 61,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 50,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 23,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 20,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-西安",
+            "成都-兰州",
+            "成都-文山",
+            "沈阳-西安"
+        ],
+        "data": [
+            {
+                "value": 63,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 55,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 28,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 22,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-西安",
+            "成都-兰州",
+            "成都-文山",
+            "沈阳-西安"
+        ],
+        "data": [
+            {
+                "value": 66,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 61,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 33,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 24,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-西安",
+            "成都-兰州",
+            "成都-文山",
+            "沈阳-西安",
+            "吕梁-成都"
+        ],
+        "data": [
+            {
+                "value": 69,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 66,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 38,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 26,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-西安",
+            "成都-兰州",
+            "成都-文山",
+            "沈阳-西安",
+            "吕梁-成都",
+            "青岛-西安"
+        ],
+        "data": [
+            {
+                "value": 72,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 72,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 42,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 28,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 4,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-西安",
+            "成都-兰州",
+            "成都-文山",
+            "沈阳-西安",
+            "吕梁-成都",
+            "青岛-西安"
+        ],
+        "data": [
+            {
+                "value": 75,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 77,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 47,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 31,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 8,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 3,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "成都-兰州",
+            "拉萨-西安",
+            "成都-文山",
+            "沈阳-西安",
+            "吕梁-成都",
+            "青岛-西安"
+        ],
+        "data": [
+            {
+                "value": 83,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 77,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 52,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 33,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 12,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 6,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "成都-兰州",
+            "拉萨-西安",
+            "成都-文山",
+            "沈阳-西安",
+            "吕梁-成都",
+            "青岛-西安"
+        ],
+        "data": [
+            {
+                "value": 88,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 80,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 57,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 35,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 16,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 10,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "成都-兰州",
+            "拉萨-西安",
+            "成都-文山",
+            "沈阳-西安",
+            "吕梁-成都",
+            "青岛-西安"
+        ],
+        "data": [
+            {
+                "value": 94,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 83,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 61,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 37,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 20,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 13,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "成都-兰州",
+            "拉萨-西安",
+            "成都-文山",
+            "沈阳-西安",
+            "吕梁-成都",
+            "青岛-西安",
+            "珠海-成都"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#7383af"
+                }
+            },
+            {
+                "value": 86,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 66,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 40,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 25,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 16,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-西安",
+            "成都-文山",
+            "沈阳-西安",
+            "吕梁-成都",
+            "青岛-西安",
+            "珠海-成都"
+        ],
+        "data": [
+            {
+                "value": 88,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 71,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 42,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 29,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 20,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 3,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-西安",
+            "成都-文山",
+            "沈阳-西安",
+            "吕梁-成都",
+            "青岛-西安",
+            "珠海-成都"
+        ],
+        "data": [
+            {
+                "value": 91,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 76,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 44,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 33,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 23,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 6,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-西安",
+            "成都-文山",
+            "沈阳-西安",
+            "吕梁-成都",
+            "青岛-西安",
+            "珠海-成都"
+        ],
+        "data": [
+            {
+                "value": 94,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 80,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 46,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 37,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 26,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 10,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-西安",
+            "成都-文山",
+            "沈阳-西安",
+            "吕梁-成都",
+            "青岛-西安",
+            "珠海-成都"
+        ],
+        "data": [
+            {
+                "value": 97,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 85,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 48,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 41,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 30,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 13,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "拉萨-西安",
+            "成都-文山",
+            "沈阳-西安",
+            "吕梁-成都",
+            "青岛-西安",
+            "珠海-成都"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#b8e450"
+                }
+            },
+            {
+                "value": 90,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 51,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 45,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 33,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 17,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "成都-文山",
+            "沈阳-西安",
+            "吕梁-成都",
+            "青岛-西安",
+            "珠海-成都"
+        ],
+        "data": [
+            {
+                "value": 95,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 53,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 50,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 36,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 20,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "成都-文山",
+            "沈阳-西安",
+            "吕梁-成都",
+            "青岛-西安",
+            "珠海-成都"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 55,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 54,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 40,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 24,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "成都-文山",
+            "沈阳-西安",
+            "吕梁-成都",
+            "青岛-西安",
+            "珠海-成都"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 57,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 58,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 43,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 27,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "吕梁-成都",
+            "沈阳-西安",
+            "青岛-西安",
+            "珠海-成都"
+        ],
+        "data": [
+            {
+                "value": 62,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 60,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 46,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 31,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "吕梁-成都",
+            "沈阳-西安",
+            "青岛-西安",
+            "珠海-成都",
+            "呼和浩特-成都",
+            "成都-深圳"
+        ],
+        "data": [
+            {
+                "value": 66,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 62,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 50,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 34,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "吕梁-成都",
+            "沈阳-西安",
+            "青岛-西安",
+            "珠海-成都",
+            "呼和浩特-成都",
+            "成都-深圳"
+        ],
+        "data": [
+            {
+                "value": 70,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 64,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 53,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 37,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 3,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 3,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "吕梁-成都",
+            "沈阳-西安",
+            "青岛-西安",
+            "珠海-成都",
+            "成都-深圳",
+            "呼和浩特-成都",
+            "兰州-成都"
+        ],
+        "data": [
+            {
+                "value": 75,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 66,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 56,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 41,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 6,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 6,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "吕梁-成都",
+            "沈阳-西安",
+            "青岛-西安",
+            "珠海-成都",
+            "成都-深圳",
+            "呼和浩特-成都",
+            "兰州-成都"
+        ],
+        "data": [
+            {
+                "value": 79,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 68,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 60,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 44,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 10,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 9,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 4,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "吕梁-成都",
+            "沈阳-西安",
+            "青岛-西安",
+            "珠海-成都",
+            "成都-深圳",
+            "呼和浩特-成都",
+            "兰州-成都"
+        ],
+        "data": [
+            {
+                "value": 83,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 71,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 63,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 48,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 13,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 12,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 9,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "吕梁-成都",
+            "沈阳-西安",
+            "青岛-西安",
+            "珠海-成都",
+            "成都-深圳",
+            "呼和浩特-成都",
+            "兰州-成都"
+        ],
+        "data": [
+            {
+                "value": 87,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 73,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 66,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 51,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 17,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 15,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 13,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "吕梁-成都",
+            "沈阳-西安",
+            "青岛-西安",
+            "珠海-成都",
+            "成都-深圳",
+            "呼和浩特-成都",
+            "兰州-成都"
+        ],
+        "data": [
+            {
+                "value": 91,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 75,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 70,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 55,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 20,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 18,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 18,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "吕梁-成都",
+            "沈阳-西安",
+            "青岛-西安",
+            "珠海-成都",
+            "成都-深圳",
+            "呼和浩特-成都",
+            "兰州-成都",
+            "文山-成都"
+        ],
+        "data": [
+            {
+                "value": 95,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 77,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 73,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 58,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 24,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 21,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 22,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 0,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "吕梁-成都",
+            "沈阳-西安",
+            "青岛-西安",
+            "珠海-成都",
+            "成都-深圳",
+            "兰州-成都",
+            "呼和浩特-成都",
+            "文山-成都"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 80,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 76,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 62,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 27,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 27,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 25,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 5,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "吕梁-成都",
+            "沈阳-西安",
+            "青岛-西安",
+            "珠海-成都",
+            "成都-深圳",
+            "兰州-成都",
+            "呼和浩特-成都",
+            "文山-成都"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#1b511d"
+                }
+            },
+            {
+                "value": 82,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 80,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 65,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 31,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 31,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 28,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 10,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "沈阳-西安",
+            "青岛-西安",
+            "珠海-成都",
+            "兰州-成都",
+            "成都-深圳",
+            "呼和浩特-成都",
+            "文山-成都"
+        ],
+        "data": [
+            {
+                "value": 84,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 83,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 68,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 36,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 34,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 31,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 15,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "沈阳-西安",
+            "青岛-西安",
+            "珠海-成都",
+            "兰州-成都",
+            "成都-深圳",
+            "呼和浩特-成都",
+            "文山-成都"
+        ],
+        "data": [
+            {
+                "value": 86,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 86,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 72,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 40,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 37,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 34,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 20,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "沈阳-西安",
+            "青岛-西安",
+            "珠海-成都",
+            "兰州-成都",
+            "成都-深圳",
+            "呼和浩特-成都",
+            "文山-成都"
+        ],
+        "data": [
+            {
+                "value": 88,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 90,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 75,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 45,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 41,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 37,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 25,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "青岛-西安",
+            "沈阳-西安",
+            "珠海-成都",
+            "兰州-成都",
+            "成都-深圳",
+            "呼和浩特-成都",
+            "文山-成都"
+        ],
+        "data": [
+            {
+                "value": 93,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 91,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 79,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 50,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 44,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 40,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 30,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "青岛-西安",
+            "沈阳-西安",
+            "珠海-成都",
+            "兰州-成都",
+            "成都-深圳",
+            "呼和浩特-成都",
+            "文山-成都"
+        ],
+        "data": [
+            {
+                "value": 96,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 93,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 82,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 54,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 48,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 43,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 35,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "青岛-西安",
+            "沈阳-西安",
+            "珠海-成都",
+            "兰州-成都",
+            "成都-深圳",
+            "呼和浩特-成都",
+            "文山-成都"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#34a54f"
+                }
+            },
+            {
+                "value": 95,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 86,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 59,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 51,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 46,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 40,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "沈阳-西安",
+            "珠海-成都",
+            "兰州-成都",
+            "成都-深圳",
+            "呼和浩特-成都",
+            "文山-成都"
+        ],
+        "data": [
+            {
+                "value": 97,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 89,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 63,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 55,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 50,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 45,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "沈阳-西安",
+            "珠海-成都",
+            "兰州-成都",
+            "成都-深圳",
+            "呼和浩特-成都",
+            "文山-成都"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#b9cda1"
+                }
+            },
+            {
+                "value": 93,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 68,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 58,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 53,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 50,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "珠海-成都",
+            "兰州-成都",
+            "成都-深圳",
+            "呼和浩特-成都",
+            "文山-成都"
+        ],
+        "data": [
+            {
+                "value": 96,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 72,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 62,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 56,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 55,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "珠海-成都",
+            "兰州-成都",
+            "成都-深圳",
+            "呼和浩特-成都",
+            "文山-成都"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#788c3b"
+                }
+            },
+            {
+                "value": 77,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 65,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 59,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 60,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "兰州-成都",
+            "成都-深圳",
+            "文山-成都",
+            "呼和浩特-成都"
+        ],
+        "data": [
+            {
+                "value": 81,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 68,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 65,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 62,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "兰州-成都",
+            "成都-深圳",
+            "文山-成都",
+            "呼和浩特-成都"
+        ],
+        "data": [
+            {
+                "value": 86,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 72,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 70,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 65,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "兰州-成都",
+            "成都-深圳",
+            "文山-成都",
+            "呼和浩特-成都"
+        ],
+        "data": [
+            {
+                "value": 90,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 75,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 75,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 68,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "兰州-成都",
+            "成都-深圳",
+            "文山-成都",
+            "呼和浩特-成都"
+        ],
+        "data": [
+            {
+                "value": 95,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 79,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 80,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 71,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "兰州-成都",
+            "文山-成都",
+            "成都-深圳",
+            "呼和浩特-成都"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#67f059"
+                }
+            },
+            {
+                "value": 85,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 82,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 75,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "文山-成都",
+            "成都-深圳",
+            "呼和浩特-成都"
+        ],
+        "data": [
+            {
+                "value": 90,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 86,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 78,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "文山-成都",
+            "成都-深圳",
+            "呼和浩特-成都"
+        ],
+        "data": [
+            {
+                "value": 95,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 89,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 81,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "文山-成都",
+            "成都-深圳",
+            "呼和浩特-成都"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#76480d"
+                }
+            },
+            {
+                "value": 93,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 84,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "成都-深圳",
+            "呼和浩特-成都"
+        ],
+        "data": [
+            {
+                "value": 96,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 87,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "成都-深圳",
+            "呼和浩特-成都"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 90,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "成都-深圳",
+            "呼和浩特-成都"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#e49c4f"
+                }
+            },
+            {
+                "value": 93,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "呼和浩特-成都"
+        ],
+        "data": [
+            {
+                "value": 96,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    },
+    {
+        "title": [
+            "呼和浩特-成都"
+        ],
+        "data": [
+            {
+                "value": 100,
+                "itemStyle": {
+                    "color": "#9f2108"
+                }
+            }
+        ]
+    }
+]

@@ -1,0 +1,24 @@
+# ===== Python =====
+__pycache__/
+*.pyc
+*.pyo
+
+# ===== IDE / 系统 =====
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# ===== 前端依赖与构建产物 =====
+node_modules/
+demo/dist/
+
+# ===== 运行时生成数据（根 data/ 均为模拟运行产物）=====
+/data/
+
+# ===== 日志与调试文件 =====
+*.log
+debug_*.txt
+bench_e2e_out.txt
+_test_*.py
+_multiDaySchedule_backup.js

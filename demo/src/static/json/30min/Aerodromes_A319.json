@@ -1,0 +1,23 @@
+[
+    {"name": "芒市", "value": 100}, {"name": "昆明", "value": 100},{"name": "甘南", "value": 100}, 
+    {"name": "天津", "value": 100}, {"name": "拉萨", "value": 100}, {"name": "琼海", "value": 100}, 
+    {"name": "成都", "value": 100}, {"name": "大连", "value": 100}, {"name": "康定", "value": 100}, 
+    {"name": "稻城", "value": 100}, {"name": "西昌", "value": 100}, {"name": "林芝", "value": 100}, 
+    {"name": "绵阳", "value": 100}, {"name": "西宁", "value": 100}, {"name": "甘孜", "value": 100}, 
+    {"name": "丽江", "value": 100}, {"name": "阜阳", "value": 100}, {"name": "重庆", "value": 100}, 
+    {"name": "攀枝花", "value": 100}, {"name": "浦东", "value": 100}, {"name": "西安", "value": 100}, 
+    {"name": "南昌", "value": 100}, {"name": "南宁", "value": 100}, {"name": "北海", "value": 100}, 
+    {"name": "银川", "value": 100}, {"name": "文山", "value": 100}, {"name": "普洱", "value": 100}, 
+    {"name": "北京", "value": 100}, {"name": "杭州", "value": 100}, {"name": "深圳", "value": 100}, 
+    {"name": "乌鲁木齐", "value": 100}, {"name": "青岛", "value": 100}, {"name": "中卫", "value": 100}, 
+    {"name": "呼和浩特", "value": 100}, {"name": "鞍山", "value": 100},  
+    {"name": "泸州", "value": 100}, {"name": "喀什", "value": 100}, {"name": "西双版纳", "value": 100}, 
+    {"name": "揭阳", "value": 100}, {"name": "徐州", "value": 100}, {"name": "舟山", "value": 100}, 
+    {"name": "沈阳", "value": 100}, {"name": "武汉", "value": 100}, {"name": "烟台", "value": 100}, 
+    {"name": "神农架", "value": 100}, {"name": "兰州", "value": 100}, {"name": "吕梁", "value": 100}, 
+    {"name": "宁波", "value": 100}, {"name": "南通", "value": 100}, {"name": "珠海", "value": 100}, 
+    {"name": "常州", "value": 100}, {"name": "长春", "value": 100}, {"name": "上饶", "value": 100}, 
+    {"name": "温州", "value": 100}, {"name": "厦门", "value": 100}, {"name": "鄂尔多斯", "value": 100}, 
+    {"name": "邯郸", "value": 100}, {"name": "济南", "value": 100}, {"name": "宜宾", "value": 100}, 
+    {"name": "三亚", "value": 100}, {"name": "合肥", "value": 100}
+]

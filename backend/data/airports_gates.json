@@ -1,0 +1,185 @@
+{
+  "_comment": "川航主要站点真实登机口配置（数据来源：机场官网/百科/航司公告 2024-2026）",
+  "成都": {
+    "_airport": "成都双流国际机场 (CTU/ZUUU)",
+    "runways": 2,
+    "total_gates": 74,
+    "near_gates": 74,
+    "remote_gates": 104,
+    "terminals": {
+      "T1": { "near_gates": 17, "comment": "2025年恢复投用，B/C指廊 101-117登机口" },
+      "T2": { "near_gates": 57, "comment": "H~U值机岛，指廊登机口" }
+    },
+    "runway_groups": [
+      {
+        "runway": 1,
+        "name": "02L/20R",
+        "gates": { "count": 37, "prefix": "辰G", "start": 1, "end": 37 },
+        "taxi_in_avg_min": 5,
+        "taxi_out_avg_min": 5
+      },
+      {
+        "runway": 2,
+        "name": "02R/20L",
+        "gates": { "count": 37, "prefix": "辰G", "start": 38, "end": 74 },
+        "taxi_in_avg_min": 6,
+        "taxi_out_avg_min": 6
+      }
+    ]
+  },
+  "北京": {
+    "_airport": "北京首都国际机场 (PEK/ZBAA)",
+    "runways": 3,
+    "total_gates": 150,
+    "near_gates": 90,
+    "remote_gates": 60,
+    "runway_groups": [
+      {
+        "runway": 1,
+        "name": "36R/18L",
+        "gates": { "count": 30, "prefix": "京G", "start": 1, "end": 30 },
+        "taxi_in_avg_min": 7,
+        "taxi_out_avg_min": 7
+      },
+      {
+        "runway": 2,
+        "name": "36L/18R",
+        "gates": { "count": 30, "prefix": "京G", "start": 31, "end": 60 },
+        "taxi_in_avg_min": 6,
+        "taxi_out_avg_min": 6
+      },
+      {
+        "runway": 3,
+        "name": "01/19",
+        "gates": { "count": 30, "prefix": "京G", "start": 61, "end": 90 },
+        "taxi_in_avg_min": 8,
+        "taxi_out_avg_min": 8
+      }
+    ]
+  },
+  "上海": {
+    "_airport": "上海浦东国际机场 (PVG/ZSPD)",
+    "runways": 2,
+    "total_gates": 163,
+    "near_gates": 163,
+    "remote_gates": 0,
+    "runway_groups": [
+      {
+        "runway": 1,
+        "name": "16L/34R",
+        "gates": { "count": 81, "prefix": "沪G", "start": 1, "end": 81 },
+        "taxi_in_avg_min": 6,
+        "taxi_out_avg_min": 6
+      },
+      {
+        "runway": 2,
+        "name": "16R/34L",
+        "gates": { "count": 82, "prefix": "沪G", "start": 82, "end": 163 },
+        "taxi_in_avg_min": 7,
+        "taxi_out_avg_min": 7
+      }
+    ]
+  },
+  "广州": {
+    "_airport": "广州白云国际机场 (CAN/ZGGG)",
+    "runways": 3,
+    "total_gates": 269,
+    "near_gates": 80,
+    "remote_gates": 189,
+    "runway_groups": [
+      {
+        "runway": 1,
+        "name": "01/19",
+        "gates": { "count": 27, "prefix": "穗G", "start": 1, "end": 27 },
+        "taxi_in_avg_min": 6,
+        "taxi_out_avg_min": 6
+      },
+      {
+        "runway": 2,
+        "name": "02L/20R",
+        "gates": { "count": 27, "prefix": "穗G", "start": 28, "end": 54 },
+        "taxi_in_avg_min": 5,
+        "taxi_out_avg_min": 5
+      },
+      {
+        "runway": 3,
+        "name": "02R/20L",
+        "gates": { "count": 26, "prefix": "穗G", "start": 55, "end": 80 },
+        "taxi_in_avg_min": 8,
+        "taxi_out_avg_min": 8
+      }
+    ]
+  },
+  "重庆": {
+    "_airport": "重庆江北国际机场 (CKG/ZUCK)",
+    "runways": 3,
+    "total_gates": 180,
+    "near_gates": 92,
+    "remote_gates": 88,
+    "runway_groups": [
+      {
+        "runway": 1,
+        "name": "02L/20R",
+        "gates": { "count": 30, "prefix": "渝G", "start": 1, "end": 30 },
+        "taxi_in_avg_min": 5,
+        "taxi_out_avg_min": 5
+      },
+      {
+        "runway": 2,
+        "name": "02R/20L",
+        "gates": { "count": 31, "prefix": "渝G", "start": 31, "end": 61 },
+        "taxi_in_avg_min": 6,
+        "taxi_out_avg_min": 6
+      },
+      {
+        "runway": 3,
+        "name": "03/21",
+        "gates": { "count": 31, "prefix": "渝G", "start": 62, "end": 92 },
+        "taxi_in_avg_min": 7,
+        "taxi_out_avg_min": 7
+      }
+    ]
+  },
+  "深圳": {
+    "_airport": "深圳宝安国际机场 (SZX/ZGSZ)",
+    "runways": 3,
+    "total_gates": 243,
+    "near_gates": 115,
+    "remote_gates": 128,
+    "runway_groups": [
+      {
+        "runway": 1,
+        "name": "15/33",
+        "gates": { "count": 38, "prefix": "深G", "start": 1, "end": 38 },
+        "taxi_in_avg_min": 5,
+        "taxi_out_avg_min": 5
+      },
+      {
+        "runway": 2,
+        "name": "16/34",
+        "gates": { "count": 38, "prefix": "深G", "start": 39, "end": 76 },
+        "taxi_in_avg_min": 6,
+        "taxi_out_avg_min": 6
+      },
+      {
+        "runway": 3,
+        "name": "17/35",
+        "gates": { "count": 39, "prefix": "深G", "start": 77, "end": 115 },
+        "taxi_in_avg_min": 8,
+        "taxi_out_avg_min": 8
+      }
+    ]
+  },
+  "_defaults": {
+    "turnaround": {
+      "deboard_min": 20,
+      "boarding_min": 30,
+      "cleaning_min": 15,
+      "refuel_min": 10,
+      "catering_min": 10,
+      "min_buffer_between_flights": 20
+    },
+    "fallback_gate_count": 25,
+    "fallback_runway_count": 2
+  }
+}
