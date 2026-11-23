@@ -674,14 +674,14 @@
   {
     "tail_no": "B-6444",
     "ac_type": "A320",
-    "age_years": 0.41,
-    "total_flight_hours": 523,
-    "maintenance_days": 0,
-    "cost_per_hour": 20000,
+    "age_years": 0.4,
+    "total_flight_hours": 523.0,
+    "maintenance_days": 0.0,
+    "cost_per_hour": 20000.0,
     "fuel_efficiency": 0.98,
     "last_overhaul": "2025-07-07",
     "on_time_rate": 1.0,
-    "cycles": 174
+    "cycles": 174.0
   },
   {
     "tail_no": "B-6445",

@@ -3,6 +3,7 @@
     <div class="page-header">
       <el-button icon="el-icon-arrow-left" size="small" @click="$router.back()">返回</el-button>
       <h2>航班旅客明细 — {{ flightNo }}</h2>
+      <el-button size="small" type="primary" plain icon="el-icon-data-analysis" @click="openCharts">图表</el-button>
       <el-radio-group v-model="viewMode" size="small" class="view-toggle">
         <el-radio-button label="3d">3D 机舱视图</el-radio-button>
         <el-radio-button label="2d">2D 座位图</el-radio-button>
@@ -110,10 +111,14 @@
         </div>
       </div>
     </template>
+
+    <chart-overlay :visible.sync="chartsOpen" :charts="chartList" title="航班旅客明细" />
   </div>
 </template>
 
 <script>
+import ChartOverlay from '@/components/ChartOverlay'
+import { buildFlightPassengersCharts } from '@/utils/charts/flightPassengers'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
@@ -132,8 +137,11 @@ const TAIL_MARGIN = 1.6         // 机尾端留空
 
 export default {
   name: 'FlightPassengers',
+  components: { ChartOverlay },
   data() {
     return {
+      chartsOpen: false,
+      chartList: [],
       flight: null,
       seats: {},
       stats: { total: 0, occupied: 0, business: 0, economy: 0 },
@@ -187,6 +195,10 @@ export default {
     },
   },
   methods: {
+    openCharts() {
+      this.chartList = buildFlightPassengersCharts(this)
+      this.chartsOpen = true
+    },
     economyColsOf(row) {
       if (this.economyRows.length && row === this.economyRows[this.economyRows.length - 1]) {
         return ECONOMY_COLS.slice(0, this.economyLastCols)

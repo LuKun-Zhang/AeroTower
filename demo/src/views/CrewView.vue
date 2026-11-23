@@ -50,6 +50,7 @@
       </div>
 
       <div class="side-actions">
+        <el-button size="small" type="primary" plain icon="el-icon-data-analysis" @click="openCharts" style="width:100%">图表</el-button>
         <el-button size="small" @click="doCrewSearch" style="width:100%" :disabled="!crewSearchText.trim()">定位机组</el-button>
         <el-button size="small" @click="togglePanel" style="width:100%">
           {{ showPairingPanel ? '收起任务池' : '展开任务池' }} ({{ pairings.length }})
@@ -419,15 +420,22 @@
     </div>
 
     <div class="dragRectBottom"></div>
+
+    <chart-overlay :visible.sync="chartsOpen" :charts="chartList" title="机组排班" />
   </div>
 </template>
 
 <script>
 import api from '@/api'
+import ChartOverlay from '@/components/ChartOverlay'
+import { buildCrewCharts } from '@/utils/charts/crewView'
 
 export default {
+  components: { ChartOverlay },
   data() {
     return {
+      chartsOpen: false,
+      chartList: [],
       filteredReady: false,
       base: '成都',
       date: '',
@@ -849,6 +857,10 @@ export default {
     pairings() { this.pairingLoadLimit = 200 },
   },
   methods: {
+    openCharts() {
+      this.chartList = buildCrewCharts(this)
+      this.chartsOpen = true
+    },
     // 辅助：检查值是否未选择（null/undefined/空字符串，0是合法值）
     isNotSelected(v) {
       return v === null || v === undefined || v === ''

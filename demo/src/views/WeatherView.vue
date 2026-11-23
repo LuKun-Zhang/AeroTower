@@ -10,6 +10,7 @@
         ref="weatherMap"
         :weatherData="{}"
         :currentTime="''"
+        :stream-summary="summary"
       />
 
       <!-- 实时中断联动摘要（每 2s 自动回传刷新，无发布按钮） -->

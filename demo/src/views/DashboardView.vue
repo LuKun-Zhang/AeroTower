@@ -1,6 +1,9 @@
 <template>
   <div class="sim-dashboard">
-    <h1>仿真运营仪表盘</h1>
+    <div class="dash-header" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <h1 style="margin:0">仿真运营仪表盘</h1>
+      <el-button size="small" type="primary" plain icon="el-icon-data-analysis" @click="openCharts">图表</el-button>
+    </div>
 
     <!-- KPI 卡片 -->
     <div class="kpi-cards">
@@ -90,16 +93,23 @@
       <span class="time-value">{{ simTime }}</span>
       <span class="time-pct">{{ simProgress }}%</span>
     </div>
+
+    <chart-overlay :visible.sync="chartsOpen" :charts="chartList" title="总览" />
   </div>
 </template>
 
 <script>
 import api from '@/api'
+import ChartOverlay from '@/components/ChartOverlay'
+import { buildDashboardCharts } from '@/utils/charts/dashboardView'
 
 export default {
   name: 'SimDashboard',
+  components: { ChartOverlay },
   data() {
     return {
+      chartsOpen: false,
+      chartList: [],
       simTime: '--',
       simProgress: 0,
       kpi: {
@@ -114,6 +124,10 @@ export default {
     }
   },
   methods: {
+    openCharts() {
+      this.chartList = buildDashboardCharts(this)
+      this.chartsOpen = true
+    },
     kpiClass(val, warn, crit) {
       if (val <= crit) return 'danger'
       if (val <= warn) return 'warning'

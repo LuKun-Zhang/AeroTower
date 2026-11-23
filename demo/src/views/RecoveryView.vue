@@ -59,6 +59,7 @@
 
       <!-- 恢复方案 + 审计日志 -->
       <div class="right-panel">
+        <el-button size="small" type="primary" plain icon="el-icon-data-analysis" @click="openCharts" style="margin-bottom:8px">图表</el-button>
         <!-- 调试：测试进度遮罩 -->
         <el-button size="mini" type="info" @click="executing = true; execStage = '测试中...'; execProgress = 50; execStatus = 'running'">[测试进度窗口]</el-button>
         <RecoveryTimeline
@@ -125,6 +126,8 @@
         </div>
       </div>
     </div>
+
+    <chart-overlay :visible.sync="chartsOpen" :charts="chartList" title="异常调度" />
   </div>
 </template>
 
@@ -134,12 +137,16 @@ import { ANOMALY_TYPE_LABELS, PRIORITY_CONFIG, STATUS_CONFIG } from '@/utils/ano
 import AnomalyPanel from '@/components/AnomalyPanel'
 import ImpactTree from '@/components/ImpactTree'
 import RecoveryTimeline from '@/components/RecoveryTimeline'
+import ChartOverlay from '@/components/ChartOverlay'
+import { buildRecoveryCharts } from '@/utils/charts/recoveryView'
 
 export default {
   name: 'RecoveryView',
-  components: { AnomalyPanel, ImpactTree, RecoveryTimeline },
+  components: { AnomalyPanel, ImpactTree, RecoveryTimeline, ChartOverlay },
   data() {
     return {
+      chartsOpen: false,
+      chartList: [],
       analyzing: false,
       showBackupDialog: false,
       executing: false,
@@ -183,6 +190,10 @@ export default {
     },
   },
   methods: {
+    openCharts() {
+      this.chartList = buildRecoveryCharts(this)
+      this.chartsOpen = true
+    },
     ...mapActions([
       'fetchAnomalyEvents', 'fetchAnomalyEvent', 'deleteAnomalyEvent',
       'analyzeEvent',

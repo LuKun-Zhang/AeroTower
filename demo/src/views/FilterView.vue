@@ -23,6 +23,7 @@
       </div>
 
       <div class="action-group">
+        <el-button size="small" type="primary" plain icon="el-icon-data-analysis" @click="openCharts">图表</el-button>
         <el-button type="success" size="small" @click="runFilter" :loading="filtering" :disabled="!uploadedFile && !hasDefault">
           执行筛选
         </el-button>
@@ -161,16 +162,24 @@
     <div v-else-if="!uploadedFile" class="empty-state">
       <p>请上传航班计划 xlsx 文件，或直接点击「执行筛选」使用默认数据</p>
     </div>
+
+    <chart-overlay :visible.sync="chartsOpen" :charts="chartList" title="航班筛选" />
   </div>
 </template>
 
 <script>
+import ChartOverlay from '@/components/ChartOverlay'
+import { buildFilterCharts } from '@/utils/charts/filterView'
+
 const PAGE_SIZE_CHAINS = 50
 const PAGE_SIZE_ORPHANS = 50
 
 export default {
+  components: { ChartOverlay },
   data() {
     return {
+      chartsOpen: false,
+      chartList: [],
       uploadedFile: '',
       uploadedCount: 0,
       uploading: false,
@@ -226,6 +235,10 @@ export default {
     },
   },
   methods: {
+    openCharts() {
+      this.chartList = buildFilterCharts(this)
+      this.chartsOpen = true
+    },
     async checkStatus(retryCount) {
       retryCount = retryCount || 0
       const uname = this._getUsername()

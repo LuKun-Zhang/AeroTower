@@ -11,6 +11,7 @@
         <button class="date-btn" @click="onNextDay" :disabled="dateIndex >= dates.length - 1">▶</button>
       </div>
       <div class="header-right">
+        <el-button size="small" type="primary" plain icon="el-icon-data-analysis" @click="openCharts">图表</el-button>
         <button class="taxi-toggle" @click="toggleTaxiPaths">
           {{ showTaxiPaths ? '🔴 隐藏路径' : '⚪ 显示路径' }}
         </button>
@@ -89,6 +90,8 @@
         @jump="onJump"
       />
     </div>
+
+    <chart-overlay :visible.sync="chartsOpen" :charts="chartList" title="旅客流模拟" />
   </div>
 </template>
 
@@ -102,6 +105,8 @@ import GateControlPanel from '@/components/GateControlPanel'
 import CongestionHeatmap from '@/components/CongestionHeatmap'
 import EvacuationPanel from '@/components/EvacuationPanel'
 import ProvinceWeatherPanel from '@/components/ProvinceWeatherPanel'
+import ChartOverlay from '@/components/ChartOverlay'
+import { buildTerminalFlowCharts } from '@/utils/charts/terminalFlow'
 import { SCHEDULE_DATES } from '@/data/multiDaySchedule'
 
 const DEFAULT_PAX_PARAMS = {
@@ -123,6 +128,7 @@ export default {
     CongestionHeatmap,
     EvacuationPanel,
     ProvinceWeatherPanel,
+    ChartOverlay,
   },
   props: {
     // 作为「模拟大引擎」内嵌 tab 时隐藏自身底部时间轴（统一由 hub 底部时钟驱动）
@@ -130,6 +136,8 @@ export default {
   },
   data() {
     return {
+      chartsOpen: false,
+      chartList: [],
       paxParams: { ...DEFAULT_PAX_PARAMS },
       heatmapEnabled: false,
       // 从 TerminalLayout 轮询同步的数据（$refs 不响应式，必须轮询）
@@ -212,6 +220,11 @@ export default {
     },
   },
   methods: {
+    openCharts() {
+      this.chartList = buildTerminalFlowCharts(this)
+      this.chartsOpen = true
+    },
+
     // 直接拉取后端 /api/paxflow/schedule 的日期列表（仅用 dates 字段），
     // 使日期下拉框确定性展示最近历史记录的真实航班日期（含 11-29）。
     async loadBackendDates() {

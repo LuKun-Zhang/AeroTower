@@ -3,6 +3,7 @@
     <div class="page-header">
       <el-button icon="el-icon-arrow-left" size="small" @click="$router.push('/traffic-input')">返回修改</el-button>
       <h2>📋 航班计划总览</h2>
+      <el-button size="small" type="primary" plain icon="el-icon-data-analysis" @click="openCharts">图表</el-button>
     </div>
 
     <!-- 步骤指示器 -->
@@ -112,14 +113,22 @@
         </el-collapse>
       </div>
     </template>
+
+    <chart-overlay :visible.sync="chartsOpen" :charts="chartList" title="航班计划总览" />
   </div>
 </template>
 
 <script>
+import ChartOverlay from '@/components/ChartOverlay'
+import { buildScheduleOverviewCharts } from '@/utils/charts/scheduleOverview'
+
 export default {
   name: 'ScheduleOverview',
+  components: { ChartOverlay },
   data() {
     return {
+      chartsOpen: false,
+      chartList: [],
       statsData: null,
       chainsList: [],
       flightsList: [],
@@ -148,6 +157,10 @@ export default {
     },
   },
   methods: {
+    openCharts() {
+      this.chartList = buildScheduleOverviewCharts(this)
+      this.chartsOpen = true
+    },
     async loadData() {
       this.loading = true
       try {

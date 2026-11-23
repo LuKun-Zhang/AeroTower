@@ -19,6 +19,7 @@
           class="mode-btn" :class="{ active: mode === 'manual' }"
           @click="setMode('manual')"
         >手动输入</button>
+        <el-button size="small" type="primary" plain icon="el-icon-data-analysis" @click="openCharts">图表</el-button>
       </div>
       <div class="legend-title" v-if="mode === 'dynamic'">气旋推演</div>
       <div class="legend-title" v-else-if="mode === 'custom'">自定义气旋</div>
@@ -181,6 +182,8 @@
       </div>
       <div class="wf-empty" v-else>未来 24 小时全国天气平稳</div>
     </div>
+
+    <ChartOverlay :visible.sync="chartsOpen" :charts="chartList" title="天气推演" />
   </div>
 </template>
 
@@ -199,11 +202,15 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import * as echarts from 'echarts'
 import '@/utils/china'  // registers echarts map "china"
+import ChartOverlay from './ChartOverlay.vue'
+import { buildWeatherCharts } from '@/utils/charts/weather'
 
 /* ==================== Props ==================== */
 const props = defineProps({
   weatherData: { type: Object, default: () => ({}) },
   currentTime: { type: String, default: '' },
+  // /api/weather/stream 自动回传的响应（外层页面每 2s 保存一份后传入；未传时中断联动图显示空态提示）
+  streamSummary: { type: Object, default: null },
 })
 
 /* ==================== Reactive refs ==================== */
@@ -253,6 +260,10 @@ const weatherTypes = [
 ]
 
 const provinceList = ref([])
+
+// ===== 透明浮层图表 =====
+const chartsOpen = ref(false)
+const chartList = ref([])
 
 /* ==================== State ==================== */
 let renderer, scene, camera, controls
@@ -2387,6 +2398,20 @@ function setClockSpeed(speed) {
 }
 
 defineExpose({ getMode, getCurrentProvinceWeather, getBusinessClock, predictProvinceTimeline, setClockPhase, setClockPaused, setClockSpeed })
+
+/** 打开透明浮层：把图表需要的只读状态/方法打包传给图表模块 */
+function openCharts() {
+  chartList.value = buildWeatherCharts({
+    mode: mode.value,
+    weatherGroups: weatherGroups.value,
+    cycloneStates: cycloneStates.value,
+    forecast: forecast.value,
+    streamSummary: props.streamSummary,
+    getBusinessClock,
+    predictProvinceTimeline,
+  })
+  chartsOpen.value = true
+}
 
 /** 更新气旋实时状态面板数据（节流更新，减少响应式开销） */
 let lastCycloneStateUpdate = 0

@@ -25,6 +25,7 @@
         </el-select>
         <el-button type="primary" size="small" @click="assignGates" :loading="loading">分配</el-button>
         <el-button size="small" @click="compareGates" :loading="compareLoading">算法对比</el-button>
+        <el-button size="small" type="primary" plain icon="el-icon-data-analysis" @click="openCharts">图表</el-button>
         <span class="hint-tip" v-if="gates.length > 0">点击色块查看详情</span>
         <span v-if="stats.avg_utilization > 0" class="info">
           {{ stats.total_gates }} 机位 | 利用率 {{ stats.avg_utilization }}%
@@ -138,15 +139,22 @@
 
     <div class="dragRectBottom"></div>
     </template>
+
+    <chart-overlay :visible.sync="chartsOpen" :charts="chartList" title="登机口分配" />
   </div>
 </template>
 
 <script>
 import api from '@/api'
+import ChartOverlay from '@/components/ChartOverlay'
+import { buildGateCharts } from '@/utils/charts/gateView'
 
 export default {
+  components: { ChartOverlay },
   data() {
     return {
+      chartsOpen: false,
+      chartList: [],
       filteredReady: false,
       airport: '成都',
       algorithm: 'bipartite',
@@ -175,6 +183,10 @@ export default {
     },
   },
   methods: {
+    openCharts() {
+      this.chartList = buildGateCharts(this)
+      this.chartsOpen = true
+    },
     _init() {
       this.checkFiltered().then(() => {
         if (this.filteredReady) {
