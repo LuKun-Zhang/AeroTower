@@ -10,6 +10,7 @@ const TURNAROUND_TIME = 5
 
 // 多日航班调度数据（后端 /api/schedule/gates + /api/schedule/runway 快照）
 import { MULTI_DAY_SCHEDULE, SCHEDULE_DATES } from '../data/multiDaySchedule'
+import api from '@/api'
 
 // 飞机滑行速度（pathProgress / tick）：提高到 0.06 使其在规定跑道占用时间内完成起降
 const TAXI_SPEED = 0.04
@@ -1236,11 +1237,10 @@ export default {
     // 成功后优先使用后端数据；若当前日期不在后端日期中，自动切换到最早日期并重建模拟。
     async loadPaxflowSchedule() {
       try {
-        const res = await fetch('/api/paxflow/schedule?disrupted=true')
-        const json = await res.json()
-        if (json.code === 0 && json.data && json.data.schedule) {
-          this.paxflowSchedule = json.data.schedule
-          this.paxflowDates = json.data.dates || []
+        const data = await api.getPaxflowSchedule(true)
+        if (data && data.schedule) {
+          this.paxflowSchedule = data.schedule
+          this.paxflowDates = data.dates || []
           const totalFlights = Object.keys(this.paxflowSchedule)
             .reduce((n, d) => n + this.paxflowSchedule[d].length, 0)
           console.log('[SIM] 已加载后端航班调度: ' + this.paxflowDates.length + ' 天，' +
@@ -1285,15 +1285,12 @@ export default {
     // 匹配不到（未生成数据/航班号不同）则返回空，粒子投放时用 _resolvePaxId 生成兜底编号。
     async loadPaxManifests(flightNos) {
       try {
-        const res = await fetch('/api/paxflow/manifests', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ date: this.currentDate, flights: flightNos }),
+        const data = await api.getPaxflowManifests({
+          date: this.currentDate, flights: flightNos,
         })
-        const json = await res.json()
-        if (json.code === 0 && json.data && json.data.manifests) {
+        if (data && data.manifests) {
           const got = {}
-          for (const m of json.data.manifests) {
+          for (const m of data.manifests) {
             if (m.pax_ids && m.pax_ids.length) got[m.flight_no] = m.pax_ids
           }
           this._paxManifest = got

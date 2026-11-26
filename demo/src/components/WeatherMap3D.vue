@@ -2397,7 +2397,7 @@ function setClockSpeed(speed) {
   clockSpeed = Number(speed) || 1
 }
 
-defineExpose({ getMode, getCurrentProvinceWeather, getBusinessClock, predictProvinceTimeline, setClockPhase, setClockPaused, setClockSpeed })
+defineExpose({ getMode, getCurrentProvinceWeather, getBusinessClock, predictProvinceTimeline, setClockPhase, setClockPaused, setClockSpeed, applyProvinceWeather })
 
 /** 打开透明浮层：把图表需要的只读状态/方法打包传给图表模块 */
 function openCharts() {
@@ -2669,6 +2669,16 @@ function onProvinceWeatherChange() {
   rebuildRainRegions(manualWeather.value)
   rebuildLightning(manualWeather.value)
   updateWeatherTex()
+}
+
+/** 实验回放：用给定省份天气直接进入手动模式（只喂数据，不改渲染内核） */
+function applyProvinceWeather(map) {
+  mode.value = 'manual'
+  manualWeather.value = { ...(map || {}) }
+  rebuildRainRegions(manualWeather.value)
+  rebuildLightning(manualWeather.value)
+  updateWeatherTex()
+  cycloneStates.value = []
 }
 
 /* ==================== 自定义气旋 ==================== */

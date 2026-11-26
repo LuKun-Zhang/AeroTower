@@ -74,6 +74,9 @@
           <el-button icon="el-icon-search" @click="$router.push('/passenger-lookup')">
             旅客追溯
           </el-button>
+          <el-button type="success" icon="el-icon-data-analysis" @click="$router.push('/experiments')">
+            实验中心
+          </el-button>
         </div>
       </div>
     </div>

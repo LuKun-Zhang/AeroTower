@@ -108,6 +108,7 @@ import ProvinceWeatherPanel from '@/components/ProvinceWeatherPanel'
 import ChartOverlay from '@/components/ChartOverlay'
 import { buildTerminalFlowCharts } from '@/utils/charts/terminalFlow'
 import { SCHEDULE_DATES } from '@/data/multiDaySchedule'
+import api from '@/api'
 
 const DEFAULT_PAX_PARAMS = {
   inboundRate: 10,
@@ -229,13 +230,12 @@ export default {
     // 使日期下拉框确定性展示最近历史记录的真实航班日期（含 11-29）。
     async loadBackendDates() {
       try {
-        const res = await fetch('/api/paxflow/schedule')
-        const json = await res.json()
-        if (json.code === 0 && json.data && json.data.dates && json.data.dates.length) {
-          this.paxflowDates = json.data.dates
+        const data = await api.getPaxflowSchedule(false)
+        if (data && data.dates && data.dates.length) {
+          this.paxflowDates = data.dates
           console.log('[PaxFlow] 日期列表已加载(独立拉取): ' + this.paxflowDates.join(', '))
         } else {
-          console.warn('[PaxFlow] 后端日期为空，使用静态快照', json)
+          console.warn('[PaxFlow] 后端日期为空，使用静态快照', data)
         }
       } catch (e) {
         console.warn('[PaxFlow] 后端日期拉取失败，使用静态快照:', e.message)

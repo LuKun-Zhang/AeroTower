@@ -60,7 +60,7 @@
         <el-button size="small" type="primary" plain icon="el-icon-data-analysis" @click="openCharts">图表</el-button>
         <ProvinceWeatherPanel />
         <EventInjectPanel
-          v-if="initialized"
+          v-if="initialized && !readonly"
           :airports="airportList"
           :aircrafts="aircraftList"
           :crewBases="crewBaseList"
@@ -120,6 +120,8 @@ export default {
   props: {
     // 作为「模拟大引擎」内嵌 tab 时隐藏自身时间轴（统一由 hub 底部时钟驱动）
     embedded: { type: Boolean, default: false },
+    // 实验回放：隐藏事件注入面板，所有数据走回放作用域
+    readonly: { type: Boolean, default: false },
   },
   data() {
     return {
