@@ -89,7 +89,8 @@ class SimulationEngine:
     RUNNING = "running"
     PAUSED = "paused"
 
-    def __init__(self):
+    def __init__(self, rng=None):
+        self._rng = rng
         self.status: str = self.IDLE
         self.speed: int = 1          # 倍速 1/2/5/10
         self.tick_minutes: int = 1   # 每 tick 推进的仿真分钟数
@@ -108,8 +109,8 @@ class SimulationEngine:
         self._airport_coords: Dict[str, Tuple[float, float]] = {}
 
         # 子系统
-        self.weather = WeatherService()
-        self.passenger_flow = PassengerFlow()
+        self.weather = WeatherService(rng=rng)
+        self.passenger_flow = PassengerFlow(rng=rng)
 
         # 事件（异常事件注入队列）
         self._pending_events: List[dict] = []   # 待处理的注入事件
@@ -137,7 +138,7 @@ class SimulationEngine:
         self._pending_events.clear()
         self._active_events.clear()
         self._airport_capacity.clear()
-        self.passenger_flow = PassengerFlow()
+        self.passenger_flow = PassengerFlow(rng=self._rng)
         self.kpi = self._init_kpi()
 
     def load_flights(self, flights: List[Flight]):
@@ -297,6 +298,38 @@ class SimulationEngine:
 
             self._recompute_flight_phase(fs, minutes)
         self._update_kpi()
+
+    def sync_frozen(self, minutes: int, plan: Optional[dict] = None, update_kpi: bool = True):
+        """冻结计划重算（实验回放专用）。
+
+        与 ``sync_to`` 的区别：计划是一次性冻结的，取消永久生效、延误永久叠加，
+        因此可以直接跳到任意时刻而不失真（``sync_to`` 每次会清零延误，且只在
+        起飞前应用取消，适合现场“计划随天气演变”的模式）。
+        """
+        self._synced_mode = True
+        self._current_minutes = int(minutes)
+        plan = plan or {}
+        for fs in self.flights.values():
+            d = plan.get(fs.flight_id) or plan.get(str(fs.flight_id))
+            apply_from = (d or {}).get('apply_from')
+            if d and apply_from is not None and self._current_minutes < int(apply_from):
+                d = None
+            if d:
+                if d.get('type') == 'cancel':
+                    fs.phase = FlightPhase.CANCELLED
+                    fs.delay_reason = d.get('reason', '计划取消')
+                else:
+                    fs.delay_minutes = int(d.get('delay_minutes', 0) or 0)
+                    fs.delay_reason = d.get('reason', '计划延误')
+            else:
+                if fs.phase == FlightPhase.CANCELLED:
+                    fs.phase = FlightPhase.SCHEDULED
+                    fs.phase_elapsed = 0
+                fs.delay_minutes = 0
+                fs.delay_reason = ''
+            self._recompute_flight_phase(fs, self._current_minutes)
+        if update_kpi:
+            self._update_kpi()
 
     def _recompute_flight_phase(self, fs: FlightState, minutes: int):
         """按绝对分钟 + 有效延误重算航班阶段（取消/未起飞/空中/已到达）。"""
@@ -517,7 +550,8 @@ class SimulationEngine:
             if next_phase == FlightPhase.TAKEOFF:
                 dep_airport = fs.departure_airport
                 cap = self._airport_capacity.get(dep_airport, 1.0)
-                if cap < 0.5 and random.random() > cap:
+                rng = self._rng or random
+                if cap < 0.5 and rng.random() > cap:
                     fs.apply_delay(30, f"{dep_airport}起飞受限")
                     return
                 fs.log("起飞")

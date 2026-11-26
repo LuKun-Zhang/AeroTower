@@ -14,7 +14,7 @@ from ..models.flight import Flight
 from ..models.passenger import Passenger
 from ..services.flight_filter import SICHUAN_BASES  # 川航基地（系统统一配置）
 from ..services.aircraft_types import (
-    type_layout, type_seats, economy_seats, fleet_ratio_list, layout_rows, FLEET_MIX,
+    type_layout, type_seats, economy_seats, fleet_sequence, layout_rows, FLEET_MIX,
 )
 
 # 川航基地：与系统其他部分（flight_filter / crew_roster）保持一致
@@ -315,8 +315,8 @@ class FlightGenerator:
         self.max_flight_hours = traffic_data.get('max_daily_flight_hours', 8)
         self.num_aircraft = traffic_data.get('num_aircraft', 100)  # 机队规模（对齐飞机排班）
         self.city_traffic = traffic_data.get('city_traffic', DEFAULT_TRAFFIC)
-        # 机型轮转列表（按机队比例展开，航班分配机型用）
-        self._fleet_seq = fleet_ratio_list()
+        # 机型轮转列表（按机队配比展开，航班分配机型用；默认 10/50/40 与旧输出一致）
+        self._fleet_seq = fleet_sequence(self.fleet_mix)
         self._batch_seq_offset = 0  # 全局批次偏移（切批机型轮转起点）
         self.slot_spacing = 6       # 同一档位内相邻班次的错峰间距（分钟），增大航班起降密度观感
         self._slot_occupy = {}      # 档位占用计数 (date_str, slot) -> 已排班次，用于同档位错峰

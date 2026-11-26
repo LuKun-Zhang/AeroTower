@@ -14,9 +14,11 @@
 import random
 
 
-def assign_pairings(pairings, flights, crew_pool):
+def assign_pairings(pairings, flights, crew_pool, rng=None):
     """选不相交的闭环 pairing 子集分配给机组。
 
+    :param rng: 可选的 random.Random 实例；实验传入带种子的实例以保证复现。
+                为 None 时退回模块级 random（保持旧行为）。
     :param pairings: 所有候选 Pairing 列表
     :param flights: 所有航班
     :param crew_pool: 机组列表
@@ -24,6 +26,8 @@ def assign_pairings(pairings, flights, crew_pool):
     """
     if not pairings or not flights:
         return crew_pool, [], pairings
+
+    rng = rng or random
 
     for c in crew_pool:
         c.assigned_flights = []
@@ -35,7 +39,7 @@ def assign_pairings(pairings, flights, crew_pool):
     candidates = [
         _select_disjoint(pairings, key=lambda p: p.cost),
         _select_disjoint(pairings, key=lambda p: -p.efficiency),
-        _best_random_disjoint(pairings, trials=200),
+        _best_random_disjoint(pairings, rng=rng, trials=200),
     ]
 
     best = candidates[0]
@@ -52,7 +56,7 @@ def assign_pairings(pairings, flights, crew_pool):
         covered_ids.update(p.flight_ids())
 
     # === 阶段2: 日级往返链 ===
-    uncovered_by_id = all_fids - covered_ids
+    uncovered_by_id = sorted(all_fids - covered_ids)
     new_chains, new_covered = _build_daily_turnarounds(uncovered_by_id, flight_map)
     if new_chains:
         selected = list(selected) + new_chains
@@ -193,7 +197,7 @@ def assign_pairings(pairings, flights, crew_pool):
 
         # 策略2失败（无可用人员） → 跳过此pairing
 
-    uncovered = [flight_map[fid] for fid in (all_fids - covered_ids)]
+    uncovered = [flight_map[fid] for fid in sorted(all_fids - covered_ids)]
     uncovered.sort(key=lambda f: f.departure_minutes)
 
     return crew_pool, assigned_info, uncovered
@@ -220,13 +224,14 @@ def _select_disjoint(pairings, key):
     return selected
 
 
-def _best_random_disjoint(pairings, trials=200):
+def _best_random_disjoint(pairings, rng=None, trials=200):
     """随机排列多次贪心，取覆盖最好的结果。"""
+    rng = rng or random
     items = list(pairings)
     best_covered = 0
     best_selection = []
     for _ in range(trials):
-        random.shuffle(items)
+        rng.shuffle(items)
         covered = set()
         selected = []
         for p in items:

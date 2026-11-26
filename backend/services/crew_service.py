@@ -20,6 +20,7 @@ from ..models.crew import CrewMember
 from ..services.data_service import data_service
 from ..services.pairing_service import PairingGenerator
 from ..services.pairing_assigner import assign_pairings
+from .experiment.seed import stable_hash
 
 # ========== 从 roster 文件加载固定人员名单 ==========
 _ROSTER_PATH = os.path.join(os.path.dirname(__file__), '..', 'data', 'crew_roster.json')
@@ -237,14 +238,26 @@ def _get_roster_names(base, role):
 
 
 class CrewSchedulingService:
-    """机组排班服务"""
+    """机组排班服务
 
-    def __init__(self):
+    rng_seed: 可选的实验种子。为 None 时保持现场行为（键相同则结果稳定），
+    但不再使用进程相关的内置 hash()，改为跨进程稳定的 crc32。
+    """
+
+    def __init__(self, rng_seed=None):
         self._crew_pool = None
         self._base_pools = {}
         self._cache_key = None
         self._pool_id_counter = 0
         self._locked_teams = {}    # team_id → [crew_id, ...]，手工指派的锁定团队
+        self._rng_seed = rng_seed
+        self._rng = random.Random(0)
+
+    def _reseed(self, key):
+        """按业务键 + 实验种子重建实例级 RNG，不触碰全局 random。"""
+        seed_val = stable_hash(f"{key}|{self._rng_seed}", 100000) + 2024
+        self._rng = random.Random(seed_val)
+        return seed_val
 
     # ========== 机组池生成 ==========
 
@@ -341,8 +354,7 @@ class CrewSchedulingService:
             return []
 
         new_key = (target_airport or '', date or '')
-        seed_val = hash(new_key) % 100000 + 2024
-        random.seed(seed_val)
+        self._reseed(new_key)
 
         if new_key != self._cache_key:
             self._base_pools = {}
@@ -692,8 +704,7 @@ class CrewSchedulingService:
             return [], [], [], []
 
         new_key = (target_airport or '', date or '')
-        seed_val = hash(new_key) % 100000 + 2024
-        random.seed(seed_val)
+        self._reseed(new_key)
         if new_key != self._cache_key:
             self._base_pools = {}
             self._crew_pool = None
@@ -705,7 +716,8 @@ class CrewSchedulingService:
         gen = PairingGenerator(flights, preferred_base=target_airport)
         pairings = gen.generate(max_pairings=3000)
 
-        crew_pool, assigned_info, uncovered = assign_pairings(pairings, flights, self._crew_pool)
+        crew_pool, assigned_info, uncovered = assign_pairings(
+            pairings, flights, self._crew_pool, rng=self._rng)
         return self._crew_pool, pairings, assigned_info, uncovered
 
     # ========== 基于飞机链的机组排班 ==========
@@ -747,8 +759,7 @@ class CrewSchedulingService:
             return [], [], [], []
 
         # 初始化机组池（基于 target_airport 的航班）
-        seed_val = hash(str(target_airport or '')) % 100000 + 2024
-        random.seed(seed_val)
+        self._reseed(target_airport or '')
         self._base_pools = {}
         self._crew_pool = None
         self._cache_key = (target_airport or '', '')
@@ -809,7 +820,7 @@ class CrewSchedulingService:
 
         # 用assign_pairings指派机组
         crew_pool, assigned_info, uncovered = assign_pairings(
-            pairings, all_flights, self._crew_pool)
+            pairings, all_flights, self._crew_pool, rng=self._rng)
         return self._crew_pool, pairings, assigned_info, uncovered
 
     # ========== 手动指派 ==========
@@ -1056,8 +1067,7 @@ class CrewSchedulingService:
             return [], [], [], []
 
         # 初始化机组池（复用已有的 base_pools，不清空缓存以免 crew_id 不匹配）
-        seed_val = hash(str(target_airport or '')) % 100000 + 2024
-        random.seed(seed_val)
+        self._reseed(target_airport or '')
         if not self._base_pools:
             self._ensure_base_pools(airport_flights, target_airport)
         self._assemble_crew_pool(target_airport)
@@ -1166,10 +1176,10 @@ class CrewSchedulingService:
             remaining_officers = [c for c in officers if c.crew_id not in manual_team_ids]
             remaining_pursers = [c for c in pursers if c.crew_id not in manual_team_ids]
             remaining_atts = [c for c in attendants if c.crew_id not in manual_team_ids]
-            random.shuffle(remaining_captains)
-            random.shuffle(remaining_officers)
-            random.shuffle(remaining_pursers)
-            random.shuffle(remaining_atts)
+            self._rng.shuffle(remaining_captains)
+            self._rng.shuffle(remaining_officers)
+            self._rng.shuffle(remaining_pursers)
+            self._rng.shuffle(remaining_atts)
 
             auto_teams = []
             max_t = min(len(remaining_captains), len(remaining_officers),
@@ -1251,7 +1261,7 @@ class CrewSchedulingService:
                     continue
 
                 # 策略2: 从基地出发 → 创建新团队
-                random.shuffle(auto_teams)
+                self._rng.shuffle(auto_teams)
                 for team in auto_teams:
                     if not _team_can_take(team, pairing.flights):
                         continue
@@ -1316,8 +1326,7 @@ class CrewSchedulingService:
             return [], [], [], [], {'error': f'没有{target_airport}相关航班'}
 
         # 初始化机组池
-        seed_val = hash(str(target_airport or '')) % 100000 + 2024
-        random.seed(seed_val)
+        self._reseed(target_airport or '')
         self._base_pools = {}
         self._crew_pool = None
         self._cache_key = (target_airport or '', '')
@@ -1410,10 +1419,10 @@ class CrewSchedulingService:
             remaining_officers = [c for c in self._crew_pool if c.role == 'first_officer' and c.crew_id not in manual_ids]
             remaining_pursers = [c for c in self._crew_pool if c.role == 'purser' and c.crew_id not in manual_ids]
             remaining_atts = [c for c in self._crew_pool if c.role == 'attendant' and c.crew_id not in manual_ids]
-            random.shuffle(remaining_captains)
-            random.shuffle(remaining_officers)
-            random.shuffle(remaining_pursers)
-            random.shuffle(remaining_atts)
+            self._rng.shuffle(remaining_captains)
+            self._rng.shuffle(remaining_officers)
+            self._rng.shuffle(remaining_pursers)
+            self._rng.shuffle(remaining_atts)
 
             auto_teams = []
             max_t = min(len(remaining_captains), len(remaining_officers),
@@ -1437,7 +1446,7 @@ class CrewSchedulingService:
                 p_fids = set(f.flight_id for f in pairing.flights)
                 if p_fids & auto_covered:
                     continue
-                random.shuffle(auto_teams)
+                self._rng.shuffle(auto_teams)
                 for team in auto_teams:
                     if not _team_can_take(team, pairing.flights):
                         continue

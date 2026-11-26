@@ -68,6 +68,8 @@ class PassengerFlow:
     passengers: dict = field(default_factory=dict)
     # 每个航班旅客已分配标记
     _generated: set = field(default_factory=set)
+    # 可选：实验注入的 random.Random 实例；None 时退回模块级 random
+    rng: object = field(default=None, repr=False)
 
     def generate_for_flight(self, flight_id: str, ac_type: str,
                             all_flight_ids: list = None) -> list:
@@ -75,13 +77,14 @@ class PassengerFlow:
         if flight_id in self._generated:
             return self.passengers.get(flight_id, [])
 
+        rng = self.rng or random
         capacity = get_capacity(ac_type)
         # 随机客座率 65%~100%
-        load_factor = random.uniform(0.65, 1.0)
+        load_factor = rng.uniform(0.65, 1.0)
         pax_count = max(20, int(capacity * load_factor))
 
         # 中转旅客比例 5%~20%
-        transit_ratio = random.uniform(0.05, 0.20)
+        transit_ratio = rng.uniform(0.05, 0.20)
         transit_count = max(0, min(int(pax_count * transit_ratio), pax_count // 3))
 
         pax_list = []
@@ -91,7 +94,7 @@ class PassengerFlow:
             next_f = None
             if is_transit and all_flight_ids and len(all_flight_ids) > 1:
                 candidates = [f for f in all_flight_ids if f != flight_id]
-                next_f = random.choice(candidates) if candidates else None
+                next_f = rng.choice(candidates) if candidates else None
 
             p = Passenger(
                 pax_id=f"{flight_id}_{i}",

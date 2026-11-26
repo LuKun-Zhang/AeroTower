@@ -104,16 +104,18 @@ def _get_region(airport: str) -> Optional[List[str]]:
 class WeatherService:
     """天气模拟服务"""
 
-    def __init__(self):
+    def __init__(self, rng=None):
+        self._rng = rng
         self._airport_weather: Dict[str, AirportWeather] = {}
         self._weather_history: Dict[str, List[AirportWeather]] = {}
         self._current_hour: int = -1
 
     def init_for_airports(self, airports: List[str]):
         """为所有机场初始化天气"""
+        rng = self._rng or random
         for ap in airports:
             # 大部分晴/多云，少量雨
-            r = random.random()
+            r = rng.random()
             if r < 0.6:
                 w = WeatherType.CLEAR
             elif r < 0.85:
@@ -158,11 +160,12 @@ class WeatherService:
     def _make_weather(self, airport: str, wtype: WeatherType, hour: int) -> AirportWeather:
         cfg = WEATHER_CONFIG[wtype]
         lo, hi = cfg["wind_ms"]
+        rng = self._rng or random
         return AirportWeather(
             airport=airport,
             weather=wtype,
-            wind_ms=round(random.uniform(lo, hi), 1),
-            visibility_m=round(random.uniform(
+            wind_ms=round(rng.uniform(lo, hi), 1),
+            visibility_m=round(rng.uniform(
                 cfg["visibility_m"] * 0.7, cfg["visibility_m"] * 1.3
             ), 0),
             hour=hour,
@@ -170,6 +173,7 @@ class WeatherService:
 
     def _evolve_weather(self, airport: str, current: WeatherType, hour: int) -> WeatherType:
         """马尔可夫链天气转移"""
+        rng = self._rng or random
         region = _get_region(airport)
 
         # 区域联动：如果同区域其他机场有更差的天气，本机场恶化概率增加
@@ -214,7 +218,7 @@ class WeatherService:
         }
 
         ts = transitions.get(current, [(WeatherType.CLEAR, 1.0)])
-        r = random.random()
+        r = rng.random()
         cumulative = 0.0
         for wtype, prob in ts:
             cumulative += prob
@@ -225,4 +229,5 @@ class WeatherService:
     def _weather_changed(self, airport: str, current: AirportWeather) -> bool:
         """检查是否有显著的风速/能见度变化"""
         cfg = WEATHER_CONFIG[current.weather]
-        return abs(current.wind_ms - random.uniform(*cfg["wind_ms"])) > 5
+        rng = self._rng or random
+        return abs(current.wind_ms - rng.uniform(*cfg["wind_ms"])) > 5

@@ -98,7 +98,7 @@ def _extract_windows(timeline, bad_provinces):
     "YYYY-MM-DD HH:MM"。返回 {省: [(start, end), ...]}。
     """
     windows = {}
-    for prov in bad_provinces:
+    for prov in sorted(bad_provinces):
         series = timeline.get(prov) or []
         if not series:
             continue
@@ -286,7 +286,7 @@ def compute_disruption(province_weather, timeline, flights,
         }
 
     transit_delay = 30 + 10 * max(1, max_severity)
-    for fid in transit_ids:
+    for fid in sorted(transit_ids):
         if fid in plan:
             continue
         plan[fid] = {

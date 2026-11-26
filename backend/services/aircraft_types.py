@@ -53,6 +53,50 @@ def fleet_ratio_list():
     return seq
 
 
+def _normalize_fleet_mix(fleet_mix):
+    """[('A319',10), ...] 或 {'A319':10,...} → (('A319',10),('A320',50),('A321',40))"""
+    if isinstance(fleet_mix, dict):
+        items = list(fleet_mix.items())
+    else:
+        items = list(fleet_mix or [])
+    counts = {}
+    for ac_type, count in items:
+        try:
+            n = int(count)
+        except (TypeError, ValueError):
+            continue
+        if n > 0 and ac_type in AIRCRAFT_TYPES:
+            counts[ac_type] = n
+    order = [t for t in ('A319', 'A320', 'A321') if t in counts]
+    return tuple((t, counts[t]) for t in order)
+
+
+def fleet_sequence(fleet_mix=None):
+    """按机队配比展开机型序列。
+
+    默认配比 (10/50/40) 直接返回 ``fleet_ratio_list()``，保证改造前后输出一致；
+    其它配比用确定性交错算法（按“已用比例最小”优先），避免长串同机型。
+    """
+    mix = _normalize_fleet_mix(fleet_mix)
+    if not mix:
+        return fleet_ratio_list()
+    if mix == (('A319', 10), ('A320', 50), ('A321', 40)):
+        return fleet_ratio_list()
+
+    total = sum(n for _, n in mix)
+    counts = dict(mix)
+    used = {t: 0 for t in counts}
+    seq = []
+    for _ in range(total):
+        pick = min(
+            counts,
+            key=lambda t: ((used[t] + 1) / counts[t], -counts[t], t),
+        )
+        seq.append(pick)
+        used[pick] += 1
+    return seq
+
+
 def parse_layout(layout):
     """'C8Y124' → {'C': 8, 'Y': 124}"""
     p = {}
