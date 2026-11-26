@@ -2,6 +2,8 @@
 __pycache__/
 *.pyc
 *.pyo
+.venv/
+venv/
 
 # ===== IDE / 系统 =====
 .idea/
@@ -22,3 +24,5 @@ debug_*.txt
 bench_e2e_out.txt
 _test_*.py
 _multiDaySchedule_backup.js
+# ===== WorkBuddy 工作区 =====
+.workbuddy/
