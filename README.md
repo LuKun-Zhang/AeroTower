@@ -887,6 +887,80 @@ npm run serve
 - `GET /api/flight/<flight_id>/passengers` — 航班旅客明细
 - `POST /api/paxflow/manifests`、`GET /api/paxflow/schedule` — 旅客流模拟数据
 
+### 实验中心（第一步）
+- `POST /api/experiments` — 创建实验（条件校验后保存）
+- `GET /api/experiments` — 实验列表
+- `GET /api/experiments/<id>` — 详情（条件 + 指标 + 曲线）
+- `DELETE /api/experiments/<id>` — 删除（运行中拒绝）
+- `POST /api/experiments/<id>/run` — 启动后台运行
+- `GET /api/experiments/<id>/progress` — 阶段进度
+- `POST /api/experiments/<id>/rerun` — 同条件同种子重跑
+- `GET /api/experiments/<id>/export` — 导出 xlsx（条件/指标/曲线）
+- `POST /api/experiments/<id>/replay/init|sync|snapshot|paxflow|context|weather_disruption` — 只读回放
+
+实验入口在首页「实验中心」。每个实验产出约 2–3 MB 工件，存放在 `data/experiments/<用户名>/<实验ID>/`，不写全局 state，不影响工作台。
+
+---
+
+## 十四、实验中心（第一步）
+
+### 14.1 入口与页面
+
+首页 →「实验中心」：
+
+| 页面 | 路径 | 作用 |
+|------|------|------|
+| 实验列表 | `/experiments` | 按创建时间倒序，显示状态、条件摘要、全程准点率、完成率 |
+| 新建实验 | `/experiments/new` | 条件表单：日期、基地、客流、机队、四类算法、天气/异常、种子 |
+| 实验详情 | `/experiments/:id` | 运行进度、三画面回放、指标卡片与曲线、条件快照、导出 |
+
+详情页支持 `?tab=weather|paxflow&t=<业务分钟>` 直接定位回放画面与时刻。
+
+### 14.2 一次实验包含什么
+
+1. 生成：客流量 → 航班计划 + 旅客 + 任务链（不写历史记录、不写全局 state）。
+2. 调度：飞机排班、跑道、登机口、机组，全部使用局部服务实例。
+3. 中断：预设天气情景（四川盆地雷暴 / 华东强降雨 / 华南台风）或机场临时关闭，编译成冻结的延误/取消计划。
+4. 推演：`SimulationEngine.sync_frozen` 按 15 分钟步长推进，产出状态序列。
+5. 汇总：全程累计指标 + 两条曲线；工件写入 `data/experiments/`。
+
+### 14.3 指标口径
+
+实验指标是**全程累计值**，与现场仪表盘的**当前时刻瞬时值**同名但语义不同，因此统一加「全程」前缀：
+
+| 指标 | 公式 |
+|------|------|
+| 计划航班数 | 生成航班总数（含调机） |
+| 全程准点率 | (总数 - 曾延误 - 取消) / 总数 × 100 |
+| 完成率 | 已到达 / (总数 - 取消) × 100 |
+| 取消航班 | 全程被取消的航班数 |
+| 延误航班 | 全程曾出现延误的航班数 |
+| 平均延误 | 延误航班最终延误分钟均值 |
+| 飞机利用率 | 平均（飞行分钟 / 18h） |
+| 跑道平均延误 | 起降条目平均延误 |
+| 登机口利用率 | 主基地登机口平均利用率 |
+| 机组覆盖率 | 机组已覆盖航班比例（违规项另列） |
+
+### 14.4 复现
+
+- 所有随机行为来自实验种子（`seed`），不使用全局 `random` / 内置 `hash()`。
+- 启动时建议设置 `PYTHONHASHSEED=0`（集合遍历已改为 `sorted`，作为兜底）。
+- 同条件 + 同种子重跑，指标与曲线应完全一致；`python scripts/experiment_smoke.py --compare --days 1` 可做跨进程校验。
+- 登机口 `cp_sat` 因 25 秒时间上限不可复现，实验算法白名单中不提供。
+
+### 14.5 目录
+
+```
+data/experiments/<username>/<exp_id>/
+├── meta.json        条件快照、状态、摘要指标
+├── flights.json     航班（不含旅客明细）
+├── schedule.json    飞机链、跑道、登机口、机组摘要
+├── weather.json     气象情景、省份时间线、冻结中断计划
+├── metrics.json     指标定义/数值/时间序列
+├── paxflow.json     回放用旅客流调度
+└── run.json         阶段耗时与警告
+```
+
 ---
 
 *本说明书基于代码库当前实现整理，具体按钮文案与布局以实际运行页面为准。如有疑问，可结合 `docs/` 目录下的设计文档进一步了解系统设计细节。*
