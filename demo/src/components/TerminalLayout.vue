@@ -88,6 +88,7 @@ export default {
       canvasWidth: 1200,
       canvasHeight: 600,
       // 画布视图变换：滚轮缩放、拖拽平移
+      dpr: 1,
       viewScale: 1,
       viewX: 0,
       viewY: 0,
@@ -268,12 +269,16 @@ export default {
       this.canvasHeight = h
       const canvas = this.$refs.canvas
       if (!canvas) return
-      // 内部分辨率
-      canvas.width = this.canvasWidth
-      canvas.height = this.canvasHeight
-      // CSS 显示尺寸：必须与内部分辨率一致，否则渲染会被 CSS 缩放
+      // 内部分辨率按 devicePixelRatio 放大（上限 2，兼顾清晰度与显存），
+      // 绘制仍用 CSS 像素坐标，由 transform 统一缩放，放大后文字不糊
+      const dpr = Math.min(window.devicePixelRatio || 1, 2)
+      this.dpr = dpr
+      canvas.width = Math.round(this.canvasWidth * dpr)
+      canvas.height = Math.round(this.canvasHeight * dpr)
       canvas.style.width = this.canvasWidth + 'px'
       canvas.style.height = this.canvasHeight + 'px'
+      const ctx0 = canvas.getContext('2d')
+      if (ctx0) ctx0.setTransform(dpr, 0, 0, dpr, 0, 0)
       // 容器也撑到足够大
       if (root) {
         root.style.width = this.canvasWidth + 'px'
@@ -295,8 +300,8 @@ export default {
       const canvas = this.$refs.canvas
       if (!canvas) return
       const rect = canvas.getBoundingClientRect()
-      const mx = (e.clientX - rect.left) * (canvas.width / rect.width)
-      const my = (e.clientY - rect.top) * (canvas.height / rect.height)
+      const mx = (e.clientX - rect.left) * (this.canvasWidth / rect.width)
+      const my = (e.clientY - rect.top) * (this.canvasHeight / rect.height)
       const factor = e.deltaY < 0 ? 1.12 : 1 / 1.12
       const next = Math.min(5, Math.max(0.6, this.viewScale * factor))
       const k = next / this.viewScale
