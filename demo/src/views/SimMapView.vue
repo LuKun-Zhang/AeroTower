@@ -94,7 +94,7 @@
       <span>空中: {{ airborneCount }} 架</span>
       <span>延误: {{ delayedCount }} 架</span>
       <span>取消: {{ cancelledCount }} 架</span>
-      <span>准点率: {{ punctuality }}%</span>
+      <span>当前准点率: {{ punctuality }}%</span>
       <span class="status-right">{{ simCurrentTime }}</span>
     </div>
 
