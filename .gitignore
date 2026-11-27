@@ -22,3 +22,18 @@ debug_*.txt
 bench_e2e_out.txt
 _test_*.py
 _multiDaySchedule_backup.js
+
+# BEGIN CODEX PERSONAL PRIVACY
+/个人资料/
+# END CODEX PERSONAL PRIVACY
+/.venv/
+/.cache/
+/.artifacts/
+/.pip-install*.json
+/data/intelligence/
+/*debug.log
+/*recovery*.log
+
+# 正式小模型通过GitHub Release交接，Git只保留清单与来源说明。
+/pretrained/intelligence/models/
+/pretrained/intelligence/language-evaluation.json

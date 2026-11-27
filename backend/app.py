@@ -21,6 +21,9 @@ from .routes.anomaly_routes import anomaly_bp, set_schedule_getter, set_post_exe
 from .routes.simulation_routes import simulation_bp
 from .routes.generate_routes import generate_bp
 from .routes.weather_routes import weather_bp
+from .routes.intelligence_routes import intelligence_bp
+from .routes.intelligence_extra_routes import intelligence_extra_bp
+from .services.intelligence.reviews import start_monitor
 
 # ==================== Flask 应用初始化 ====================
 app = Flask(__name__)
@@ -48,6 +51,9 @@ app.register_blueprint(map_bp, url_prefix='/api/map')
 app.register_blueprint(simulation_bp, url_prefix='/api')
 app.register_blueprint(generate_bp)
 app.register_blueprint(weather_bp, url_prefix='/api')
+app.register_blueprint(intelligence_bp, url_prefix='/api/intelligence')
+app.register_blueprint(intelligence_extra_bp, url_prefix='/api/intelligence')
+start_monitor()
 
 
 # ==================== 异常调度集成 ====================

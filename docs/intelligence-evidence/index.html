@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>AeroTower 智能化改造：实际运行验收</title>
+<style>body{margin:30px auto;max-width:1300px;padding:0 24px;font:16px/1.8 system-ui;color:#25384c;background:#f3f5f8}section{background:white;padding:24px;margin:24px 0;border:1px solid #dce3ed;border-radius:8px}img{width:100%;height:auto;border:1px solid #dce3ed}h1{font-size:26px}h2{font-size:20px}a{color:#276bc2}.note{padding:16px;background:#e9eff8}</style>
+<h1>AeroTower 智能化改造：实际运行验收</h1>
+<p>2026-11-27，本机Chrome与真实Flask后端联调。10张图片为实际程序运行截图，没有论文图片或生成图片。实验中的“实际分钟”是系统模拟结果；截图由本地自动化联调生成，航班和异常均为演示数据。</p>
+<p><a href="ui-check.json">基础浏览器检查</a> · <a href="extensions-check.json">六项补齐联调</a> · <a href="test-summary.json">回归与交接测试摘要</a> · <a href="test-summary.json">前端构建记录</a> · <a href="language-evaluation.json">1.5B逐条评测</a> · <a href="language-provenance-audit.json">模型字段来源核对</a> · <a href="../HANDOFF.md">环境与模型交接说明</a></p>
+<p class="note"><a href="acceptance-summary.json">最终验收汇总</a>：模型81860180，两组浏览器检查版本一致。旧24条由原流程16/24改善为新流程两轮合并24/24，新24留出也24/24；首轮单次29/48，最多一次只给字段名的反馈合并后48/48。每个计入模型成功的值均可追溯到模型输出，默认启用本地模型流程；不是单次输出100%或任意表述保证。</p>
+<section><h2>模型启用状态与实际成绩</h2><p>页面分别显示首轮与两轮合并成绩；默认本地模型，失败或低内存时仍保留模板回退。</p><img src="language-model-status.png" alt="本地语言模型29/48首轮及48/48合并的实际启用状态"></section>
+<section><h2>1. 实验前客流趋势</h2><p>显示模拟日历史、预测与同期对照，可把基地、比例、天数填入表单，仍需确认运行。真实历史月数据另外标明用途。</p><img src="demand-forecast.png" alt="实验前客流预测与完整趋势曲线"></section>
+<section><h2>2. 描述生成待确认草稿</h2><p>当前默认官方1.5B本地模型；字段附原文依据，日期由日历解析器处理。左侧是新草稿，右侧可仍是上一次历史实验；生成和填入草稿都不运行新实验，真正的新结果见下一张。不合格候选明确回退模板。</p><img src="draft-confirmation.png" alt="默认本地模型生成的待确认草稿"></section>
+<section><h2>3. 预测与模拟实际结果</h2><p>显示判断正确架数、总架数、命中率及分钟误差；个别实验不保证优于历史均值，实际误差照常展示。</p><img src="experiment-result.png" alt="命中率及逐航班延误预测对照"></section>
+<section><h2>4. 同异常的原恢复方案与五策略</h2><p>基线实际调用原恢复服务生成并执行隔离副本。取消、未恢复架次分开显示；计划成本更差时保留原可行方案，不自动采用推荐。</p><img src="strategy-comparison.png" alt="真实原服务基线和五策略计划代价"></section>
+<section><h2>5. 原排班算法建议</h2><p>比较三个原算法、约束和代价。选用只改变算法下拉框，仍需点击原“一键排班”；原默认方案多数时候已经最优。</p><img src="routing-recommendation.png" alt="排班建议与原算法执行入口"></section>
+<section><h2>6. 失准停用与复核恢复</h2><p>此图是明确的人为失准演示，延误模型被停用；正常复核后恢复。浏览器记录同时核实保存的权重没有改变。服务运行期间按7天周期检查，离线后重启补做。</p><img src="model-review-fallback.png" alt="固定模型失准复核与停用回退"></section>
+<section><h2>7. 原航班列表风险列</h2><p>先确认天气、容量与前序条件，再展开任务链查看风险。</p><img src="flight-risk.png" alt="原航班表风险预估"></section>
+<section><h2>8. 原异常调度页</h2><p>完成影响分析后比较策略，下方仍沿用原确认与执行流程；联调实际执行成功。</p><img src="live-recovery.png" alt="原异常调度页的辅助推荐"></section>
+<section><h2>9. 延误风险依据</h2><p>固定其他条件，查看当前因素相对参考值的模型预测变化，不当作现实因果结论。</p><img src="risk-explanation.png" alt="风险因素参考对照"></section>
+</html>

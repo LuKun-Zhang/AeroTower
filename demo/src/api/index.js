@@ -1,7 +1,7 @@
 /** API 请求封装 */
 const BASE_URL = '/api'
 
-async function request(url, options = {}) {
+export async function request(url, options = {}) {
   const config = {
     headers: { 'Content-Type': 'application/json' },
     ...options,

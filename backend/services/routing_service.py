@@ -421,17 +421,8 @@ class AircraftRoutingService:
                 best_idx_ac = i
                 break  # 已按质量降序，第一个匹配的就是最好的
             if best_ac is None:
-                # 放宽机型限制
-                for i, ac in enumerate(all_aircrafts):
-                    if ac_used[i]:
-                        continue
-                    if _chain_max_daily_segments(chain) > ac.max_daily_flights:
-                        continue
-                    best_ac = ac
-                    best_idx_ac = i
-                    break
-            if best_ac is None:
-                continue  # 没有能装下这条链的飞机，跳过
+                # 运力不足时保留未分配状态，不能把不同机型当作可互换资源。
+                continue
 
             for f in chain:
                 best_ac.add_flight(f)

@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "modelVersion": "818601802430426e9e0694555437d6c0",
+  "firstExperiment": "a5222499b1074e77a9dcbee4b84830cb",
+  "rerun": "909137b434b84249b40dc4870d55d6d6",
+  "classificationHitRate": {
+    "correct": 406,
+    "total": 406,
+    "visible": true
+  },
+  "languageTrial": {
+    "model": "Qwen2.5-1.5B-Instruct",
+    "method": "local-qwen",
+    "confirmedByUserFlow": true
+  },
+  "draftDidNotRun": true,
+  "repeatable": true,
+  "csvDownloaded": true,
+  "explanationVisible": true,
+  "batch": [
+    "2fa814d3524a4e139f52430bee3939a4",
+    "01756a36020746beb8e2a658be8d7118",
+    "40446c67f667496b9dc2b446bf6e0362"
+  ],
+  "controlExperiment": "73c5333d1e9f4c32adbe7f18874074a7",
+  "modelSwitchPreservesOutcome": true,
+  "legacy": {
+    "flightCount": 4,
+    "eventId": "1f4b59d3",
+    "candidateCount": 5,
+    "originalScheduleSaved": true
+  },
+  "pageErrors": []
+}

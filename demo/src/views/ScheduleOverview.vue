@@ -59,6 +59,7 @@
       </div>
 
       <!-- 任务链明细 -->
+      <FlightRisk :flights="flights" @predicted="riskById = $event" />
       <div class="chains-section">
         <h3>任务链明细（{{ chains.length }} 条）</h3>
         <el-collapse v-model="activeChains">
@@ -100,6 +101,13 @@
                     <span v-else>{{ f.pax_count }}</span>
                   </template>
                 </el-table-column>
+                <el-table-column label="延误风险" width="115">
+                  <template #default="{ row: f }">
+                    <span v-if="riskById[f.flight_id] && riskById[f.flight_id].probability != null">{{ (riskById[f.flight_id].probability * 100).toFixed(1) }}% / {{ riskById[f.flight_id].minutes }}分</span>
+                    <span v-else>尚未预估</span>
+                    <RiskExplanation :prediction="riskById[f.flight_id]" />
+                  </template>
+                </el-table-column>
                 <el-table-column label="操作" width="120" align="center">
                   <template #default="{ row: f }">
                     <el-button v-if="!f.is_ferry" type="text" size="mini" @click="viewFlightPax(f)">查看旅客</el-button>
@@ -116,11 +124,15 @@
 </template>
 
 <script>
+import FlightRisk from '@/components/intelligence/FlightRisk'
+import RiskExplanation from '@/components/intelligence/RiskExplanation'
 export default {
   name: 'ScheduleOverview',
+  components: { FlightRisk, RiskExplanation },
   data() {
     return {
       statsData: null,
+      riskById: {},
       chainsList: [],
       flightsList: [],
       activeChains: [],

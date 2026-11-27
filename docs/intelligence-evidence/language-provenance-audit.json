@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "identity": {
+    "name": "Qwen2.5-1.5B-Instruct",
+    "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "prompt_sha256": "94a5787f23a7ac784cf47fd3bc99fe38b1628d96c1fc225d9570f7eb24bcf4d7",
+    "pipeline_sha256": "4c2ffc48c390c2bd2be81db4b92f1dd3c8a9059c0701f7dc96471537fff96daf",
+    "inference_dtype": "float32",
+    "threads": 4
+  },
+  "cohorts": {
+    "old_24": {
+      "count": 24,
+      "first": 15,
+      "merged": 24,
+      "guarded": 24
+    },
+    "fresh_24": {
+      "count": 24,
+      "first": 14,
+      "merged": 24,
+      "guarded": 24
+    },
+    "all_48": {
+      "count": 48,
+      "first": 29,
+      "merged": 48,
+      "guarded": 48
+    }
+  },
+  "baseline": {
+    "count": 24,
+    "first": 15,
+    "after_feedback": 16
+  },
+  "all_model_fields_traceable": true,
+  "default_policy": {
+    "mode": "local-qwen",
+    "raw_exact": 29,
+    "cases": 48,
+    "model": "Qwen2.5-1.5B-Instruct",
+    "after_feedback_exact": 48,
+    "reason": "48条描述的模型提取及两轮合并通过；不合格候选明确回退模板，输出仍须人工确认"
+  }
+}
