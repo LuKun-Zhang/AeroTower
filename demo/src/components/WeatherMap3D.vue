@@ -2912,7 +2912,7 @@ function animate(time) {
     updateDynamicProvinceMap()
     updateCycloneStates()
     // 小图重绘限 5 FPS（原为每帧）
-    if (time - lastChartDrawAt >= 200) {
+    if (time - lastChartDrawAt >= 100) {
       drawWeatherChart()
       lastChartDrawAt = time
     }
@@ -2950,10 +2950,10 @@ function animate(time) {
     })
   })
 
-  // 天气纹理刷新：动态模式限 5 FPS（原为每帧 2048² 重绘 + 纹理上传），静态模式 2 FPS
+  // 天气纹理刷新：动态模式限 10 FPS（原为每帧 2048² 重绘 + 纹理上传），静态模式 2 FPS
   tickCounter++
   if (mode.value === 'dynamic' || mode.value === 'custom') {
-    if (time - lastWeatherTexAt >= 200) {
+    if (time - lastWeatherTexAt >= 100) {
       updateWeatherTex()
       lastWeatherTexAt = time
     }

@@ -920,6 +920,8 @@ export default {
             const tickInterval = Math.max(30, 200 / this.simState.speed)
             if (elapsed >= tickInterval) {
               this.lastSimTick = timestamp
+              this._lastTickAt = performance.now()
+              this._lastTickInterval = tickInterval
               tickCount++
               if (tickCount <= 5 || tickCount % 10 === 0) {
                 console.log('[DEBUG] simTick #' + tickCount + ' at t=' + this.simState.currentTime.toFixed(1) + ' frame=' + frameCount + ' pax=' + this.passengers.length + ' planes=' + this.airplanes.length)
@@ -2037,6 +2039,7 @@ export default {
         // 疏散模式下加速
         const speedMul = this.evacuation.active ? 2.5 : 1
 
+        p._prevProgress = p.progress
         p.progress += p.speed * speedMul
 
         // entering 状态：到达主干道区域（约 0.3 进度）转为候机
@@ -3418,6 +3421,12 @@ export default {
       const dense = this.passengers.length > 300
 
       // 按颜色/状态分组，每组一次性 fill：上千名旅客时避免上千次 arc+fill+stroke 拖垮合成
+      // 两次模拟 tick 之间按时间比例插值，画面刷新 60fps，旅客不再每 200ms 跳一格
+      const tickGap = this._lastTickInterval || 200
+      const tickFrac = this._lastTickAt
+        ? Math.min(1, Math.max(0, (performance.now() - this._lastTickAt) / tickGap))
+        : 1
+
       const groups = new Map()
       for (const p of this.passengers) {
         let sx, sy
@@ -3428,7 +3437,11 @@ export default {
           const rc = this.routeCorridors[p.corridorIdx]
           if (!rc) continue
           const wps = p.waypoints || rc.waypoints
-          const pos = this.interpolateRoute(wps, p.progress, p.laneOffset, (p.waypoints ? 5 : rc.width) * 0.85)
+          let prog = p.progress
+          if (tickFrac < 1 && p._prevProgress != null && p.status !== 'arrived' && Math.abs(p.progress - p._prevProgress) < 0.3) {
+            prog = p._prevProgress + (p.progress - p._prevProgress) * tickFrac
+          }
+          const pos = this.interpolateRoute(wps, prog, p.laneOffset, (p.waypoints ? 5 : rc.width) * 0.85)
           sx = this.tx(pos.x)
           sy = this.ty(pos.y)
         }
