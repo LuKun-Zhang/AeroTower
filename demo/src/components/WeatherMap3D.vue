@@ -1281,6 +1281,60 @@ function updateWeatherTex() {
 }
 
 /* ==================== 中国 Mask + 地图 → 纹理 ==================== */
+
+/**
+ * 内置 utils/china.js 使用 UTF8 压缩格式（UTF8Encoding + encodeOffsets），
+ * echarts.getMap() 返回的 geoJSON 仍是压缩态：coordinates 是字符串。
+ * 直接按数组遍历会抛 "c.forEach is not a function"，使地形降级成纯色。
+ * 这里按 ECharts 的解码算法就地还原成经纬度数组。
+ */
+function decodeChinaGeoJSON(json) {
+  if (!json || !json.UTF8Encoding) return json
+  const scale = json.UTF8Scale || 1024
+  const decodeRing = (ring, offsets) => {
+    const result = []
+    let prevX = offsets[0]
+    let prevY = offsets[1]
+    for (let i = 0; i < ring.length; i += 2) {
+      let x = ring.charCodeAt(i) - 64
+      let y = ring.charCodeAt(i + 1) - 64
+      // ZigZag 还原 + 差分还原
+      x = (x >> 1) ^ (-(x & 1))
+      y = (y >> 1) ^ (-(y & 1))
+      x += prevX
+      y += prevY
+      prevX = x
+      prevY = y
+      result.push([x / scale, y / scale])
+    }
+    return result
+  }
+
+  for (const feature of json.features || []) {
+    const geometry = feature && feature.geometry
+    if (!geometry || !geometry.coordinates || !geometry.encodeOffsets) continue
+    const coords = geometry.coordinates
+    const offsets = geometry.encodeOffsets
+    if (geometry.type === 'Polygon') {
+      for (let i = 0; i < coords.length; i++) {
+        if (typeof coords[i] === 'string') coords[i] = decodeRing(coords[i], offsets[i])
+      }
+    } else if (geometry.type === 'MultiPolygon') {
+      for (let i = 0; i < coords.length; i++) {
+        const polygon = coords[i]
+        if (!Array.isArray(polygon)) continue
+        for (let j = 0; j < polygon.length; j++) {
+          if (typeof polygon[j] === 'string') {
+            polygon[j] = decodeRing(polygon[j], offsets[i][j])
+          }
+        }
+      }
+    }
+  }
+  json.UTF8Encoding = false
+  return json
+}
+
 function createChinaTextures() {
   const M = 2048  // 纹理分辨率
   const toX = (lng) => (lng - CHINA.minLng) / (CHINA.maxLng - CHINA.minLng) * M
@@ -1315,7 +1369,7 @@ function createChinaTextures() {
   try {
     const geo = echarts.getMap('china')
     if (geo && geo.geoJSON) {
-      geo.geoJSON.features.forEach(feature => {
+      decodeChinaGeoJSON(geo.geoJSON).features.forEach(feature => {
         const name = feature.properties?.name || ''
         const coords = feature.geometry?.coordinates
         if (!coords || !name) return

@@ -26,3 +26,6 @@ _test_*.py
 _multiDaySchedule_backup.js
 # ===== WorkBuddy 工作区 =====
 .workbuddy/
+
+# ===== Playwright CLI =====
+.playwright-cli/
