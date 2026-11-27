@@ -439,7 +439,7 @@ export default {
       if (this.embedded) {
         // 嵌入模式：旅客流时间速度与统一时钟保持一致（5 业务分钟/秒 ≈ speed 5），
         // 并保持播放状态，避免跳转后 running=false 导致飞机“到点不动”
-        L.setSpeed(5)
+        L.setSpeed(2)
         L.setRunning(true)
       }
       if (date && date !== this.currentDate) {

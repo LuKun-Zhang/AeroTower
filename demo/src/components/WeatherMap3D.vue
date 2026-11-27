@@ -296,7 +296,7 @@ let sizeW = 1, sizeH = 1
 const BUSINESS_MINUTES_PER_DAY = 24 * 60                       // 1440
 const CYCLONE_DAYS = 7                                          // 一个气旋周期覆盖 7 个业务日
 const CYCLONE_BUSINESS_MINUTES = CYCLONE_DAYS * BUSINESS_MINUTES_PER_DAY  // 10080 业务分钟
-const UNIFIED_MINUTES_PER_SECOND = 5                            // 统一速率：每现实秒推进的业务分钟数
+const UNIFIED_MINUTES_PER_SECOND = 1                            // 统一速率：每现实秒推进的业务分钟数（原 5，过快）
 const CYCLONE_CYCLE = CYCLONE_BUSINESS_MINUTES / UNIFIED_MINUTES_PER_SECOND  // 2016 秒
 
 // 业务时间锚点：气旋 phase 0 ↔ 2020-11-29 00:00（生成数据首日）

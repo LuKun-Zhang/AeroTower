@@ -102,7 +102,7 @@ export default {
         paused: false,
         speed: 1,
         currentTime: 0,
-        timePerTick: 0.2,
+        timePerTick: 0.1,
       },
       // 旅客生成参数
       paxParams: {
@@ -1031,7 +1031,7 @@ export default {
     },
 
     setSpeed(speed) {
-      this.simState.speed = Math.max(1, Math.min(10, speed))
+      this.simState.speed = Math.max(0.25, Math.min(10, speed))
     },
 
     // 显式设置模拟运行状态（不重置时间/旅客/飞机），供统一时钟对齐时使用
@@ -1051,6 +1051,8 @@ export default {
       const savedSpeed = this.simState.speed
       const savedRunning = this.simState.running
       const savedPaused = this.simState.paused
+      // 快进时用较粗的时间步长，避免 tick 数翻倍把主线程拖慢
+      const savedTimePerTick = this.simState.timePerTick
       const beforeTime = this.simState.currentTime
       // 手动拖动过进度条：当天播放完成后不自动切天，画面定格等待用户操作
       this._manualIntervention = true
@@ -1081,6 +1083,7 @@ export default {
 
         // 快进期间用标准速度，避免倍速导致动画位移失真
         this.simState.speed = 1
+        this.simState.timePerTick = 0.2
         this.simState.running = true
         this.simState.paused = false
 
@@ -1125,6 +1128,7 @@ export default {
           this.simState.currentTime = target
         }
         this.simState.speed = savedSpeed
+        this.simState.timePerTick = savedTimePerTick
         this.simState.running = savedRunning
         this.simState.paused = savedPaused
         console.log('[JUMP] 状态恢复: running=' + this.simState.running + ' paused=' + this.simState.paused + ' currentTime=' + this.simState.currentTime.toFixed(1))
