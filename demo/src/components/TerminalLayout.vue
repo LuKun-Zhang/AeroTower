@@ -1,6 +1,7 @@
 <template>
   <div class="terminal-layout" ref="root">
     <canvas ref="canvas" class="layout-canvas"></canvas>
+    <div class="zoom-hint">滚轮缩放 · 拖拽平移 · 双击复位</div>
   </div>
 </template>
 
@@ -86,6 +87,11 @@ export default {
     return {
       canvasWidth: 1200,
       canvasHeight: 600,
+      // 画布视图变换：滚轮缩放、拖拽平移
+      viewScale: 1,
+      viewX: 0,
+      viewY: 0,
+      panning: false,
       scaleX: 1,
       scaleY: 1,
       offsetX: 0,
@@ -216,11 +222,30 @@ export default {
     })
     this._resizeObserver.observe(this.$refs.root)
     console.log('[DEBUG] mounted() COMPLETE. running=', this.simState.running, 'paused=', this.simState.paused, 'flights=', this.simFlights.length, 'pax=', this.passengers.length, 'planes=', this.airplanes.length)
+    // 画布缩放 / 拖拽
+    const canvas = this.$refs.canvas
+    if (canvas) {
+      canvas.addEventListener('wheel', this.onViewWheel, { passive: false })
+      canvas.addEventListener('mousedown', this.onViewPanStart)
+      canvas.addEventListener('dblclick', this.resetView)
+      canvas.addEventListener('contextmenu', (e) => e.preventDefault())
+    }
+    window.addEventListener('mousemove', this.onViewPanMove)
+    window.addEventListener('mouseup', this.onViewPanEnd)
+
     // 异步拉取后端真实航班调度（不阻塞模拟启动；成功后自动切换到最早日期）
     this.loadPaxflowSchedule()
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize)
+    window.removeEventListener('mousemove', this.onViewPanMove)
+    window.removeEventListener('mouseup', this.onViewPanEnd)
+    const canvas = this.$refs.canvas
+    if (canvas) {
+      canvas.removeEventListener('wheel', this.onViewWheel)
+      canvas.removeEventListener('mousedown', this.onViewPanStart)
+      canvas.removeEventListener('dblclick', this.resetView)
+    }
     if (this._resizeObserver) { this._resizeObserver.disconnect(); this._resizeObserver = null }
     if (this._animFrame) cancelAnimationFrame(this._animFrame)
   },
@@ -265,10 +290,50 @@ export default {
       this.offsetY = pad - b.min_y * this.scaleY
     },
 
-    tx(x) { return x * this.scaleX + this.offsetX },
-    ty(y) { return y * this.scaleY + this.offsetY },
-    tw(w) { return w * this.scaleX },
-    th(h) { return h * this.scaleY },
+    onViewWheel(e) {
+      e.preventDefault()
+      const canvas = this.$refs.canvas
+      if (!canvas) return
+      const rect = canvas.getBoundingClientRect()
+      const mx = (e.clientX - rect.left) * (canvas.width / rect.width)
+      const my = (e.clientY - rect.top) * (canvas.height / rect.height)
+      const factor = e.deltaY < 0 ? 1.12 : 1 / 1.12
+      const next = Math.min(5, Math.max(0.6, this.viewScale * factor))
+      const k = next / this.viewScale
+      // 以鼠标位置为锚点缩放
+      this.viewX = mx - (mx - this.viewX) * k
+      this.viewY = my - (my - this.viewY) * k
+      this.viewScale = next
+    },
+
+    onViewPanStart(e) {
+      if (e.button !== 0) return
+      this.panning = true
+      this._panStart = { x: e.clientX, y: e.clientY, vx: this.viewX, vy: this.viewY }
+      e.preventDefault()
+    },
+
+    onViewPanMove(e) {
+      if (!this.panning || !this._panStart) return
+      this.viewX = this._panStart.vx + (e.clientX - this._panStart.x)
+      this.viewY = this._panStart.vy + (e.clientY - this._panStart.y)
+    },
+
+    onViewPanEnd() {
+      this.panning = false
+      this._panStart = null
+    },
+
+    resetView() {
+      this.viewScale = 1
+      this.viewX = 0
+      this.viewY = 0
+    },
+
+    tx(x) { return (x * this.scaleX + this.offsetX) * this.viewScale + this.viewX },
+    ty(y) { return (y * this.scaleY + this.offsetY) * this.viewScale + this.viewY },
+    tw(w) { return w * this.scaleX * this.viewScale },
+    th(h) { return h * this.scaleY * this.viewScale },
 
     buildScene() {
       this.drawAll()
@@ -3533,5 +3598,23 @@ export default {
 
 .layout-canvas {
   display: block;
+  cursor: grab;
+}
+
+.layout-canvas:active {
+  cursor: grabbing;
+}
+
+.zoom-hint {
+  position: absolute;
+  right: 10px;
+  bottom: 8px;
+  padding: 2px 8px;
+  font-size: 11px;
+  color: rgba(205, 214, 244, 0.55);
+  background: rgba(10, 15, 30, 0.55);
+  border-radius: 4px;
+  pointer-events: none;
+  user-select: none;
 }
 </style>
