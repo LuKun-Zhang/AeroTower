@@ -1106,6 +1106,23 @@ function createProvinceLabels() {
     scene.add(sprite)
     provinceSprites.push({ sprite, name: pc.name })
   })
+  updateProvinceLabelScale()
+}
+
+/**
+ * 省份标签按相机距离换算尺寸，保持恒定屏幕字号（约 12–14px）。
+ * 之前用固定世界尺寸 5.5，相机拉近时标签会占满半个屏幕并相互重叠。
+ */
+function updateProvinceLabelScale() {
+  if (!camera || !renderer || !provinceSprites.length) return
+  const vh = renderer.domElement.clientHeight || 1
+  const halfFov = THREE.MathUtils.degToRad(camera.fov * 0.5)
+  for (const item of provinceSprites) {
+    const dist = camera.position.distanceTo(item.sprite.position)
+    const worldPerPx = (2 * Math.tan(halfFov) * dist) / vh
+    const h = 34 * worldPerPx      // 目标屏幕高度约 34px（字形约 15px）
+    item.sprite.scale.set(h * 3.2, h, 1)
+  }
 }
 
 function updateLightning(dt) {
@@ -2205,26 +2222,52 @@ function rebuildWeatherGrid() {
     }
   }
   weatherGridDirty = false
+  rebuildWeatherGridIndex()
   weatherGridVersion.value++
 }
 
 /** 从天气网格查找指定类型的随机位置 */
-function spawnFromWeatherGrid(targetTypes) {
-  const typeSet = new Set(targetTypes)
-  const matches = []
+// 天气网格按类型建索引：雨滴落地重采样时不用每次扫描整张 128×128 网格
+let weatherGridCellsByType = {}
+
+function rebuildWeatherGridIndex() {
+  const map = Object.create(null)
   for (let gy = 0; gy < WEATHER_GRID; gy++) {
     for (let gx = 0; gx < WEATHER_GRID; gx++) {
       const type = WEATHER_TYPE_BY_INDEX[weatherGrid[gy * WEATHER_GRID + gx]]
-      if (typeSet.has(type)) matches.push({ gx, gy, type })
+      if (!map[type]) map[type] = []
+      map[type].push({ gx, gy })
     }
   }
-  if (matches.length === 0) return null
-  const m = matches[Math.floor(Math.random() * matches.length)]
+  weatherGridCellsByType = map
+}
+
+function spawnFromWeatherGrid(targetTypes) {
+  let total = 0
+  for (const t of targetTypes) {
+    const list = weatherGridCellsByType[t]
+    if (list) total += list.length
+  }
+  if (total === 0) return null
+
+  // 按各类型格点数量加权随机选一个类型，再随机取格点
+  let r = Math.random() * total
+  let pickedType = targetTypes[0]
+  let pickedList = null
+  for (const t of targetTypes) {
+    const list = weatherGridCellsByType[t]
+    if (!list || !list.length) continue
+    if (r < list.length) { pickedType = t; pickedList = list; break }
+    r -= list.length
+  }
+  if (!pickedList) return null
+
+  const m = pickedList[Math.floor(Math.random() * pickedList.length)]
   const lng = CHINA.minLng + (m.gx / (WEATHER_GRID - 1)) * (CHINA.maxLng - CHINA.minLng)
   const lat = CHINA.minLat + ((m.gy + (Math.random() - 0.5) * 0.8) / (WEATHER_GRID - 1)) * (CHINA.maxLat - CHINA.minLat)
   const dLng = (Math.random() - 0.5) * 0.8 * (CHINA.maxLng - CHINA.minLng) / (WEATHER_GRID - 1)
   const w = lngLatToWorld(lng + dLng, lat)
-  return { x: w.x, z: w.z, type: m.type }
+  return { x: w.x, z: w.z, type: pickedType }
 }
 
 /** 动态模式：将天气网格绘制到 Canvas 纹理 */
@@ -2236,7 +2279,10 @@ function drawDynamicWeather() {
     dynamicGridCanvas.width = WEATHER_GRID; dynamicGridCanvas.height = WEATHER_GRID
   }
   const gCtx = dynamicGridCanvas.getContext('2d')
-  const imgData = gCtx.createImageData(WEATHER_GRID, WEATHER_GRID)
+  if (!dynamicGridImageData) {
+    dynamicGridImageData = gCtx.createImageData(WEATHER_GRID, WEATHER_GRID)
+  }
+  const imgData = dynamicGridImageData
   for (let gy = 0; gy < WEATHER_GRID; gy++) {
     for (let gx = 0; gx < WEATHER_GRID; gx++) {
       const type = WEATHER_TYPE_BY_INDEX[weatherGrid[gy * WEATHER_GRID + gx]]
@@ -2249,8 +2295,7 @@ function drawDynamicWeather() {
   }
   gCtx.putImageData(imgData, 0, 0)
   const ctx = weatherCtx
-  ctx.clearRect(0, 0, 2048, 2048)
-  ctx.fillStyle = '#000'; ctx.fillRect(0, 0, 2048, 2048)
+  // grid 图完全不透明，drawImage 会覆盖整块纹理，无需先 clear/fill
   ctx.drawImage(dynamicGridCanvas, 0, 0, 2048, 2048)
 }
 
@@ -2558,20 +2603,23 @@ function drawWeatherChart() {
   const toX = (lng) => marginL + (lng - 73) / 62 * mapW
   const toY = (lat) => marginT + (54 - lat) / 36 * mapH  // 与底图 Y 对齐
 
-  // 读取 chinaMask 纹理图像 → 绘制中国轮廓 + 省份边界
-  if (chinaMaskTex && chinaMaskTex.image) {
-    // 先画低透明度中国轮廓底图
-    ctx.save()
-    ctx.globalAlpha = 0.25
-    ctx.drawImage(chinaMaskTex.image, marginL, marginT, mapW, mapH)
-    ctx.restore()
-    // 叠加 chinaMap（含省界和地名，更高对比度）
+  // 中国轮廓 + 省界底图：2048² 纹理缩到 232×176 很贵，首次预缩放到小画布后复用
+  if (!weatherChartBaseReady && chinaMaskTex && chinaMaskTex.image) {
+    if (!weatherChartBase) weatherChartBase = document.createElement('canvas')
+    weatherChartBase.width = Math.max(1, Math.round(mapW))
+    weatherChartBase.height = Math.max(1, Math.round(mapH))
+    const bctx = weatherChartBase.getContext('2d')
+    bctx.globalAlpha = 0.25
+    bctx.drawImage(chinaMaskTex.image, 0, 0, weatherChartBase.width, weatherChartBase.height)
     if (chinaMapTex && chinaMapTex.image) {
-      ctx.save()
-      ctx.globalAlpha = 0.4
-      ctx.drawImage(chinaMapTex.image, marginL, marginT, mapW, mapH)
-      ctx.restore()
+      bctx.globalAlpha = 0.4
+      bctx.drawImage(chinaMapTex.image, 0, 0, weatherChartBase.width, weatherChartBase.height)
     }
+    bctx.globalAlpha = 1
+    weatherChartBaseReady = true
+  }
+  if (weatherChartBaseReady) {
+    ctx.drawImage(weatherChartBase, marginL, marginT)
   } else {
     // fallback: 矩形框
     ctx.strokeStyle = 'rgba(255,255,255,0.2)'; ctx.lineWidth = 0.8
@@ -2833,15 +2881,27 @@ function applyCycloneConfig() {
 /* ==================== 动画循环 ==================== */
 let tickCounter = 0
 let lastWeatherTexAt = 0
+let dynamicGridImageData = null
+let weatherChartBase = null
+let weatherChartBaseReady = false
 let lastChartDrawAt = 0
 function animate(time) {
   animationId = requestAnimationFrame(animate)
   const dt = Math.min((time - lastTime) / 1000, 0.1)
   lastTime = time
 
-  // 作为「模拟大引擎」的非活动 tab 时（display:none），跳过渲染与重绘，
-  // 避免多个 3D 场景同时抢占 GPU；切回时自动恢复。
-  if (container.value && container.value.getClientRects().length === 0) return
+  // 作为「模拟大引擎」的非活动 tab 时（display:none）：继续推进时钟与天气场，
+  // 但跳过纹理重绘、粒子更新与 render，避免多个 3D 场景同时抢占 GPU。
+  const hidden = !!(container.value && container.value.getClientRects().length === 0)
+
+  if (hidden) {
+    if (mode.value === 'dynamic' || mode.value === 'custom') {
+      updateCyclones(dt)
+      updateConvectiveCells(dt)
+      updateDynamicProvinceMap()
+    }
+    return
+  }
 
   controls.update()
 
@@ -2890,10 +2950,10 @@ function animate(time) {
     })
   })
 
-  // 天气纹理刷新：动态模式限 10 FPS（原为每帧 2048² 重绘 + 纹理上传），静态模式 2 FPS
+  // 天气纹理刷新：动态模式限 5 FPS（原为每帧 2048² 重绘 + 纹理上传），静态模式 2 FPS
   tickCounter++
   if (mode.value === 'dynamic' || mode.value === 'custom') {
-    if (time - lastWeatherTexAt >= 100) {
+    if (time - lastWeatherTexAt >= 200) {
       updateWeatherTex()
       lastWeatherTexAt = time
     }
@@ -2905,6 +2965,9 @@ function animate(time) {
   // 雨 & 雷电
   updateRain(dt)
   updateLightning(dt)
+
+  // 标签随相机距离缩放，保持恒定屏幕字号
+  updateProvinceLabelScale()
 
   renderer.render(scene, camera)
 }

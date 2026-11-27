@@ -94,7 +94,7 @@ export default {
 </script>
 
 <style scoped>
-.exp-page { min-height: 100vh; background: #141428; color: #cdd6f4; overflow-y: auto; }
+.exp-page { height: 100vh; background: #141428; color: #cdd6f4; overflow-y: auto; }
 .exp-header {
   display: flex; align-items: center; gap: 16px;
   padding: 12px 24px; background: #1a1a2e; border-bottom: 1px solid #2d2d44;

@@ -268,7 +268,11 @@ export default {
 
     startPolling() {
       if (this._pollTimer) clearInterval(this._pollTimer)
-      this._pollTimer = setInterval(() => this.pollSnapshot(), 500)
+      // 非活动 tab（display:none）时跳过轮询，切回后自动恢复
+      this._pollTimer = setInterval(() => {
+        if (this.$el && this.$el.getClientRects().length === 0) return
+        this.pollSnapshot()
+      }, 500)
     },
     stopPolling() {
       if (this._pollTimer) { clearInterval(this._pollTimer); this._pollTimer = null }

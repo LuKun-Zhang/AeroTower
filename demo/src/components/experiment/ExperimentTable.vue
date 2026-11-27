@@ -51,7 +51,8 @@ export default {
     pct(v) { return v === null || v === undefined ? '—' : `${v}%` },
     conditionText(row) {
       const c = row.conditions || {}
-      const dates = (c.dates || []).join(', ')
+      const ds = c.dates || []
+      const dates = ds.length > 2 ? `${ds[0]} 起 ${ds.length} 天` : ds.join(', ')
       const bases = (c.bases || []).join('/')
       const w = (c.disruption || {}).weather || 'none'
       const wText = {
