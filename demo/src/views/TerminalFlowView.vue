@@ -446,6 +446,9 @@ export default {
         L.setDate(date)
         this.currentDate = date
       }
+      // 正在快进时不再叠加新的快进，避免多次 jumpToTime 并发把主线程拖死
+      if (L._jumpInProgress) return
+      if (Math.abs(minuteInDay - (L.simState ? L.simState.currentTime : 0)) < 5) return
       L.jumpToTime(minuteInDay)
     },
   },

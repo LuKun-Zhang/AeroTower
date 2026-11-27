@@ -931,7 +931,10 @@ export default {
           if (frameCount <= 3) {
             console.log('[DEBUG] draw frame #' + frameCount + ' canvas=' + (this.$refs.canvas ? (this.$refs.canvas.width + 'x' + this.$refs.canvas.height) : 'NULL') + ' running=' + this.simState.running + ' paused=' + this.simState.paused)
           }
-          if (!hidden) {
+
+          // 快进期间隔帧绘制：把主线程让给模拟推进，画面仍保持约 25–30 FPS 的更新
+          const skipDraw = this._jumpInProgress && (frameCount & 1) === 0
+          if (!hidden && !skipDraw) {
             this.drawAll()
             this.drawCorridors()
             if (this.congestion.enabled) {
@@ -1084,12 +1087,16 @@ export default {
         // 异步分批次快进：每批最多 TICKS_PER_BATCH 次 simTick()，
         // 然后 await requestAnimationFrame 让出主线程执行渲染，
         // 避免同步 while 循环长时间阻塞导致画面冻结（飞机"卡住"）。
-        const TICKS_PER_BATCH = 80
         let guard = 0
         let tickErrors = 0
         while (this.simState.currentTime < target && guard < 80000) {
-          const batchEnd = Math.min(guard + TICKS_PER_BATCH, 80000)
-          for (; guard < batchEnd && this.simState.currentTime < target; guard++) {
+          // 按时间预算分片：每批最多占用 20ms 主线程，保证快进期间仍能流畅出帧
+          const deadline = performance.now() + 20
+          while (
+            this.simState.currentTime < target &&
+            guard < 80000 &&
+            performance.now() < deadline
+          ) {
             try {
               this.simTick()
             } catch (te) {
@@ -1098,6 +1105,7 @@ export default {
                 console.error('[JUMP] simTick #' + guard + ' 异常 (t=' + this.simState.currentTime.toFixed(1) + '):', te)
               }
             }
+            guard++
           }
           // 每批次后让浏览器渲染一帧
           if (this.simState.currentTime < target) {
@@ -3403,66 +3411,59 @@ export default {
       const canvas = this.$refs.canvas
       if (!canvas) return
       const ctx = canvas.getContext('2d')
-      const now = Date.now()
+      const dense = this.passengers.length > 300
 
+      // 按颜色/状态分组，每组一次性 fill：上千名旅客时避免上千次 arc+fill+stroke 拖垮合成
+      const groups = new Map()
       for (const p of this.passengers) {
         let sx, sy
-
         if (p.status === 'waiting') {
-          // 候机旅客：显示在航站楼候机区，带呼吸脉冲
           sx = this.tx(p.waitX)
           sy = this.ty(p.waitY)
         } else {
           const rc = this.routeCorridors[p.corridorIdx]
           if (!rc) continue
-          // 下客旅客使用自定义 waypoints（现有走廊反转+末端出口门），其余用走廊默认
           const wps = p.waypoints || rc.waypoints
           const pos = this.interpolateRoute(wps, p.progress, p.laneOffset, (p.waypoints ? 5 : rc.width) * 0.85)
           sx = this.tx(pos.x)
           sy = this.ty(pos.y)
         }
+        const key = p.status === 'waiting' ? p.color + '|w' : p.color
+        let arr = groups.get(key)
+        if (!arr) { arr = []; groups.set(key, arr) }
+        arr.push(sx, sy)
+      }
 
-        const isWaiting = p.status === 'waiting'
-        const isEntering = p.status === 'entering'
-        const pulse = isWaiting ? 0.7 + 0.3 * Math.sin(now / 600 + (p.id || '0').charCodeAt(0 || 0)) : 1
-        const r = isWaiting ? 4 : 3
-
-        if (!isWaiting && !isEntering) {
-          // 外发光（walking/boarding 等移动状态）
-          ctx.beginPath()
-          const glowR = r + 2.5
-          ctx.arc(sx, sy, glowR, 0, Math.PI * 2)
-          ctx.fillStyle = p.color + '40'
-          ctx.fill()
+      for (const [key, pts] of groups) {
+        const waiting = key.endsWith('|w')
+        const color = waiting ? key.slice(0, -2) : key
+        const r = waiting ? 4 : 3
+        ctx.beginPath()
+        for (let i = 0; i < pts.length; i += 2) {
+          ctx.moveTo(pts[i] + r, pts[i + 1])
+          ctx.arc(pts[i], pts[i + 1], r, 0, Math.PI * 2)
         }
+        ctx.fillStyle = color
+        ctx.fill()
+        if (!dense) {
+          ctx.strokeStyle = waiting ? '#ffffcc' : '#fff'
+          ctx.lineWidth = waiting ? 1.0 : 0.6
+          ctx.stroke()
+        }
+      }
 
-        if (isWaiting) {
-          // 外发光（脉动）
+      // 候机光晕只在人数较少时绘制（人多了视觉上也分不出来）
+      if (!dense) {
+        const now = Date.now()
+        for (const p of this.passengers) {
+          if (p.status !== 'waiting') continue
+          const pulse = 0.7 + 0.3 * Math.sin(now / 600 + (p.id || '0').charCodeAt(0 || 0))
+          const sx = this.tx(p.waitX)
+          const sy = this.ty(p.waitY)
           ctx.beginPath()
-          const glowR = r + 4
-          ctx.arc(sx, sy, glowR, 0, Math.PI * 2)
+          ctx.arc(sx, sy, 8, 0, Math.PI * 2)
           ctx.fillStyle = p.color + Math.floor(30 * pulse).toString(16).padStart(2, '0')
           ctx.fill()
-        }
-
-        // 主体
-        ctx.beginPath()
-        ctx.arc(sx, sy, r, 0, Math.PI * 2)
-        ctx.fillStyle = p.color
-        ctx.fill()
-
-        // 边框
-        ctx.strokeStyle = isWaiting ? '#ffffcc' : '#fff'
-        ctx.lineWidth = isWaiting ? 1.0 : 0.6
-        ctx.stroke()
-
-        // 等待旅客：额外白色小点脉冲
-        if (isWaiting && pulse > 0.92) {
-          ctx.beginPath()
-          ctx.arc(sx, sy, r + 2, 0, Math.PI * 2)
-          ctx.strokeStyle = '#ffffff' + Math.floor(50 * (pulse - 0.92) / 0.08).toString(16).padStart(2, '0')
-          ctx.lineWidth = 0.8
-          ctx.stroke()
         }
       }
     },
