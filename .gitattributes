@@ -1,0 +1,10 @@
+# 保持训练报告所记录的源文件字节；原模块使用CRLF，新智能模块使用LF。
+backend/services/**/*.py text eol=crlf
+backend/services/intelligence/*.py text eol=lf
+backend/models/*.py text eol=crlf
+backend/models/experiment_flight.py text eol=lf
+tests/fixtures/language_holdout_v2.json text eol=lf
+
+# 正式模型包按原始字节校验，JSON和二进制均不作换行转换。
+pretrained/intelligence/** -text
+docs/intelligence-evidence/*.png binary

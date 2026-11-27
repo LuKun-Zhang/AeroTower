@@ -30,6 +30,7 @@
       </div>
     </div>
 
+    <RoutingRecommendation :aircraft-limit="aircraftLimit" @select="algorithm = $event" />
     <!-- 未筛选提示 -->
     <div class="empty-hint" v-if="!filteredReady && aircrafts.length === 0">
       <p>请先在「航班筛选」页面上传文件、执行筛选并点击「保存并执行排班计划」</p>
@@ -168,8 +169,10 @@
 
 <script>
 import api from '@/api'
+import RoutingRecommendation from '@/components/intelligence/RoutingRecommendation'
 
 export default {
+  components: { RoutingRecommendation },
   data() {
     return {
       filteredReady: false,

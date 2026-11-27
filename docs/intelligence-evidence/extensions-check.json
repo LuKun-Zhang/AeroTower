@@ -1,0 +1,206 @@
+{
+  "passed": true,
+  "modelVersion": "818601802430426e9e0694555437d6c0",
+  "demand": {
+    "source": "成都",
+    "total": 69047,
+    "evaluation": {
+      "baseline_mae": 347.79,
+      "comparison": [
+        {
+          "actual": 8905,
+          "baseline": 8794,
+          "date": "2026-10-29",
+          "predicted": 8978
+        },
+        {
+          "actual": 9996,
+          "baseline": 9802,
+          "date": "2026-10-30",
+          "predicted": 9960
+        },
+        {
+          "actual": 10572,
+          "baseline": 10544,
+          "date": "2026-10-31",
+          "predicted": 10679
+        },
+        {
+          "actual": 9700,
+          "baseline": 9664,
+          "date": "2026-11-01",
+          "predicted": 9802
+        },
+        {
+          "actual": 8657,
+          "baseline": 8440,
+          "date": "2026-11-02",
+          "predicted": 8784
+        },
+        {
+          "actual": 8267,
+          "baseline": 8079,
+          "date": "2026-11-03",
+          "predicted": 8449
+        },
+        {
+          "actual": 8406,
+          "baseline": 8541,
+          "date": "2026-11-04",
+          "predicted": 8632
+        },
+        {
+          "actual": 8882,
+          "baseline": 8794,
+          "date": "2026-11-05",
+          "predicted": 9096
+        },
+        {
+          "actual": 10114,
+          "baseline": 9802,
+          "date": "2026-11-06",
+          "predicted": 10082
+        },
+        {
+          "actual": 10510,
+          "baseline": 10544,
+          "date": "2026-11-07",
+          "predicted": 10823
+        },
+        {
+          "actual": 9744,
+          "baseline": 9664,
+          "date": "2026-11-08",
+          "predicted": 9938
+        },
+        {
+          "actual": 8726,
+          "baseline": 8440,
+          "date": "2026-11-09",
+          "predicted": 8890
+        },
+        {
+          "actual": 8544,
+          "baseline": 8079,
+          "date": "2026-11-10",
+          "predicted": 8543
+        },
+        {
+          "actual": 8814,
+          "baseline": 8541,
+          "date": "2026-11-11",
+          "predicted": 8736
+        },
+        {
+          "actual": 9159,
+          "baseline": 8794,
+          "date": "2026-11-12",
+          "predicted": 9208
+        },
+        {
+          "actual": 10158,
+          "baseline": 9802,
+          "date": "2026-11-13",
+          "predicted": 10213
+        },
+        {
+          "actual": 11066,
+          "baseline": 10544,
+          "date": "2026-11-14",
+          "predicted": 10965
+        },
+        {
+          "actual": 10135,
+          "baseline": 9664,
+          "date": "2026-11-15",
+          "predicted": 10072
+        },
+        {
+          "actual": 8878,
+          "baseline": 8440,
+          "date": "2026-11-16",
+          "predicted": 9038
+        },
+        {
+          "actual": 8592,
+          "baseline": 8079,
+          "date": "2026-11-17",
+          "predicted": 8707
+        },
+        {
+          "actual": 8783,
+          "baseline": 8541,
+          "date": "2026-11-18",
+          "predicted": 8877
+        },
+        {
+          "actual": 9280,
+          "baseline": 8794,
+          "date": "2026-11-19",
+          "predicted": 9345
+        },
+        {
+          "actual": 10569,
+          "baseline": 9802,
+          "date": "2026-11-20",
+          "predicted": 10368
+        },
+        {
+          "actual": 11216,
+          "baseline": 10544,
+          "date": "2026-11-21",
+          "predicted": 11131
+        },
+        {
+          "actual": 10222,
+          "baseline": 9664,
+          "date": "2026-11-22",
+          "predicted": 10222
+        },
+        {
+          "actual": 9126,
+          "baseline": 8440,
+          "date": "2026-11-23",
+          "predicted": 9158
+        },
+        {
+          "actual": 8779,
+          "baseline": 8079,
+          "date": "2026-11-24",
+          "predicted": 8809
+        },
+        {
+          "actual": 9056,
+          "baseline": 8541,
+          "date": "2026-11-25",
+          "predicted": 9009
+        }
+      ],
+      "holdout": 28,
+      "mae": 105.21,
+      "passed": true,
+      "rows": 730,
+      "source": "原平台基准客流构造的模拟历史，含周季节、年季节、趋势及扰动；不是真实航司客流",
+      "split": "时间尾部连续留出，递归预测期间不读取真实未来客流"
+    },
+    "formAppliedWithoutRunning": true
+  },
+  "review": {
+    "initial": "e4559444f60a4380bc5cc7457073ea5d",
+    "stressed": "b0e8f8a195fc489a9c3410471667167a",
+    "restored": "583cd23665ed4b0f9ecbd83063a9c542",
+    "weightsUnchanged": true
+  },
+  "routing": {
+    "algorithm": "greedy",
+    "originalSolverExecuted": true
+  },
+  "originalRecovery": {
+    "eventId": "4cb12e5a",
+    "planId": "plan_4cb12e5a",
+    "expectedCost": 120,
+    "comparisonCost": 120,
+    "fullExecutionPassed": true
+  },
+  "pageErrors": []
+}

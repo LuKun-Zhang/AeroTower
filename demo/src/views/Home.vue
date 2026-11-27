@@ -68,6 +68,7 @@
       <div class="new-feature-section">
         <div class="divider-text"><span>全链路模式（客流量 → 航班 → 调度 → 仿真）</span></div>
         <div class="feature-links">
+          <el-button type="primary" plain icon="el-icon-data-analysis" @click="$router.push('/intelligence')">智能实验中心</el-button>
           <el-button type="primary" icon="el-icon-data-line" @click="$router.push('/traffic-input')">
             客流量输入
           </el-button>

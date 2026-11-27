@@ -1,0 +1,48 @@
+{
+  "checked_date": "2026-11-27",
+  "model_version": "818601802430426e9e0694555437d6c0",
+  "unit_tests": {
+    "passed": 33,
+    "failed": 0,
+    "command": "python -B -m unittest discover -s tests -p 'test_*.py' -v"
+  },
+  "frontend_build": {
+    "passed": true,
+    "existing_warnings": 10,
+    "evidence": "本机最终后端模型版本确定后的构建日志，发布整理未修改前端源码"
+  },
+  "browser": {
+    "basic_passed": true,
+    "extensions_passed": true,
+    "actual_chrome_and_backend": true,
+    "screenshots": 10,
+    "evidence_files": [
+      "ui-check.json",
+      "extensions-check.json"
+    ]
+  },
+  "handoff": {
+    "model_version": "818601802430426e9e0694555437d6c0",
+    "release_archive_offline_restore": true,
+    "download_cache_verification": true,
+    "installed_files": 8,
+    "idempotent_skip_files": 8,
+    "source_sha256_matches": true,
+    "language_pipeline_prompt_runtime_matches": true,
+    "qwen_weights_copied": false,
+    "same_machine_clean_staged_checkout": true,
+    "delay_predictions": 48,
+    "demand_forecast_days": 7
+  },
+  "release_archive": {
+    "name": "aerotower-intelligence-81860180.zip",
+    "bytes": 556202,
+    "sha256": "fc031465d4f52ea01ee5ec8a85a740814b1fb47f80aa2ed59c20741f490cba4e",
+    "offline_restore_verified": true
+  },
+  "limits": [
+    "干净检出检查仍在交付机器和相同Python环境执行，不代表同学电脑已验证。",
+    "Qwen完整48条评测及浏览器联调记录独立保留；本次打包验证没有重新运行大模型推理。",
+    "模型成绩仅代表所列模拟条件和有限公开历史数据。"
+  ]
+}

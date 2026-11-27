@@ -59,6 +59,7 @@
 
       <!-- 恢复方案 + 审计日志 -->
       <div class="right-panel">
+        <RecoveryRecommendation :event-id="selectedEvent ? selectedEvent.event_id : null" :impact="impactReport" />
         <!-- 调试：测试进度遮罩 -->
         <el-button size="mini" type="info" @click="executing = true; execStage = '测试中...'; execProgress = 50; execStatus = 'running'">[测试进度窗口]</el-button>
         <RecoveryTimeline
@@ -134,10 +135,11 @@ import { ANOMALY_TYPE_LABELS, PRIORITY_CONFIG, STATUS_CONFIG } from '@/utils/ano
 import AnomalyPanel from '@/components/AnomalyPanel'
 import ImpactTree from '@/components/ImpactTree'
 import RecoveryTimeline from '@/components/RecoveryTimeline'
+import RecoveryRecommendation from '@/components/intelligence/RecoveryRecommendation'
 
 export default {
   name: 'RecoveryView',
-  components: { AnomalyPanel, ImpactTree, RecoveryTimeline },
+  components: { AnomalyPanel, ImpactTree, RecoveryTimeline, RecoveryRecommendation },
   data() {
     return {
       analyzing: false,

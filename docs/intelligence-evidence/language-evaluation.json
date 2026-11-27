@@ -1,0 +1,1652 @@
+{
+  "identity": {
+    "name": "Qwen2.5-1.5B-Instruct",
+    "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "prompt_sha256": "94a5787f23a7ac784cf47fd3bc99fe38b1628d96c1fc225d9570f7eb24bcf4d7",
+    "pipeline_sha256": "4c2ffc48c390c2bd2be81db4b92f1dd3c8a9059c0701f7dc96471537fff96daf",
+    "inference_dtype": "float32",
+    "threads": 4
+  },
+  "cases": [
+    {
+      "group": "development",
+      "text": "成都基地，客流涨两成，加一场雷暴",
+      "expected": {
+        "base_airport": "成都",
+        "demand_factor": 1.2,
+        "weather": "storm"
+      },
+      "actual": {
+        "base_airport": "成都",
+        "weather": "storm",
+        "demand_factor": 1.2
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"成都\",\"客流变化\":\"涨两成\",\"天气\":\"加一场雷暴\"}",
+      "model_output": "{\"基地\":\"成都\",\"客流变化\":\"涨两成\",\"天气\":\"加一场雷暴\"}",
+      "retry_used": false,
+      "seconds": 22.39,
+      "model_fields": {
+        "base_airport": "成都",
+        "demand_factor": 1.2,
+        "weather": "storm"
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "demand_factor": "initial",
+        "weather": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "development",
+      "text": "北京基地，客流减少20%，大雾，48班航班",
+      "expected": {
+        "base_airport": "北京",
+        "demand_factor": 0.8,
+        "weather": "fog",
+        "flight_count": 48
+      },
+      "actual": {
+        "base_airport": "北京",
+        "weather": "fog",
+        "demand_factor": 0.8,
+        "flight_count": 48
+      },
+      "raw_model_exact": false,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"北京\",\"客流变化\":\"减少20%\"}",
+      "model_output": "{\"航班数\":\"48班\",\"天气\":\"大雾\"}",
+      "retry_used": true,
+      "seconds": 12.36,
+      "model_fields": {
+        "base_airport": "北京",
+        "demand_factor": 0.8,
+        "flight_count": 48,
+        "weather": "fog"
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "demand_factor": "initial",
+        "flight_count": "retry",
+        "weather": "retry"
+      },
+      "warnings": []
+    },
+    {
+      "group": "development",
+      "text": "上海基地，晴天，2条可用跑道，备用飞机3架",
+      "expected": {
+        "base_airport": "上海",
+        "weather": "clear",
+        "capacity": 2,
+        "backup_aircraft": 3
+      },
+      "actual": {
+        "base_airport": "上海",
+        "weather": "clear",
+        "capacity": 2,
+        "backup_aircraft": 3
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"上海\",\"天气\":\"晴天\",\"跑道数\":\"2条\",\"备用飞机\":\"3架\"}",
+      "model_output": "{\"基地\":\"上海\",\"天气\":\"晴天\",\"跑道数\":\"2条\",\"备用飞机\":\"3架\"}",
+      "retry_used": false,
+      "seconds": 7.7,
+      "model_fields": {
+        "base_airport": "上海",
+        "weather": "clear",
+        "capacity": 2,
+        "backup_aircraft": 3
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "weather": "initial",
+        "capacity": "initial",
+        "backup_aircraft": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "development",
+      "text": "昆明基地，前序延误30分钟，从9点开始",
+      "expected": {
+        "base_airport": "昆明",
+        "previous_delay": 30,
+        "start_hour": 9
+      },
+      "actual": {
+        "base_airport": "昆明",
+        "previous_delay": 30,
+        "start_hour": 9
+      },
+      "raw_model_exact": false,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"前序延误\":\"30分钟\",\"开始时间\":\"9点\"}",
+      "model_output": "{\"基地\":\"昆明\"}",
+      "retry_used": true,
+      "seconds": 11.05,
+      "model_fields": {
+        "previous_delay": 30,
+        "start_hour": 9,
+        "base_airport": "昆明"
+      },
+      "model_field_sources": {
+        "previous_delay": "initial",
+        "start_hour": "initial",
+        "base_airport": "retry"
+      },
+      "warnings": []
+    },
+    {
+      "group": "development",
+      "text": "广州基地，不要雷暴",
+      "expected": {
+        "base_airport": "广州"
+      },
+      "actual": {
+        "base_airport": "广州"
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"广州\"}",
+      "model_output": "{\"基地\":\"广州\"}",
+      "retry_used": false,
+      "seconds": 3.83,
+      "model_fields": {
+        "base_airport": "广州"
+      },
+      "model_field_sources": {
+        "base_airport": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "development",
+      "text": "三亚基地，机场关闭120分钟",
+      "expected": {
+        "base_airport": "三亚",
+        "event_type": "airport_closure",
+        "disruption_minutes": 120
+      },
+      "actual": {
+        "base_airport": "三亚",
+        "disruption_minutes": 120,
+        "event_type": "airport_closure"
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"三亚\",\"异常类型\":\"机场关闭\",\"关闭时长\":\"120分钟\"}",
+      "model_output": "{\"基地\":\"三亚\",\"异常类型\":\"机场关闭\",\"关闭时长\":\"120分钟\"}",
+      "retry_used": false,
+      "seconds": 7.11,
+      "model_fields": {
+        "base_airport": "三亚",
+        "event_type": "airport_closure",
+        "disruption_minutes": 120
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "event_type": "initial",
+        "disruption_minutes": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "development",
+      "text": "重庆基地，客流增加10%，降雨",
+      "expected": {
+        "base_airport": "重庆",
+        "demand_factor": 1.1,
+        "weather": "rain"
+      },
+      "actual": {
+        "base_airport": "重庆",
+        "weather": "rain",
+        "demand_factor": 1.1
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"重庆\",\"客流变化\":\"增加10%\",\"天气\":\"降雨\"}",
+      "model_output": "{\"基地\":\"重庆\",\"客流变化\":\"增加10%\",\"天气\":\"降雨\"}",
+      "retry_used": false,
+      "seconds": 6.34,
+      "model_fields": {
+        "base_airport": "重庆",
+        "demand_factor": 1.1,
+        "weather": "rain"
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "demand_factor": "initial",
+        "weather": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "development",
+      "text": "西安基地，40班航班，飞机故障",
+      "expected": {
+        "base_airport": "西安",
+        "flight_count": 40,
+        "event_type": "aircraft_failure"
+      },
+      "actual": {
+        "base_airport": "西安",
+        "flight_count": 40,
+        "event_type": "aircraft_failure"
+      },
+      "raw_model_exact": false,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"航班数\":\"40班\",\"异常类型\":\"飞机故障\"}",
+      "model_output": "{\"基地\":\"西安\"}",
+      "retry_used": true,
+      "seconds": 10.5,
+      "model_fields": {
+        "flight_count": 40,
+        "event_type": "aircraft_failure",
+        "base_airport": "西安"
+      },
+      "model_field_sources": {
+        "flight_count": "initial",
+        "event_type": "initial",
+        "base_airport": "retry"
+      },
+      "warnings": []
+    },
+    {
+      "group": "regression",
+      "text": "成都基地，80班航班，客流增加25%，晴天",
+      "expected": {
+        "base_airport": "成都",
+        "flight_count": 80,
+        "demand_factor": 1.25,
+        "weather": "clear"
+      },
+      "actual": {
+        "base_airport": "成都",
+        "weather": "clear",
+        "demand_factor": 1.25,
+        "flight_count": 80
+      },
+      "raw_model_exact": false,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"成都\",\"航班数\":\"80班\",\"客流变化\":\"增加25%\"}",
+      "model_output": "{\"天气\":\"晴天\"}",
+      "retry_used": true,
+      "seconds": 26.81,
+      "model_fields": {
+        "base_airport": "成都",
+        "flight_count": 80,
+        "demand_factor": 1.25,
+        "weather": "clear"
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "flight_count": "initial",
+        "demand_factor": "initial",
+        "weather": "retry"
+      },
+      "warnings": []
+    },
+    {
+      "group": "regression",
+      "text": "昆明基地，备用飞机2架，1条可用跑道",
+      "expected": {
+        "base_airport": "昆明",
+        "backup_aircraft": 2,
+        "capacity": 1
+      },
+      "actual": {
+        "base_airport": "昆明",
+        "capacity": 1,
+        "backup_aircraft": 2
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"昆明\",\"备用飞机\":\"2架\",\"跑道数\":\"1条\"}",
+      "model_output": "{\"基地\":\"昆明\",\"备用飞机\":\"2架\",\"跑道数\":\"1条\"}",
+      "retry_used": false,
+      "seconds": 6.38,
+      "model_fields": {
+        "base_airport": "昆明",
+        "backup_aircraft": 2,
+        "capacity": 1
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "backup_aircraft": "initial",
+        "capacity": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "regression",
+      "text": "北京基地，前序航班延误45分钟，大雾",
+      "expected": {
+        "base_airport": "北京",
+        "previous_delay": 45,
+        "weather": "fog"
+      },
+      "actual": {
+        "base_airport": "北京",
+        "weather": "fog",
+        "previous_delay": 45
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"北京\",\"前序延误\":\"45分钟\",\"天气\":\"大雾\"}",
+      "model_output": "{\"基地\":\"北京\",\"前序延误\":\"45分钟\",\"天气\":\"大雾\"}",
+      "retry_used": false,
+      "seconds": 6.61,
+      "model_fields": {
+        "base_airport": "北京",
+        "previous_delay": 45,
+        "weather": "fog"
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "previous_delay": "initial",
+        "weather": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "regression",
+      "text": "重庆基地，登机口故障，前序延误15分钟",
+      "expected": {
+        "base_airport": "重庆",
+        "event_type": "gate_failure",
+        "previous_delay": 15
+      },
+      "actual": {
+        "base_airport": "重庆",
+        "previous_delay": 15,
+        "event_type": "gate_failure"
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"重庆\",\"异常类型\":\"登机口故障\",\"前序延误\":\"15分钟\"}",
+      "model_output": "{\"基地\":\"重庆\",\"异常类型\":\"登机口故障\",\"前序延误\":\"15分钟\"}",
+      "retry_used": false,
+      "seconds": 7.3,
+      "model_fields": {
+        "base_airport": "重庆",
+        "event_type": "gate_failure",
+        "previous_delay": 15
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "event_type": "initial",
+        "previous_delay": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "regression",
+      "text": "三亚基地，客流下降10%，降雪",
+      "expected": {
+        "base_airport": "三亚",
+        "demand_factor": 0.9,
+        "weather": "snow"
+      },
+      "actual": {
+        "base_airport": "三亚",
+        "weather": "snow",
+        "demand_factor": 0.9
+      },
+      "raw_model_exact": false,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"三亚\",\"客流变化\":\"下降10%\"}",
+      "model_output": "{\"天气\":\"降雪\"}",
+      "retry_used": true,
+      "seconds": 10.39,
+      "model_fields": {
+        "base_airport": "三亚",
+        "demand_factor": 0.9,
+        "weather": "snow"
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "demand_factor": "initial",
+        "weather": "retry"
+      },
+      "warnings": []
+    },
+    {
+      "group": "regression",
+      "text": "西安基地，3条可用跑道，从8点开始，40班航班",
+      "expected": {
+        "base_airport": "西安",
+        "capacity": 3,
+        "start_hour": 8,
+        "flight_count": 40
+      },
+      "actual": {
+        "base_airport": "西安",
+        "flight_count": 40,
+        "capacity": 3,
+        "start_hour": 8
+      },
+      "raw_model_exact": false,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"跑道数\":\"3条\",\"开始时间\":\"8点\",\"航班数\":\"40班\"}",
+      "model_output": "{\"基地\":\"西安\"}",
+      "retry_used": true,
+      "seconds": 12.02,
+      "model_fields": {
+        "capacity": 3,
+        "start_hour": 8,
+        "flight_count": 40,
+        "base_airport": "西安"
+      },
+      "model_field_sources": {
+        "capacity": "initial",
+        "start_hour": "initial",
+        "flight_count": "initial",
+        "base_airport": "retry"
+      },
+      "warnings": []
+    },
+    {
+      "group": "regression",
+      "text": "上海基地，不要降雨，24班航班",
+      "expected": {
+        "base_airport": "上海",
+        "flight_count": 24
+      },
+      "actual": {
+        "base_airport": "上海",
+        "flight_count": 24
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"上海\",\"航班数\":\"24班\"}",
+      "model_output": "{\"基地\":\"上海\",\"航班数\":\"24班\"}",
+      "retry_used": false,
+      "seconds": 5.39,
+      "model_fields": {
+        "base_airport": "上海",
+        "flight_count": 24
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "flight_count": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "regression",
+      "text": "北京基地，晴天，备用飞机1架",
+      "expected": {
+        "base_airport": "北京",
+        "weather": "clear",
+        "backup_aircraft": 1
+      },
+      "actual": {
+        "base_airport": "北京",
+        "weather": "clear",
+        "backup_aircraft": 1
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"北京\",\"天气\":\"晴天\",\"备用飞机\":\"1架\"}",
+      "model_output": "{\"基地\":\"北京\",\"天气\":\"晴天\",\"备用飞机\":\"1架\"}",
+      "retry_used": false,
+      "seconds": 6.25,
+      "model_fields": {
+        "base_airport": "北京",
+        "weather": "clear",
+        "backup_aircraft": 1
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "weather": "initial",
+        "backup_aircraft": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "regression",
+      "text": "广州基地，客流涨三成，机组请假",
+      "expected": {
+        "base_airport": "广州",
+        "demand_factor": 1.3,
+        "event_type": "crew_absence"
+      },
+      "actual": {
+        "base_airport": "广州",
+        "demand_factor": 1.3,
+        "event_type": "crew_absence"
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"广州\",\"客流变化\":\"涨三成\",\"异常类型\":\"机组请假\"}",
+      "model_output": "{\"基地\":\"广州\",\"客流变化\":\"涨三成\",\"异常类型\":\"机组请假\"}",
+      "retry_used": false,
+      "seconds": 6.73,
+      "model_fields": {
+        "base_airport": "广州",
+        "demand_factor": 1.3,
+        "event_type": "crew_absence"
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "demand_factor": "initial",
+        "event_type": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "regression",
+      "text": "成都基地，从6点开始，前序延误20分钟",
+      "expected": {
+        "base_airport": "成都",
+        "start_hour": 6,
+        "previous_delay": 20
+      },
+      "actual": {
+        "base_airport": "成都",
+        "previous_delay": 20,
+        "start_hour": 6
+      },
+      "raw_model_exact": false,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"开始时间\":\"6点\",\"前序延误\":\"20分钟\"}",
+      "model_output": "{\"基地\":\"成都\"}",
+      "retry_used": true,
+      "seconds": 11.06,
+      "model_fields": {
+        "start_hour": 6,
+        "previous_delay": 20,
+        "base_airport": "成都"
+      },
+      "model_field_sources": {
+        "start_hour": "initial",
+        "previous_delay": "initial",
+        "base_airport": "retry"
+      },
+      "warnings": []
+    },
+    {
+      "group": "regression",
+      "text": "昆明基地，机场关闭150分钟，36班航班",
+      "expected": {
+        "base_airport": "昆明",
+        "event_type": "airport_closure",
+        "disruption_minutes": 150,
+        "flight_count": 36
+      },
+      "actual": {
+        "base_airport": "昆明",
+        "flight_count": 36,
+        "disruption_minutes": 150,
+        "event_type": "airport_closure"
+      },
+      "raw_model_exact": false,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"昆明\",\"异常类型\":\"机场关闭\",\"关闭时长\":\"150分钟\"}",
+      "model_output": "{\"航班数\":\"36班\"}",
+      "retry_used": true,
+      "seconds": 12.78,
+      "model_fields": {
+        "base_airport": "昆明",
+        "event_type": "airport_closure",
+        "disruption_minutes": 150,
+        "flight_count": 36
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "event_type": "initial",
+        "disruption_minutes": "initial",
+        "flight_count": "retry"
+      },
+      "warnings": []
+    },
+    {
+      "group": "regression",
+      "text": "重庆基地，备用机组2组，备用登机口3个",
+      "expected": {
+        "base_airport": "重庆",
+        "backup_crew": 2,
+        "backup_gates": 3
+      },
+      "actual": {
+        "base_airport": "重庆",
+        "backup_crew": 2,
+        "backup_gates": 3
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"重庆\",\"备用机组\":\"2组\",\"备用登机口\":\"3个\"}",
+      "model_output": "{\"基地\":\"重庆\",\"备用机组\":\"2组\",\"备用登机口\":\"3个\"}",
+      "retry_used": false,
+      "seconds": 7.12,
+      "model_fields": {
+        "base_airport": "重庆",
+        "backup_crew": 2,
+        "backup_gates": 3
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "backup_crew": "initial",
+        "backup_gates": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "regression",
+      "text": "上海基地，64班航班，降雨，客流减少15%",
+      "expected": {
+        "base_airport": "上海",
+        "flight_count": 64,
+        "weather": "rain",
+        "demand_factor": 0.85
+      },
+      "actual": {
+        "base_airport": "上海",
+        "weather": "rain",
+        "demand_factor": 0.85,
+        "flight_count": 64
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"上海\",\"航班数\":\"64班\",\"天气\":\"降雨\",\"客流变化\":\"减少15%\"}",
+      "model_output": "{\"基地\":\"上海\",\"航班数\":\"64班\",\"天气\":\"降雨\",\"客流变化\":\"减少15%\"}",
+      "retry_used": false,
+      "seconds": 8.39,
+      "model_fields": {
+        "base_airport": "上海",
+        "flight_count": 64,
+        "weather": "rain",
+        "demand_factor": 0.85
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "flight_count": "initial",
+        "weather": "initial",
+        "demand_factor": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "regression",
+      "text": "西安基地",
+      "expected": {
+        "base_airport": "西安"
+      },
+      "actual": {
+        "base_airport": "西安"
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"西安\"}",
+      "model_output": "{\"基地\":\"西安\"}",
+      "retry_used": false,
+      "seconds": 3.83,
+      "model_fields": {
+        "base_airport": "西安"
+      },
+      "model_field_sources": {
+        "base_airport": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "regression",
+      "text": "广州基地，前序延误0分钟，58班航班",
+      "expected": {
+        "base_airport": "广州",
+        "previous_delay": 0,
+        "flight_count": 58
+      },
+      "actual": {
+        "base_airport": "广州",
+        "flight_count": 58,
+        "previous_delay": 0
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"广州\",\"前序延误\":\"0分钟\",\"航班数\":\"58班\"}",
+      "model_output": "{\"基地\":\"广州\",\"前序延误\":\"0分钟\",\"航班数\":\"58班\"}",
+      "retry_used": false,
+      "seconds": 6.98,
+      "model_fields": {
+        "base_airport": "广州",
+        "previous_delay": 0,
+        "flight_count": 58
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "previous_delay": "initial",
+        "flight_count": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "regression",
+      "text": "三亚基地，4条可用跑道，机场关闭30分钟，客流增加5%",
+      "expected": {
+        "base_airport": "三亚",
+        "capacity": 4,
+        "event_type": "airport_closure",
+        "disruption_minutes": 30,
+        "demand_factor": 1.05
+      },
+      "actual": {
+        "base_airport": "三亚",
+        "demand_factor": 1.05,
+        "capacity": 4,
+        "disruption_minutes": 30,
+        "event_type": "airport_closure"
+      },
+      "raw_model_exact": false,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"跑道数\":\"4条\",\"异常类型\":\"机场关闭\",\"关闭时长\":\"30分钟\"}",
+      "model_output": "{\"基地\":\"三亚\",\"客流变化\":\"增加5%\"}",
+      "retry_used": true,
+      "seconds": 14.02,
+      "model_fields": {
+        "capacity": 4,
+        "event_type": "airport_closure",
+        "disruption_minutes": 30,
+        "base_airport": "三亚",
+        "demand_factor": 1.05
+      },
+      "model_field_sources": {
+        "capacity": "initial",
+        "event_type": "initial",
+        "disruption_minutes": "initial",
+        "base_airport": "retry",
+        "demand_factor": "retry"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "成都基地，晴朗，42班航班，客流增加12%",
+      "expected": {
+        "base_airport": "成都",
+        "weather": "clear",
+        "flight_count": 42,
+        "demand_factor": 1.12
+      },
+      "actual": {
+        "base_airport": "成都",
+        "weather": "clear",
+        "demand_factor": 1.12,
+        "flight_count": 42
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"成都\",\"天气\":\"晴朗\",\"航班数\":\"42班\",\"客流变化\":\"增加12%\"}",
+      "model_output": "{\"基地\":\"成都\",\"天气\":\"晴朗\",\"航班数\":\"42班\",\"客流变化\":\"增加12%\"}",
+      "retry_used": false,
+      "seconds": 8.72,
+      "model_fields": {
+        "base_airport": "成都",
+        "weather": "clear",
+        "flight_count": 42,
+        "demand_factor": 1.12
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "weather": "initial",
+        "flight_count": "initial",
+        "demand_factor": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "北京基地，备用飞机4架，2条可用跑道，前序延误35分钟",
+      "expected": {
+        "base_airport": "北京",
+        "backup_aircraft": 4,
+        "capacity": 2,
+        "previous_delay": 35
+      },
+      "actual": {
+        "base_airport": "北京",
+        "capacity": 2,
+        "backup_aircraft": 4,
+        "previous_delay": 35
+      },
+      "raw_model_exact": false,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"北京\",\"备用飞机\":\"4架\",\"跑道数\":\"2条\"}",
+      "model_output": "{\"前序延误\":\"35分钟\"}",
+      "retry_used": true,
+      "seconds": 12.55,
+      "model_fields": {
+        "base_airport": "北京",
+        "backup_aircraft": 4,
+        "capacity": 2,
+        "previous_delay": 35
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "backup_aircraft": "initial",
+        "capacity": "initial",
+        "previous_delay": "retry"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "昆明基地，机组请假，客流减少5%，64班航班",
+      "expected": {
+        "base_airport": "昆明",
+        "event_type": "crew_absence",
+        "demand_factor": 0.95,
+        "flight_count": 64
+      },
+      "actual": {
+        "base_airport": "昆明",
+        "demand_factor": 0.95,
+        "flight_count": 64,
+        "event_type": "crew_absence"
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"昆明\",\"异常类型\":\"机组请假\",\"客流变化\":\"减少5%\",\"航班数\":\"64班\"}",
+      "model_output": "{\"基地\":\"昆明\",\"异常类型\":\"机组请假\",\"客流变化\":\"减少5%\",\"航班数\":\"64班\"}",
+      "retry_used": false,
+      "seconds": 8.25,
+      "model_fields": {
+        "base_airport": "昆明",
+        "event_type": "crew_absence",
+        "demand_factor": 0.95,
+        "flight_count": 64
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "event_type": "initial",
+        "demand_factor": "initial",
+        "flight_count": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "上海基地，从11点开始，降雨，前序延误25分钟",
+      "expected": {
+        "base_airport": "上海",
+        "start_hour": 11,
+        "weather": "rain",
+        "previous_delay": 25
+      },
+      "actual": {
+        "base_airport": "上海",
+        "weather": "rain",
+        "previous_delay": 25,
+        "start_hour": 11
+      },
+      "raw_model_exact": false,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"开始时间\":\"11点\",\"异常类型\":\"降雨\",\"前序延误\":\"25分钟\"}",
+      "model_output": "{\"基地\":\"上海\",\"天气\":\"降雨\"}",
+      "retry_used": true,
+      "seconds": 13.12,
+      "model_fields": {
+        "start_hour": 11,
+        "previous_delay": 25,
+        "base_airport": "上海",
+        "weather": "rain"
+      },
+      "model_field_sources": {
+        "start_hour": "initial",
+        "previous_delay": "initial",
+        "base_airport": "retry",
+        "weather": "retry"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "广州基地，机场关闭75分钟，36班航班",
+      "expected": {
+        "base_airport": "广州",
+        "event_type": "airport_closure",
+        "disruption_minutes": 75,
+        "flight_count": 36
+      },
+      "actual": {
+        "base_airport": "广州",
+        "flight_count": 36,
+        "disruption_minutes": 75,
+        "event_type": "airport_closure"
+      },
+      "raw_model_exact": false,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"广州\",\"关闭时长\":\"75分钟\"}",
+      "model_output": "{\"异常类型\":\"机场关闭\",\"航班数\":\"36班\"}",
+      "retry_used": true,
+      "seconds": 12.5,
+      "model_fields": {
+        "base_airport": "广州",
+        "disruption_minutes": 75,
+        "event_type": "airport_closure",
+        "flight_count": 36
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "disruption_minutes": "initial",
+        "event_type": "retry",
+        "flight_count": "retry"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "重庆基地，登机口故障，备用登机口2个",
+      "expected": {
+        "base_airport": "重庆",
+        "event_type": "gate_failure",
+        "backup_gates": 2
+      },
+      "actual": {
+        "base_airport": "重庆",
+        "backup_gates": 2,
+        "event_type": "gate_failure"
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"重庆\",\"异常类型\":\"登机口故障\",\"备用登机口\":\"2个\"}",
+      "model_output": "{\"基地\":\"重庆\",\"异常类型\":\"登机口故障\",\"备用登机口\":\"2个\"}",
+      "retry_used": false,
+      "seconds": 7.31,
+      "model_fields": {
+        "base_airport": "重庆",
+        "event_type": "gate_failure",
+        "backup_gates": 2
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "event_type": "initial",
+        "backup_gates": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "西安基地，飞机故障，备用机组3组，备用飞机1架",
+      "expected": {
+        "base_airport": "西安",
+        "event_type": "aircraft_failure",
+        "backup_crew": 3,
+        "backup_aircraft": 1
+      },
+      "actual": {
+        "base_airport": "西安",
+        "backup_aircraft": 1,
+        "backup_crew": 3,
+        "event_type": "aircraft_failure"
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"西安\",\"异常类型\":\"飞机故障\",\"备用机组\":\"3组\",\"备用飞机\":\"1架\"}",
+      "model_output": "{\"基地\":\"西安\",\"异常类型\":\"飞机故障\",\"备用机组\":\"3组\",\"备用飞机\":\"1架\"}",
+      "retry_used": false,
+      "seconds": 7.7,
+      "model_fields": {
+        "base_airport": "西安",
+        "event_type": "aircraft_failure",
+        "backup_crew": 3,
+        "backup_aircraft": 1
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "event_type": "initial",
+        "backup_crew": "initial",
+        "backup_aircraft": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "三亚基地，不要降雪，客流增加18%",
+      "expected": {
+        "base_airport": "三亚",
+        "demand_factor": 1.18
+      },
+      "actual": {
+        "base_airport": "三亚",
+        "demand_factor": 1.18
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"三亚\",\"客流变化\":\"增加18%\"}",
+      "model_output": "{\"基地\":\"三亚\",\"客流变化\":\"增加18%\"}",
+      "retry_used": false,
+      "seconds": 5.58,
+      "model_fields": {
+        "base_airport": "三亚",
+        "demand_factor": 1.18
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "demand_factor": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "成都基地，大雾，前序航班延误70分钟，备用飞机0架",
+      "expected": {
+        "base_airport": "成都",
+        "weather": "fog",
+        "previous_delay": 70,
+        "backup_aircraft": 0
+      },
+      "actual": {
+        "base_airport": "成都",
+        "weather": "fog",
+        "backup_aircraft": 0,
+        "previous_delay": 70
+      },
+      "raw_model_exact": false,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"成都\",\"天气\":\"大雾\",\"前序延误\":\"70分钟\"}",
+      "model_output": "{\"备用飞机\":\"0架\"}",
+      "retry_used": true,
+      "seconds": 12.16,
+      "model_fields": {
+        "base_airport": "成都",
+        "weather": "fog",
+        "previous_delay": 70,
+        "backup_aircraft": 0
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "weather": "initial",
+        "previous_delay": "initial",
+        "backup_aircraft": "retry"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "昆明基地，客流下降22%，3条可用跑道，96班航班",
+      "expected": {
+        "base_airport": "昆明",
+        "demand_factor": 0.78,
+        "capacity": 3,
+        "flight_count": 96
+      },
+      "actual": {
+        "base_airport": "昆明",
+        "demand_factor": 0.78,
+        "flight_count": 96,
+        "capacity": 3
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"昆明\",\"客流变化\":\"下降22%\",\"跑道数\":\"3条\",\"航班数\":\"96班\"}",
+      "model_output": "{\"基地\":\"昆明\",\"客流变化\":\"下降22%\",\"跑道数\":\"3条\",\"航班数\":\"96班\"}",
+      "retry_used": false,
+      "seconds": 8.45,
+      "model_fields": {
+        "base_airport": "昆明",
+        "demand_factor": 0.78,
+        "capacity": 3,
+        "flight_count": 96
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "demand_factor": "initial",
+        "capacity": "initial",
+        "flight_count": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "西安基地，前序延误0分钟，备用飞机0架，晴天",
+      "expected": {
+        "base_airport": "西安",
+        "previous_delay": 0,
+        "backup_aircraft": 0,
+        "weather": "clear"
+      },
+      "actual": {
+        "base_airport": "西安",
+        "weather": "clear",
+        "backup_aircraft": 0,
+        "previous_delay": 0
+      },
+      "raw_model_exact": false,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"西安\",\"前序延误\":\"0分钟\",\"天气\":\"晴天\"}",
+      "model_output": "{\"备用飞机\":\"0架\"}",
+      "retry_used": true,
+      "seconds": 12.0,
+      "model_fields": {
+        "base_airport": "西安",
+        "previous_delay": 0,
+        "weather": "clear",
+        "backup_aircraft": 0
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "previous_delay": "initial",
+        "weather": "initial",
+        "backup_aircraft": "retry"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "成都基地，4条可用跑道，160班航班，从5点开始",
+      "expected": {
+        "base_airport": "成都",
+        "capacity": 4,
+        "flight_count": 160,
+        "start_hour": 5
+      },
+      "actual": {
+        "base_airport": "成都",
+        "flight_count": 160,
+        "capacity": 4,
+        "start_hour": 5
+      },
+      "raw_model_exact": false,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"跑道数\":\"4条\",\"航班数\":\"160班\",\"开始时间\":\"5点\"}",
+      "model_output": "{\"基地\":\"成都\"}",
+      "retry_used": true,
+      "seconds": 12.41,
+      "model_fields": {
+        "capacity": 4,
+        "flight_count": 160,
+        "start_hour": 5,
+        "base_airport": "成都"
+      },
+      "model_field_sources": {
+        "capacity": "initial",
+        "flight_count": "initial",
+        "start_hour": "initial",
+        "base_airport": "retry"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "北京基地，客流减少35%，雷暴，前序延误55分钟",
+      "expected": {
+        "base_airport": "北京",
+        "demand_factor": 0.65,
+        "weather": "storm",
+        "previous_delay": 55
+      },
+      "actual": {
+        "base_airport": "北京",
+        "weather": "storm",
+        "demand_factor": 0.65,
+        "previous_delay": 55
+      },
+      "raw_model_exact": false,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"北京\",\"客流变化\":\"减少35%\",\"异常类型\":\"雷暴\"}",
+      "model_output": "{\"前序延误\":\"55分钟\",\"天气\":\"雷暴\"}",
+      "retry_used": true,
+      "seconds": 13.72,
+      "model_fields": {
+        "base_airport": "北京",
+        "demand_factor": 0.65,
+        "previous_delay": 55,
+        "weather": "storm"
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "demand_factor": "initial",
+        "previous_delay": "retry",
+        "weather": "retry"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "三亚基地，飞机故障，客流涨一成",
+      "expected": {
+        "base_airport": "三亚",
+        "event_type": "aircraft_failure",
+        "demand_factor": 1.1
+      },
+      "actual": {
+        "base_airport": "三亚",
+        "demand_factor": 1.1,
+        "event_type": "aircraft_failure"
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"三亚\",\"异常类型\":\"飞机故障\",\"客流变化\":\"涨一成\"}",
+      "model_output": "{\"基地\":\"三亚\",\"异常类型\":\"飞机故障\",\"客流变化\":\"涨一成\"}",
+      "retry_used": false,
+      "seconds": 6.58,
+      "model_fields": {
+        "base_airport": "三亚",
+        "event_type": "aircraft_failure",
+        "demand_factor": 1.1
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "event_type": "initial",
+        "demand_factor": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "上海基地，备用机组1组，备用登机口4个，晴朗",
+      "expected": {
+        "base_airport": "上海",
+        "backup_crew": 1,
+        "backup_gates": 4,
+        "weather": "clear"
+      },
+      "actual": {
+        "base_airport": "上海",
+        "weather": "clear",
+        "backup_crew": 1,
+        "backup_gates": 4
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"上海\",\"天气\":\"晴朗\",\"备用机组\":\"1组\",\"备用登机口\":\"4个\"}",
+      "model_output": "{\"基地\":\"上海\",\"天气\":\"晴朗\",\"备用机组\":\"1组\",\"备用登机口\":\"4个\"}",
+      "retry_used": false,
+      "seconds": 8.05,
+      "model_fields": {
+        "base_airport": "上海",
+        "weather": "clear",
+        "backup_crew": 1,
+        "backup_gates": 4
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "weather": "initial",
+        "backup_crew": "initial",
+        "backup_gates": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "广州基地，28班航班，下雪，1条可用跑道",
+      "expected": {
+        "base_airport": "广州",
+        "flight_count": 28,
+        "weather": "snow",
+        "capacity": 1
+      },
+      "actual": {
+        "base_airport": "广州",
+        "weather": "snow",
+        "flight_count": 28,
+        "capacity": 1
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"广州\",\"航班数\":\"28班\",\"天气\":\"下雪\",\"跑道数\":\"1条\"}",
+      "model_output": "{\"基地\":\"广州\",\"航班数\":\"28班\",\"天气\":\"下雪\",\"跑道数\":\"1条\"}",
+      "retry_used": false,
+      "seconds": 7.73,
+      "model_fields": {
+        "base_airport": "广州",
+        "flight_count": 28,
+        "weather": "snow",
+        "capacity": 1
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "flight_count": "initial",
+        "weather": "initial",
+        "capacity": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "重庆基地，下雨，机场关闭45分钟，客流增加8%",
+      "expected": {
+        "base_airport": "重庆",
+        "weather": "rain",
+        "event_type": "airport_closure",
+        "disruption_minutes": 45,
+        "demand_factor": 1.08
+      },
+      "actual": {
+        "base_airport": "重庆",
+        "weather": "rain",
+        "demand_factor": 1.08,
+        "disruption_minutes": 45,
+        "event_type": "airport_closure"
+      },
+      "raw_model_exact": false,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"重庆\",\"天气\":\"下雨\",\"关闭时长\":\"45分钟\",\"客流变化\":\"增加8%\"}",
+      "model_output": "{\"异常类型\":\"机场关闭45分钟\"}",
+      "retry_used": true,
+      "seconds": 14.12,
+      "model_fields": {
+        "base_airport": "重庆",
+        "weather": "rain",
+        "disruption_minutes": 45,
+        "demand_factor": 1.08,
+        "event_type": "airport_closure"
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "weather": "initial",
+        "disruption_minutes": "initial",
+        "demand_factor": "initial",
+        "event_type": "retry"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "北京基地，没有飞机故障，52班航班",
+      "expected": {
+        "base_airport": "北京",
+        "flight_count": 52
+      },
+      "actual": {
+        "base_airport": "北京",
+        "flight_count": 52
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"北京\",\"航班数\":\"52班\"}",
+      "model_output": "{\"基地\":\"北京\",\"航班数\":\"52班\"}",
+      "retry_used": false,
+      "seconds": 5.61,
+      "model_fields": {
+        "base_airport": "北京",
+        "flight_count": 52
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "flight_count": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "西安基地，机组请假，备用机组0组，从12点开始",
+      "expected": {
+        "base_airport": "西安",
+        "event_type": "crew_absence",
+        "backup_crew": 0,
+        "start_hour": 12
+      },
+      "actual": {
+        "base_airport": "西安",
+        "backup_crew": 0,
+        "start_hour": 12,
+        "event_type": "crew_absence"
+      },
+      "raw_model_exact": false,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"西安\",\"异常类型\":\"机组请假\",\"开始时间\":\"12点\"}",
+      "model_output": "{\"备用机组\":\"0组\"}",
+      "retry_used": true,
+      "seconds": 12.2,
+      "model_fields": {
+        "base_airport": "西安",
+        "event_type": "crew_absence",
+        "start_hour": 12,
+        "backup_crew": 0
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "event_type": "initial",
+        "start_hour": "initial",
+        "backup_crew": "retry"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "昆明基地，登机口故障，客流减少8%，前序延误10分钟",
+      "expected": {
+        "base_airport": "昆明",
+        "event_type": "gate_failure",
+        "demand_factor": 0.92,
+        "previous_delay": 10
+      },
+      "actual": {
+        "base_airport": "昆明",
+        "demand_factor": 0.92,
+        "previous_delay": 10,
+        "event_type": "gate_failure"
+      },
+      "raw_model_exact": false,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"基地\":\"昆明\",\"异常类型\":\"登机口故障\",\"客流变化\":\"减少8%\"}",
+      "model_output": "{\"前序延误\":\"10分钟\"}",
+      "retry_used": true,
+      "seconds": 13.19,
+      "model_fields": {
+        "base_airport": "昆明",
+        "event_type": "gate_failure",
+        "demand_factor": 0.92,
+        "previous_delay": 10
+      },
+      "model_field_sources": {
+        "base_airport": "initial",
+        "event_type": "initial",
+        "demand_factor": "initial",
+        "previous_delay": "retry"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "晴天，20班航班",
+      "expected": {
+        "weather": "clear",
+        "flight_count": 20
+      },
+      "actual": {
+        "weather": "clear",
+        "flight_count": 20
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"天气\":\"晴天\",\"航班数\":\"20班\"}",
+      "model_output": "{\"天气\":\"晴天\",\"航班数\":\"20班\"}",
+      "retry_used": false,
+      "seconds": 5.78,
+      "model_fields": {
+        "weather": "clear",
+        "flight_count": 20
+      },
+      "model_field_sources": {
+        "weather": "initial",
+        "flight_count": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "备用飞机6架，备用机组4组",
+      "expected": {
+        "backup_aircraft": 6,
+        "backup_crew": 4
+      },
+      "actual": {
+        "backup_aircraft": 6,
+        "backup_crew": 4
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"备用飞机\":\"6架\",\"备用机组\":\"4组\"}",
+      "model_output": "{\"备用飞机\":\"6架\",\"备用机组\":\"4组\"}",
+      "retry_used": false,
+      "seconds": 5.58,
+      "model_fields": {
+        "backup_aircraft": 6,
+        "backup_crew": 4
+      },
+      "model_field_sources": {
+        "backup_aircraft": "initial",
+        "backup_crew": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "前序延误12分钟，从14点开始",
+      "expected": {
+        "previous_delay": 12,
+        "start_hour": 14
+      },
+      "actual": {
+        "previous_delay": 12,
+        "start_hour": 14
+      },
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\"前序延误\":\"12分钟\",\"开始时间\":\"14点\"}",
+      "model_output": "{\"前序延误\":\"12分钟\",\"开始时间\":\"14点\"}",
+      "retry_used": false,
+      "seconds": 6.27,
+      "model_fields": {
+        "previous_delay": 12,
+        "start_hour": 14
+      },
+      "model_field_sources": {
+        "previous_delay": "initial",
+        "start_hour": "initial"
+      },
+      "warnings": []
+    },
+    {
+      "group": "holdout",
+      "text": "请帮我配置一次实验",
+      "expected": {},
+      "actual": {},
+      "raw_model_exact": true,
+      "model_exact_after_feedback": true,
+      "grounded_exact": true,
+      "method": "local-qwen",
+      "initial_model_output": "{\n  \"基地\": \"\",\n  \"天气\": \"\",\n  \"航班数\": \"\",\n  \"客流变化\": \"\",\n  \"跑道数\": \"\",\n  \"备用飞机\": \"\",\n  \"备用机组\": \"\",\n  \"备用登机口\": \"\",\n  \"前序延误\": \"\",\n  \"开始时间\": \"\",\n  \"关闭时长\": \"\",\n  \"异常类型\": \"\"\n}",
+      "model_output": "{\n  \"基地\": \"\",\n  \"天气\": \"\",\n  \"航班数\": \"\",\n  \"客流变化\": \"\",\n  \"跑道数\": \"\",\n  \"备用飞机\": \"\",\n  \"备用机组\": \"\",\n  \"备用登机口\": \"\",\n  \"前序延误\": \"\",\n  \"开始时间\": \"\",\n  \"关闭时长\": \"\",\n  \"异常类型\": \"\"\n}",
+      "retry_used": false,
+      "seconds": 18.95,
+      "model_fields": {},
+      "model_field_sources": {},
+      "warnings": []
+    }
+  ],
+  "count": 48,
+  "holdout_count": 24,
+  "raw_model_exact": 29,
+  "model_exact_after_feedback": 48,
+  "grounded_exact": 48,
+  "holdout_model_exact": 24,
+  "protocol_version": 2,
+  "fresh_cases_sha256": "6509a92be98d38a32754e46155155d6b4ef3b78b6b431b2011d57c43f915c724",
+  "acceptance": "8开发+16旧回归+24新留出；总体及新留出两轮模型提取合并正确率均至少90%，带回退草稿100%正确；失败明确模板回退",
+  "raw_definition": "首轮模型字段经中文名称、单位、枚举与空值规范化；只读取模型输出，不从原文补值",
+  "feedback_definition": "最多一次只含字段名的反馈；保留已核对正确的首轮模型值，再合并第二轮模型补丁，逐字段记录来源；不把模板补漏算模型成功",
+  "scope": "固定支持描述，不能保证任意自由表达；只生成草稿，必须人工确认"
+}

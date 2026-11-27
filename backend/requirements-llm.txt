@@ -1,0 +1,5 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+-r requirements-intelligence.txt
+torch==2.10.0+cpu
+transformers==5.24.1
+safetensors==0.8.0

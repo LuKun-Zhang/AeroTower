@@ -11,7 +11,7 @@
 import copy
 import os
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from ..models.recovery_plan import RecoveryPlan, RecoveryPlanStatus, ChangeType
 from ..services.impact_analysis_service import impact_analysis_service, CANCEL_DELAY_THRESHOLD
@@ -821,22 +821,11 @@ class RecoveryService:
         if not time_tuple or not isinstance(time_tuple, (tuple, list)) or len(time_tuple) < 5:
             return ''
         try:
-            y, m, d, h, mi = int(time_tuple[0]), int(time_tuple[1]), int(time_tuple[2]), int(time_tuple[3]), int(time_tuple[4])
+            value = datetime(*(int(part) for part in time_tuple[:5])) + timedelta(minutes=offset_minutes)
         except (ValueError, TypeError):
             return ''
-        total_minutes = ((m - 11) * 30 + d) * 24 * 60 + h * 60 + mi + offset_minutes
-
-        # 转回日期
-        days = total_minutes // (24 * 60)
-        remaining = total_minutes % (24 * 60)
-        new_h = remaining // 60
-        new_mi = remaining % 60
-
-        month_offset = days // 30
-        new_m = 11 + month_offset
-        new_d = days % 30
-
-        return f"2020-{new_m:02d}-{new_d:02d} {new_h:02d}:{new_mi:02d}"
+        # 用真实日历处理月底和跨年，避免出现12月0日或把年份写回2020。
+        return value.strftime("%Y-%m-%d %H:%M")
 
     @staticmethod
     def _apply_delay(flight, delay_minutes):
@@ -847,17 +836,10 @@ class RecoveryService:
             val = getattr(flight, attr, None)
             if val and isinstance(val, (tuple, list)) and len(val) >= 5:
                 try:
-                    y, m, d, h, mi = int(val[0]), int(val[1]), int(val[2]), int(val[3]), int(val[4])
+                    value = datetime(*(int(part) for part in val[:5])) + timedelta(minutes=delay_minutes)
                 except (ValueError, TypeError):
                     continue
-                total = ((m - 11) * 30 + d) * 24 * 60 + h * 60 + mi + delay_minutes
-                days = total // (24 * 60)
-                rem = total % (24 * 60)
-                new_h = rem // 60
-                new_mi = rem % 60
-                new_m = 11 + days // 30
-                new_d = days % 30
-                new_val = (y, new_m, new_d, new_h, new_mi)
+                new_val = (value.year, value.month, value.day, value.hour, value.minute)
                 setattr(flight, attr, new_val)
 
 

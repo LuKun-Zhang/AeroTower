@@ -1,0 +1,35 @@
+{
+  "checked_at": "2026-11-27T01:56:38.067799+00:00",
+  "model_version": "818601802430426e9e0694555437d6c0",
+  "six_items": {
+    "demand": "passed",
+    "routing": "passed",
+    "hit_rate_display": "passed",
+    "actual_original_recovery_comparison": "passed",
+    "periodic_review_and_fallback": "passed",
+    "language": "passed_with_one_feedback_and_merge"
+  },
+  "browser_ui": true,
+  "browser_extensions": true,
+  "source_hash_matches": true,
+  "samples_hash_matches": true,
+  "health_restored": {
+    "delay": true,
+    "demand": true,
+    "recovery": true,
+    "routing": true
+  },
+  "limits": [
+    "首轮29/48，不能称单次输出100%正确；固定描述不代表任意自由表达",
+    "日期和天数由日历解析器处理，不计模型提取",
+    "本机约16GB内存；模型加载前需约7GB可用物理内存，不足回退模板"
+  ],
+  "language": {
+    "first": 29,
+    "merged": 48,
+    "count": 48,
+    "fresh_holdout_merged": 24,
+    "fresh_holdout_count": 24,
+    "all_model_fields_traceable": true
+  }
+}
