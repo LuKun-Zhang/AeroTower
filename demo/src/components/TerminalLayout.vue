@@ -910,9 +910,12 @@ export default {
       let tickCount = 0
       const animate = (timestamp) => {
         frameCount++
+        // 非活动 tab（display:none）时只跳过绘制，模拟仍继续推进，切回后立即重绘
+        const canvasEl = this.$refs.canvas
+        const hidden = !!(canvasEl && canvasEl.getClientRects().length === 0)
         try {
           // 模拟引擎 tick（异步跳转期间跳过，由 jumpToTime 内部驱动）
-          if (this.simState.running && !this.simState.paused && !this._jumpInProgress) {
+          if (!hidden && this.simState.running && !this.simState.paused && !this._jumpInProgress) {
             const elapsed = timestamp - this.lastSimTick
             const tickInterval = Math.max(30, 200 / this.simState.speed)
             if (elapsed >= tickInterval) {
@@ -928,15 +931,17 @@ export default {
           if (frameCount <= 3) {
             console.log('[DEBUG] draw frame #' + frameCount + ' canvas=' + (this.$refs.canvas ? (this.$refs.canvas.width + 'x' + this.$refs.canvas.height) : 'NULL') + ' running=' + this.simState.running + ' paused=' + this.simState.paused)
           }
-          this.drawAll()
-          this.drawCorridors()
-          if (this.congestion.enabled) {
-            this.drawHeatmapOverlay()
+          if (!hidden) {
+            this.drawAll()
+            this.drawCorridors()
+            if (this.congestion.enabled) {
+              this.drawHeatmapOverlay()
+            }
+            this.drawGateOverlays()
+            this.drawAirplanes()
+            this.drawWaitingStats()
+            this.drawPassengers()
           }
-          this.drawGateOverlays()
-          this.drawAirplanes()
-          this.drawWaitingStats()
-          this.drawPassengers()
         } catch (e) {
           console.error('[TerminalLayout] animation error:', e)
         }

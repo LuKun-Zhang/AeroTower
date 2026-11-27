@@ -2832,10 +2832,16 @@ function applyCycloneConfig() {
 
 /* ==================== 动画循环 ==================== */
 let tickCounter = 0
+let lastWeatherTexAt = 0
+let lastChartDrawAt = 0
 function animate(time) {
   animationId = requestAnimationFrame(animate)
   const dt = Math.min((time - lastTime) / 1000, 0.1)
   lastTime = time
+
+  // 作为「模拟大引擎」的非活动 tab 时（display:none），跳过渲染与重绘，
+  // 避免多个 3D 场景同时抢占 GPU；切回时自动恢复。
+  if (container.value && container.value.getClientRects().length === 0) return
 
   controls.update()
 
@@ -2845,7 +2851,11 @@ function animate(time) {
     updateConvectiveCells(dt)
     updateDynamicProvinceMap()
     updateCycloneStates()
-    drawWeatherChart()
+    // 小图重绘限 5 FPS（原为每帧）
+    if (time - lastChartDrawAt >= 200) {
+      drawWeatherChart()
+      lastChartDrawAt = time
+    }
   }
 
   // 云层漂移（动态模式：沿平均气旋方向整体漂移，模拟风推云走）
@@ -2880,12 +2890,16 @@ function animate(time) {
     })
   })
 
-  // 天气纹理刷新（动态模式每帧，静态模式每 0.5s）
+  // 天气纹理刷新：动态模式限 10 FPS（原为每帧 2048² 重绘 + 纹理上传），静态模式 2 FPS
   tickCounter++
   if (mode.value === 'dynamic' || mode.value === 'custom') {
+    if (time - lastWeatherTexAt >= 100) {
+      updateWeatherTex()
+      lastWeatherTexAt = time
+    }
+  } else if (time - lastWeatherTexAt >= 500) {
     updateWeatherTex()
-  } else if (tickCounter % 30 === 0) {
-    updateWeatherTex()
+    lastWeatherTexAt = time
   }
 
   // 雨 & 雷电

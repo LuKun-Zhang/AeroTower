@@ -1026,6 +1026,9 @@ export default {
     _animate: function(time) {
       var self = this
       this._animationId = requestAnimationFrame(function(t) { self._animate(t) })
+      // 作为「模拟大引擎」的非活动 tab 时（display:none）跳过渲染，切回自动恢复
+      var host = this.$refs.container
+      if (host && host.getClientRects().length === 0) return
       var dt = Math.min(this._clock.getDelta(), 0.1)
 
       this._controls.update()
