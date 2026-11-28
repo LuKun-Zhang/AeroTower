@@ -2773,10 +2773,15 @@ function onProvinceWeatherChange() {
   updateWeatherTex()
 }
 
-/** 实验回放：用给定省份天气直接进入手动模式（只喂数据，不改渲染内核） */
-function applyProvinceWeather(map) {
-  mode.value = 'manual'
+/**
+ * 实验回放：喂入实验的省份天气。
+ * force=true 时首次强制切到手动模式（回放默认展示实验天气）；
+ * 之后只在用户仍处于手动模式时刷新数据，避免把用户选的动态/自动模式顶回去。
+ */
+function applyProvinceWeather(map, force = false) {
   manualWeather.value = { ...(map || {}) }
+  if (!force && mode.value !== 'manual') return
+  mode.value = 'manual'
   rebuildRainRegions(manualWeather.value)
   rebuildLightning(manualWeather.value)
   updateWeatherTex()

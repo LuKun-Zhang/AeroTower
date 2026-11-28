@@ -71,6 +71,7 @@ export default {
       _weatherTimer: null,
       _lastSync: 0,
       _provinceNames: null,
+      _weatherPinned: false,
     }
   },
   computed: {
@@ -153,7 +154,12 @@ export default {
         const map = {}
         this._provinceNames.forEach(p => { map[p] = 'sunny' })
         Object.assign(map, data.province_weather || {})
-        if (wm.applyProvinceWeather) wm.applyProvinceWeather(map)
+        if (wm.applyProvinceWeather) {
+          // 首次强制切到实验天气，之后尊重用户在天气页选的模式
+          const force = !this._weatherPinned
+          this._weatherPinned = true
+          wm.applyProvinceWeather(map, force)
+        }
       } catch (e) {}
     },
     toggle() {
