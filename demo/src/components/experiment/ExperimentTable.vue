@@ -9,7 +9,7 @@
     <el-table-column label="条件" min-width="250">
       <template #default="{ row }">
         <div class="et-sub">{{ conditionText(row) }}</div>
-        <div class="et-sub">种子 {{ row.conditions.seed }} · {{ sizeText(row) }}</div>
+        <div class="et-sub">种子 {{ row.conditions.seed }} · {{ sizeText(row) }}<span v-if="planText(row)"> · {{ planText(row) }}</span></div>
       </template>
     </el-table-column>
     <el-table-column label="状态" width="110">
@@ -49,6 +49,12 @@ export default {
   methods: {
     statusText(s) { return STATUS[s] || s },
     pct(v) { return v === null || v === undefined ? '—' : `${v}%` },
+    planText(row) {
+      const v = row.summary || {}
+      if (v.total_flights == null) return ''
+      const pax = v.total_passengers != null ? ` / ${Number(v.total_passengers).toLocaleString()} 人` : ''
+      return `${v.total_flights} 班${pax}`
+    },
     conditionText(row) {
       const c = row.conditions || {}
       const ds = c.dates || []

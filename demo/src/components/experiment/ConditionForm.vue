@@ -86,6 +86,7 @@
             <el-option v-for="w in weatherOptions" :key="w.value"
                        :label="w.label" :value="w.value" />
           </el-select>
+          <p class="cf-hint">天气只影响延误与准点率，不改变航班计划</p>
         </div>
         <div class="cf-field">
           <label>异常</label>
