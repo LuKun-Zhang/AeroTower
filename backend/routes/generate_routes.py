@@ -11,6 +11,11 @@ from ..services.flight_generator import FlightGenerator, DEFAULT_TRAFFIC
 from ..services.passenger_service import passenger_service
 from ..services import runway_service, gate_service, routing_service
 from ..services.aircraft_types import layout_seats
+from ..services.experiment.paxflow_builder import (
+    PAXFLOW_LOAD_FACTOR as _PAXFLOW_LOAD_FACTOR,
+    build_paxflow_schedule,
+    flight_date as _paxflow_date,
+)
 from ..models.flight import Flight
 from ..auth import get_user_history_dir, get_history_dir
 from ..state import (
@@ -145,10 +150,17 @@ def get_generated_data():
     支持 ?type=stats|chains|flights|passengers&limit=N&offset=N&flight_id=X&pax_id=X
     """
     data = state.get_generated_data()
-    if not data:
-        return jsonify({'code': 1, 'msg': '暂无生成数据，请先生成航班计划'}), 404
-
     data_type = request.args.get('type', 'stats')
+    if not data:
+        # 没有生成数据属于正常空态，不应返回 404（前端会当成接口错误并刷控制台）
+        msg = '暂无生成数据，请先生成航班计划'
+        if data_type == 'chains':
+            return jsonify({'code': 0, 'data': [], 'empty': True, 'msg': msg})
+        if data_type in ('flights', 'passengers') and not (
+            request.args.get('flight_id') or request.args.get('pax_id')
+        ):
+            return jsonify({'code': 0, 'data': [], 'total': 0, 'empty': True, 'msg': msg})
+        return jsonify({'code': 0, 'data': None, 'empty': True, 'msg': msg})
     limit = int(request.args.get('limit') or 50)
     offset = int(request.args.get('offset') or 0)
     flight_id = request.args.get('flight_id', '')
@@ -325,76 +337,8 @@ def get_paxflow_manifests():
 
 
 # ==================== 旅客流模拟数据源 ====================
-# 成都双流机场俯视图中的矩形登机口（矩形编号 → 滑行通道 → 跑道）：
-#   16~43  → T1（t1_left/t1_mid/t1_right，滑向跑道一）
-#   44~71  → T2 左/中（t2_left/t2_mid，滑向跑道一）
-#   72~86, 92 → T2 右（t2_right，滑向跑道二）
-# 后端登机口分配（辰Gxx，74 个）通过确定性规则映射到矩形，保证飞机滑行跑道与调度跑道一致。
-_PAXFLOW_RUNWAY1_RECTS = list(range(16, 72))            # 16~71 → 跑道一（56 个）
-_PAXFLOW_RUNWAY2_RECTS = list(range(72, 87)) + [92]     # 72~86, 92 → 跑道二（16 个）
-_PAXFLOW_LOAD_FACTOR = 0.78                             # 载客率（与旅客流模拟参数一致）
-
-
-def _paxflow_rect_for_gate(gate_name):
-    """后端登机口"辰Gxx" → 前端布局"矩形 xx"编号。
-    跑道一组（辰G01~37）映射到跑道一矩形（16~71 循环）；
-    跑道二组（辰G38~74）映射到跑道二矩形（72~92 循环）。
-    """
-    m = re.match(r'辰G(\d+)', str(gate_name))
-    if not m:
-        return None
-    num = int(m.group(1))
-    if 1 <= num <= 37:
-        return _PAXFLOW_RUNWAY1_RECTS[(num - 1) % len(_PAXFLOW_RUNWAY1_RECTS)]
-    return _PAXFLOW_RUNWAY2_RECTS[(num - 38) % len(_PAXFLOW_RUNWAY2_RECTS)]
-
-
-def _paxflow_terminal(rect_num):
-    """矩形编号 → 航站楼（与前端 TAXI_CHANNELS 分组一致：16~43=T1，44 起=T2）"""
-    return 'T1' if rect_num <= 43 else 'T2'
-
-
-def _paxflow_date(f, airport='成都'):
-    """航班在目标机场的操作日期（到达用到达日期，出发用出发日期）"""
-    if f.arrival_airport == airport:
-        y, m, d, *_ = f.time_arrival
-    else:
-        y, m, d, *_ = f.time_departure
-    return f"{y}-{m:02d}-{d:02d}"
-
-
-def _paxflow_tail_no(flight_id):
-    """飞机尾号兜底：由 flight_id（gen_xxxxx）派生唯一编号，避免前端机队合并冲突"""
-    try:
-        return 'B-' + str(int(str(flight_id).replace('gen_', ''))).zfill(5)
-    except Exception:
-        return 'B-' + str(abs(hash(str(flight_id))) % 100000).zfill(5)
-
-
-def _apply_disruption_to_entry(entry, plan_item):
-    """把天气中断计划应用到单个旅客流调度 entry。
-
-    plan_item 形如 {type: 'cancel'|'delay', delay_minutes, reason, affected_by}。
-    - 取消：仅标记 cancelled，保留 entry 供前端灰显（不生成粒子/飞机）。
-    - 延误：时间字段整体后移 delay_minutes。
-    """
-    if not plan_item:
-        return
-    entry['disruptionType'] = plan_item.get('type')
-    entry['reason'] = plan_item.get('reason', '天气影响')
-
-    if plan_item.get('type') == 'cancel':
-        entry['cancelled'] = True
-        return
-
-    delay = int(plan_item.get('delay_minutes', 0) or 0)
-    entry['delayMinutes'] = delay
-    if delay <= 0:
-        return
-    for key in ('boardingStart', 'boardingEnd', 'takeoffTime',
-                'scheduledArr', 'rwStart', 'rwEnd'):
-        if key in entry and entry[key] is not None:
-            entry[key] += delay
+# 矩形登机口映射、跑道窗口、按天组装等纯逻辑已抽到
+# backend/services/experiment/paxflow_builder.py，路由与实验流水线共用。
 
 
 def _ensure_paxflow_flights():
@@ -526,20 +470,7 @@ def get_paxflow_schedule():
         plan = get_weather_disruption_plan() if disrupted else {}
 
         # 1) 跑道调度（真实分配）
-        runway_service._set_airport(airport)
         runway_schedule, _ = runway_service.solve_multi_runway(ap_flights, airport)
-        runway_map = {}
-        rw_window = {}  # flight_id -> {start, end}（分钟，对应当天 0~1440）
-        for item in runway_schedule:
-            fid = item.get('flight_id')
-            if fid and fid not in runway_map:
-                runway_map[fid] = item.get('runway', 1)
-                start_raw = item.get('actual_time', 0)
-                end_raw = item.get('end_time', 0)
-                rw_window[fid] = {
-                    'start': start_raw % 1440,
-                    'end': end_raw % 1440,
-                }
 
         # 2) 登机口分配（真实分配，返回辰Gxx）
         gates = gate_service.assign_flights_to_gates(
@@ -563,71 +494,17 @@ def get_paxflow_schedule():
         # 4) 生成乘客编号（对接 /api/paxflow/manifests）
         pax_count = _build_paxflow_passengers(ap_flights)
 
-        # 5) 按天组装调度数据
-        dates = sorted({_paxflow_date(f, airport) for f in ap_flights})
-        schedule_by_date = {}
-        for date_str in dates:
-            items = []
-            for f in ap_flights:
-                if _paxflow_date(f, airport) != date_str:
-                    continue
-                gm = gate_map.get(f.flight_id, {})
-                backend_gate = gm.get('gate') or '辰G01'
-                rect_num = _paxflow_rect_for_gate(backend_gate)
-                if rect_num is None:
-                    rect_num = 16
-                gate_name = f"矩形 {rect_num}"
-                runway_no = runway_map.get(f.flight_id, gm.get('runway_group', 1))
-                runway = '跑道一' if runway_no == 1 else '跑道二'
-                seats = layout_seats(f.layout) or 150
-                pax_total = max(1, round(seats * _PAXFLOW_LOAD_FACTOR))
-
-                if f.departure_airport == airport:
-                    dep_min = f.departure_minutes % 1440
-                    rw = rw_window.get(f.flight_id, {})
-                    entry = {
-                        'flightId': str(f.flight_id),
-                        'flightNo': f.flight_no,
-                        'tailNo': tail_map.get(f.flight_id) or _paxflow_tail_no(f.flight_id),
-                        'type': 'departure',
-                        'gateName': gate_name,
-                        'backendGate': backend_gate,
-                        'terminal': _paxflow_terminal(rect_num),
-                        'boardingStart': dep_min - 35,
-                        'boardingEnd': dep_min - 5,
-                        'takeoffTime': dep_min,
-                        'rwStart': rw.get('start', dep_min - 3),
-                        'rwEnd': rw.get('end', dep_min + 2),
-                        'runway': runway,
-                        'paxTotal': pax_total,
-                        'origin': airport,
-                        'dest': f.arrival_airport,
-                        'nextFlightNo': None,
-                    }
-                else:
-                    arr_min = f.arrival_minutes % 1440
-                    rw = rw_window.get(f.flight_id, {})
-                    entry = {
-                        'flightId': str(f.flight_id),
-                        'flightNo': f.flight_no,
-                        'tailNo': tail_map.get(f.flight_id) or _paxflow_tail_no(f.flight_id),
-                        'type': 'arrival',
-                        'gateName': gate_name,
-                        'backendGate': backend_gate,
-                        'terminal': _paxflow_terminal(rect_num),
-                        'scheduledArr': arr_min,
-                        'rwStart': rw.get('start', arr_min - 2),
-                        'rwEnd': rw.get('end', arr_min + 3),
-                        'runway': runway,
-                        'paxTotal': pax_total,
-                        'origin': f.departure_airport,
-                        'dest': airport,
-                        'nextFlightNo': None,
-                    }
-                _apply_disruption_to_entry(entry, plan.get(str(f.flight_id)))
-                items.append(entry)
-            items.sort(key=lambda e: (e.get('takeoffTime') if e.get('type') == 'departure' else e.get('scheduledArr', 0)))
-            schedule_by_date[date_str] = items
+        # 5) 按天组装调度数据（纯函数，不写全局状态）
+        paxflow = build_paxflow_schedule(
+            ap_flights,
+            airport=airport,
+            runway_schedule=runway_schedule,
+            gate_map=gate_map,
+            tail_map=tail_map,
+            plan=plan,
+        )
+        dates = paxflow['dates']
+        schedule_by_date = paxflow['schedule']
 
         return jsonify({
             'code': 0,

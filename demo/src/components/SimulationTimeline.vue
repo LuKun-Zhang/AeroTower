@@ -11,6 +11,7 @@
       <div class="speed-group">
         <span class="speed-label">倍速</span>
         <select class="speed-select" :value="speed" @change="$emit('speedChange', Number($event.target.value))">
+          <option :value="0.5">0.5x</option>
           <option :value="1">1x</option>
           <option :value="2">2x</option>
           <option :value="5">5x</option>

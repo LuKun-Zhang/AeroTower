@@ -57,9 +57,10 @@
 
       <!-- 右侧面板：省份天气实时表 + 事件注入 + 天气航班调整 -->
       <div class="sim-sidebar">
+        <el-button size="small" type="primary" plain icon="el-icon-data-analysis" @click="openCharts">图表</el-button>
         <ProvinceWeatherPanel />
         <EventInjectPanel
-          v-if="initialized"
+          v-if="initialized && !readonly"
           :airports="airportList"
           :aircrafts="aircraftList"
           :crewBases="crewBaseList"
@@ -93,10 +94,11 @@
       <span>空中: {{ airborneCount }} 架</span>
       <span>延误: {{ delayedCount }} 架</span>
       <span>取消: {{ cancelledCount }} 架</span>
-      <span>准点率: {{ punctuality }}%</span>
+      <span>当前准点率: {{ punctuality }}%</span>
       <span class="status-right">{{ simCurrentTime }}</span>
     </div>
 
+    <chart-overlay :visible.sync="chartsOpen" :charts="chartList" title="航班模拟" />
   </div>
 </template>
 
@@ -108,17 +110,23 @@ import FlightInstruments from '@/components/FlightInstruments'
 import EventInjectPanel from '@/components/EventInjectPanel'
 import ProvinceWeatherPanel from '@/components/ProvinceWeatherPanel'
 import WeatherFlightPanel from '@/components/WeatherFlightPanel'
+import ChartOverlay from '@/components/ChartOverlay'
+import { buildSimMapCharts } from '@/utils/charts/simMap'
 import api from '@/api/index'
 
 export default {
   name: 'SimMapView',
-  components: { FlightMap3D, SimulationTimeline, FlightInfoPopup, FlightInstruments, EventInjectPanel, ProvinceWeatherPanel, WeatherFlightPanel },
+  components: { FlightMap3D, SimulationTimeline, FlightInfoPopup, FlightInstruments, EventInjectPanel, ProvinceWeatherPanel, WeatherFlightPanel, ChartOverlay },
   props: {
     // 作为「模拟大引擎」内嵌 tab 时隐藏自身时间轴（统一由 hub 底部时钟驱动）
     embedded: { type: Boolean, default: false },
+    // 实验回放：隐藏事件注入面板，所有数据走回放作用域
+    readonly: { type: Boolean, default: false },
   },
   data() {
     return {
+      chartsOpen: false,
+      chartList: [],
       initialized: false,
       loading: false,
       engineRunning: false,
@@ -166,6 +174,11 @@ export default {
     }
   },
   methods: {
+    openCharts() {
+      this.chartList = buildSimMapCharts(this)
+      this.chartsOpen = true
+    },
+
     async autoStart() {
       this.loading = true
       try {
@@ -255,7 +268,11 @@ export default {
 
     startPolling() {
       if (this._pollTimer) clearInterval(this._pollTimer)
-      this._pollTimer = setInterval(() => this.pollSnapshot(), 500)
+      // 非活动 tab（display:none）时跳过轮询，切回后自动恢复
+      this._pollTimer = setInterval(() => {
+        if (this.$el && this.$el.getClientRects().length === 0) return
+        this.pollSnapshot()
+      }, 500)
     },
     stopPolling() {
       if (this._pollTimer) { clearInterval(this._pollTimer); this._pollTimer = null }

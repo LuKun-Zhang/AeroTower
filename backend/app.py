@@ -24,6 +24,9 @@ from .routes.weather_routes import weather_bp
 from .routes.intelligence_routes import intelligence_bp
 from .routes.intelligence_extra_routes import intelligence_extra_bp
 from .services.intelligence.reviews import start_monitor
+from .routes.experiment_routes import experiment_bp
+from .routes.experiment_run_routes import run_bp
+from .routes.experiment_replay_routes import replay_bp
 
 # ==================== Flask 应用初始化 ====================
 app = Flask(__name__)
@@ -53,6 +56,9 @@ app.register_blueprint(generate_bp)
 app.register_blueprint(weather_bp, url_prefix='/api')
 app.register_blueprint(intelligence_bp, url_prefix='/api/intelligence')
 app.register_blueprint(intelligence_extra_bp, url_prefix='/api/intelligence')
+app.register_blueprint(experiment_bp, url_prefix='/api')
+app.register_blueprint(run_bp, url_prefix='/api')
+app.register_blueprint(replay_bp, url_prefix='/api')
 start_monitor()
 
 

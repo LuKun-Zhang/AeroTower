@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import api from '@/api'
+
 const WEATHER_LABELS = {
   sunny: '晴',
   cloudy: '多云',
@@ -42,10 +44,9 @@ export default {
   methods: {
     async fetch() {
       try {
-        const res = await fetch('/api/weather/disruption')
-        const json = await res.json()
-        if (json.code === 0 && json.data) {
-          const pw = json.data.province_weather || {}
+        const data = await api.getWeatherDisruption()
+        if (data) {
+          const pw = data.province_weather || {}
           this.list = Object.keys(pw).map(name => ({
             name,
             type: pw[name] || 'sunny',

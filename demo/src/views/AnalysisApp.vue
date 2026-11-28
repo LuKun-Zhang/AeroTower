@@ -84,6 +84,7 @@
 </template>
 
 <script>
+import * as echarts from "echarts";
 import Map from "@/components/Map";
 import Mapa from "@/components/Map-a";
 import ProgressBar from "@/components/ProgressBar";
@@ -163,10 +164,25 @@ export default {
     activeTab(newVal) {
       if (newVal === 'simhub') {
         this.$router.push('/simulation-hub')
+        return
+      }
+      // 地图区是 v-show：组件在隐藏状态下就已 mounted，echarts 拿到的容器尺寸是 0，
+      // 会退化成 100x100 的小画布（表现为地图只出现在左上角一小块）。切回来时必须补 resize。
+      if (newVal === 'map') {
+        this.$nextTick(() => this.resizeMapViewCharts())
       }
     },
   },
   methods: {
+    resizeMapViewCharts() {
+      const root = this.$el && this.$el.querySelector('.map-view')
+      if (!root) return
+      const hosts = root.querySelectorAll('[_echarts_instance_]')
+      for (let i = 0; i < hosts.length; i++) {
+        const inst = echarts.getInstanceByDom(hosts[i])
+        if (inst) inst.resize()
+      }
+    },
     dismissAlert() {
       this.$store.commit('CLEAR_GLOBAL_ALERT');
     },

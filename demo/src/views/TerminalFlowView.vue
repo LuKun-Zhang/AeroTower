@@ -11,6 +11,7 @@
         <button class="date-btn" @click="onNextDay" :disabled="dateIndex >= dates.length - 1">▶</button>
       </div>
       <div class="header-right">
+        <el-button size="small" type="primary" plain icon="el-icon-data-analysis" @click="openCharts">图表</el-button>
         <button class="taxi-toggle" @click="toggleTaxiPaths">
           {{ showTaxiPaths ? '🔴 隐藏路径' : '⚪ 显示路径' }}
         </button>
@@ -89,6 +90,8 @@
         @jump="onJump"
       />
     </div>
+
+    <chart-overlay :visible.sync="chartsOpen" :charts="chartList" title="旅客流模拟" />
   </div>
 </template>
 
@@ -102,7 +105,11 @@ import GateControlPanel from '@/components/GateControlPanel'
 import CongestionHeatmap from '@/components/CongestionHeatmap'
 import EvacuationPanel from '@/components/EvacuationPanel'
 import ProvinceWeatherPanel from '@/components/ProvinceWeatherPanel'
+import ChartOverlay from '@/components/ChartOverlay'
+import { buildTerminalFlowCharts } from '@/utils/charts/terminalFlow'
 import { SCHEDULE_DATES } from '@/data/multiDaySchedule'
+import { resetSamples } from '@/utils/chartBase'
+import api from '@/api'
 
 const DEFAULT_PAX_PARAMS = {
   inboundRate: 10,
@@ -123,6 +130,7 @@ export default {
     CongestionHeatmap,
     EvacuationPanel,
     ProvinceWeatherPanel,
+    ChartOverlay,
   },
   props: {
     // 作为「模拟大引擎」内嵌 tab 时隐藏自身底部时间轴（统一由 hub 底部时钟驱动）
@@ -130,6 +138,8 @@ export default {
   },
   data() {
     return {
+      chartsOpen: false,
+      chartList: [],
       paxParams: { ...DEFAULT_PAX_PARAMS },
       heatmapEnabled: false,
       // 从 TerminalLayout 轮询同步的数据（$refs 不响应式，必须轮询）
@@ -212,17 +222,21 @@ export default {
     },
   },
   methods: {
+    openCharts() {
+      this.chartList = buildTerminalFlowCharts(this)
+      this.chartsOpen = true
+    },
+
     // 直接拉取后端 /api/paxflow/schedule 的日期列表（仅用 dates 字段），
     // 使日期下拉框确定性展示最近历史记录的真实航班日期（含 11-29）。
     async loadBackendDates() {
       try {
-        const res = await fetch('/api/paxflow/schedule')
-        const json = await res.json()
-        if (json.code === 0 && json.data && json.data.dates && json.data.dates.length) {
-          this.paxflowDates = json.data.dates
+        const data = await api.getPaxflowSchedule(false)
+        if (data && data.dates && data.dates.length) {
+          this.paxflowDates = data.dates
           console.log('[PaxFlow] 日期列表已加载(独立拉取): ' + this.paxflowDates.join(', '))
         } else {
-          console.warn('[PaxFlow] 后端日期为空，使用静态快照', json)
+          console.warn('[PaxFlow] 后端日期为空，使用静态快照', data)
         }
       } catch (e) {
         console.warn('[PaxFlow] 后端日期拉取失败，使用静态快照:', e.message)
@@ -233,10 +247,10 @@ export default {
       const L = this.$refs.layout
       if (!L) return
       // 嵌入模式：后端调度加载完成后，一次性把旅客流速度对齐到统一时钟
-      // （5 业务分钟/秒 ≈ speed 5），保证日常播放与天气/航班模拟速度一致
+      // （统一时钟 1 业务分钟/秒；timePerTick=0.1，speed 2 ≈ 10 tick/秒）
       if (this.embedded && !this._speedSynced && L.paxflowDates && L.paxflowDates.length) {
         this._speedSynced = true
-        if (typeof L.setSpeed === 'function') L.setSpeed(5)
+        if (typeof L.setSpeed === 'function') L.setSpeed(2)
       }
       this.simRunning = L.simState.running
       this.simPaused = L.simState.paused
@@ -244,7 +258,12 @@ export default {
       this.simTime = L.simState.currentTime
       this.simFlights = L.simFlights ? [...L.simFlights] : []
       this.paxCount = L.passengers ? L.passengers.length : 0
-      this.planeCount = L.airplanes ? L.airplanes.length : 0
+      // 只统计真正在场上/滑行中的飞机：airplanes 里包含当天全部计划飞机，
+      // 未到时刻的 alpha=0，直接取 length 会恒等于总班次（看起来像“在场 189 架”）
+      const IDLE_PLANE = { IN_FLIGHT: 1, PRELOADED: 1, PRELOADED_AT_GATE: 1, AWAITING_ARRIVAL: 1 }
+      this.planeCount = L.airplanes
+        ? L.airplanes.filter(p => p.alpha > 0 && !IDLE_PLANE[p.status]).length
+        : 0
       this.gateStates = { ...L.gateStates }
       this.entryGates = L.entryGates ? [...L.entryGates] : []
       this.exitGates = L.exitGates ? [...L.exitGates] : []
@@ -290,6 +309,8 @@ export default {
 
     onDateChange(date) {
       if (!this.$refs.layout || date === this.currentDate) return
+      // 换天/换数据源后清空趋势采样，避免把不同日期的曲线连在一起
+      ;['pax-count', 'tflow-cong', 'evac'].forEach(k => resetSamples(k))
       this.$refs.layout.setDate(date)
     },
     onPrevDay() {
@@ -426,13 +447,16 @@ export default {
       if (this.embedded) {
         // 嵌入模式：旅客流时间速度与统一时钟保持一致（5 业务分钟/秒 ≈ speed 5），
         // 并保持播放状态，避免跳转后 running=false 导致飞机“到点不动”
-        L.setSpeed(5)
+        L.setSpeed(2)
         L.setRunning(true)
       }
       if (date && date !== this.currentDate) {
         L.setDate(date)
         this.currentDate = date
       }
+      // 正在快进时不再叠加新的快进，避免多次 jumpToTime 并发把主线程拖死
+      if (L._jumpInProgress) return
+      if (Math.abs(minuteInDay - (L.simState ? L.simState.currentTime : 0)) < 5) return
       L.jumpToTime(minuteInDay)
     },
   },

@@ -10,9 +10,9 @@
 """
 import os
 import json
-import random
 from ..models.gate import Gate
 from ..services.data_service import data_service
+from .experiment.seed import stable_hash
 
 _GATES_CONFIG_PATH = os.path.normpath(os.path.join(
     os.path.abspath(__file__), '..', '..', 'data', 'airports_gates.json'
@@ -35,10 +35,11 @@ class GateAssignmentService:
     TAXI_IN_DEFAULT = 5      # 默认滑入时间（分钟）
     TAXI_OUT_DEFAULT = 5     # 默认滑出时间（分钟）
 
-    def __init__(self):
+    def __init__(self, rng_seed=None):
         self._gates_config = _load_gates_config()
         self._gates_by_airport = {}
         self._seed = 2024
+        self._rng_seed = rng_seed
 
     def _get_airport_config(self, airport_name):
         """获取机场登机口配置"""
@@ -83,7 +84,6 @@ class GateAssignmentService:
             fallback_n = defaults.get('fallback_gate_count', 25)
             return self._build_fallback_gates(airport_name, fallback_n)
 
-        random.seed(hash(airport_name) % 10000 + self._seed)
         gates = []
         gate_counter = 0
 
@@ -107,7 +107,7 @@ class GateAssignmentService:
                     gtype = 'small'
 
                 start_idx = g_cfg.get('start', 1) + i
-                gid = hash(f"{airport_name}_rw{rw_num}_{start_idx}") % 10000
+                gid = stable_hash(f"{airport_name}_rw{rw_num}_{start_idx}", 10000)
                 gates.append(Gate(
                     gate_id=gid,
                     name=f"{prefix}{start_idx:02d}",
@@ -124,7 +124,6 @@ class GateAssignmentService:
 
     def _build_fallback_gates(self, airport_name, num_gates):
         """回退方案：无配置时生成默认登机口（双跑道各半）"""
-        random.seed(hash(airport_name) % 10000 + self._seed)
         n_rw = 2
         gates = []
         per_rw = num_gates // n_rw
@@ -142,7 +141,7 @@ class GateAssignmentService:
                     gtype = 'medium'
                 else:
                     gtype = 'small'
-                gid = hash(f"{airport_name}_{rw}_{i}") % 10000
+                gid = stable_hash(f"{airport_name}_{rw}_{i}", 10000)
                 gates.append(Gate(
                     gate_id=gid,
                     name=f"{airport_name[:2]}G{counter:02d}",

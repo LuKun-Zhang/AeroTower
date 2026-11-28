@@ -15,6 +15,7 @@
         </el-select>
         <el-button type="primary" size="small" @click="runRouting">一键排班</el-button>
         <el-button size="small" @click="compareRouting">算法对比</el-button>
+        <el-button size="small" type="primary" plain icon="el-icon-data-analysis" @click="openCharts">图表</el-button>
         <el-button type="success" size="small" @click="saveRouting" :disabled="!filterDate">保存排班</el-button>
         <el-input-number v-model="aircraftLimit" :min="1" :max="100" size="small" style="width:90px" />
         <span class="sep">|</span>
@@ -164,17 +165,23 @@
         <el-button type="primary" size="small" :loading="savingAircraft" @click="saveAircraft">保存并重新排班</el-button>
       </div>
     </el-dialog>
+
+    <chart-overlay :visible.sync="chartsOpen" :charts="chartList" title="飞机排班" />
   </div>
 </template>
 
 <script>
 import api from '@/api'
 import RoutingRecommendation from '@/components/intelligence/RoutingRecommendation'
+import ChartOverlay from '@/components/ChartOverlay'
+import { buildGanttCharts } from '@/utils/charts/ganttView'
 
 export default {
-  components: { RoutingRecommendation },
+  components: { ChartOverlay, RoutingRecommendation },
   data() {
     return {
+      chartsOpen: false,
+      chartList: [],
       filteredReady: false,
       algorithm: 'bipartite',
       aircraftLimit: 100,
@@ -273,6 +280,10 @@ export default {
     },
   },
   methods: {
+    openCharts() {
+      this.chartList = buildGanttCharts(this)
+      this.chartsOpen = true
+    },
     idxClass(val) {
       if (val == null || val === '?') return ''
       if (val >= 80) return 'idx-good'

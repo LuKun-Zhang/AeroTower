@@ -3,6 +3,7 @@
     <div class="page-header">
       <h2>📊 客流量数据输入</h2>
       <div class="header-actions">
+        <el-button size="small" type="primary" plain icon="el-icon-data-analysis" @click="openCharts">图表</el-button>
         <el-button size="small" @click="loadDefaultData">加载演示数据</el-button>
         <el-button size="small" @click="clearAll">全部清零</el-button>
       </div>
@@ -170,10 +171,15 @@
         当前共 {{ nonZeroCount }} 条方向流有效（客流量 &gt; 0），日均总客流量 {{ totalPax }} 人次
       </p>
     </div>
+
+    <chart-overlay :visible.sync="chartsOpen" :charts="chartList" title="客流量输入" />
   </div>
 </template>
 
 <script>
+import ChartOverlay from '@/components/ChartOverlay'
+import { buildTrafficCharts } from '@/utils/charts/trafficInput'
+
 const CITY_LIST = [
   '成都', '北京', '上海', '广州', '深圳', '昆明', '杭州', '南京', '武汉',
   '长沙', '西安', '重庆', '贵阳', '拉萨', '三亚', '厦门', '青岛',
@@ -223,8 +229,11 @@ const TRIANGLE_PAIRS = [
 
 export default {
   name: 'TrafficInput',
+  components: { ChartOverlay },
   data() {
     return {
+      chartsOpen: false,
+      chartList: [],
       params: {
         hub: '成都',
         bases: ['成都', '重庆', '昆明', '宜宾', '绵阳', '杭州'],
@@ -285,6 +294,10 @@ export default {
     },
   },
   methods: {
+    openCharts() {
+      this.chartList = buildTrafficCharts(this)
+      this.chartsOpen = true
+    },
     // 初始化全量两两组合（客流量默认 0）
     initFlows() {
       const flows = []

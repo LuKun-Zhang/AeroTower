@@ -1,6 +1,7 @@
 <template>
   <div class="terminal-layout" ref="root">
     <canvas ref="canvas" class="layout-canvas"></canvas>
+    <div class="zoom-hint">滚轮缩放 · 拖拽平移 · 双击复位</div>
   </div>
 </template>
 
@@ -10,6 +11,7 @@ const TURNAROUND_TIME = 5
 
 // 多日航班调度数据（后端 /api/schedule/gates + /api/schedule/runway 快照）
 import { MULTI_DAY_SCHEDULE, SCHEDULE_DATES } from '../data/multiDaySchedule'
+import api from '@/api'
 
 // 飞机滑行速度（pathProgress / tick）：提高到 0.06 使其在规定跑道占用时间内完成起降
 const TAXI_SPEED = 0.04
@@ -85,6 +87,12 @@ export default {
     return {
       canvasWidth: 1200,
       canvasHeight: 600,
+      // 画布视图变换：滚轮缩放、拖拽平移
+      dpr: 1,
+      viewScale: 1,
+      viewX: 0,
+      viewY: 0,
+      panning: false,
       scaleX: 1,
       scaleY: 1,
       offsetX: 0,
@@ -101,7 +109,7 @@ export default {
         paused: false,
         speed: 1,
         currentTime: 0,
-        timePerTick: 0.2,
+        timePerTick: 0.1,
       },
       // 旅客生成参数
       paxParams: {
@@ -215,11 +223,30 @@ export default {
     })
     this._resizeObserver.observe(this.$refs.root)
     console.log('[DEBUG] mounted() COMPLETE. running=', this.simState.running, 'paused=', this.simState.paused, 'flights=', this.simFlights.length, 'pax=', this.passengers.length, 'planes=', this.airplanes.length)
+    // 画布缩放 / 拖拽
+    const canvas = this.$refs.canvas
+    if (canvas) {
+      canvas.addEventListener('wheel', this.onViewWheel, { passive: false })
+      canvas.addEventListener('mousedown', this.onViewPanStart)
+      canvas.addEventListener('dblclick', this.resetView)
+      canvas.addEventListener('contextmenu', (e) => e.preventDefault())
+    }
+    window.addEventListener('mousemove', this.onViewPanMove)
+    window.addEventListener('mouseup', this.onViewPanEnd)
+
     // 异步拉取后端真实航班调度（不阻塞模拟启动；成功后自动切换到最早日期）
     this.loadPaxflowSchedule()
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize)
+    window.removeEventListener('mousemove', this.onViewPanMove)
+    window.removeEventListener('mouseup', this.onViewPanEnd)
+    const canvas = this.$refs.canvas
+    if (canvas) {
+      canvas.removeEventListener('wheel', this.onViewWheel)
+      canvas.removeEventListener('mousedown', this.onViewPanStart)
+      canvas.removeEventListener('dblclick', this.resetView)
+    }
     if (this._resizeObserver) { this._resizeObserver.disconnect(); this._resizeObserver = null }
     if (this._animFrame) cancelAnimationFrame(this._animFrame)
   },
@@ -242,12 +269,16 @@ export default {
       this.canvasHeight = h
       const canvas = this.$refs.canvas
       if (!canvas) return
-      // 内部分辨率
-      canvas.width = this.canvasWidth
-      canvas.height = this.canvasHeight
-      // CSS 显示尺寸：必须与内部分辨率一致，否则渲染会被 CSS 缩放
+      // 内部分辨率按 devicePixelRatio 放大（上限 2，兼顾清晰度与显存），
+      // 绘制仍用 CSS 像素坐标，由 transform 统一缩放，放大后文字不糊
+      const dpr = Math.min(window.devicePixelRatio || 1, 2)
+      this.dpr = dpr
+      canvas.width = Math.round(this.canvasWidth * dpr)
+      canvas.height = Math.round(this.canvasHeight * dpr)
       canvas.style.width = this.canvasWidth + 'px'
       canvas.style.height = this.canvasHeight + 'px'
+      const ctx0 = canvas.getContext('2d')
+      if (ctx0) ctx0.setTransform(dpr, 0, 0, dpr, 0, 0)
       // 容器也撑到足够大
       if (root) {
         root.style.width = this.canvasWidth + 'px'
@@ -264,10 +295,50 @@ export default {
       this.offsetY = pad - b.min_y * this.scaleY
     },
 
-    tx(x) { return x * this.scaleX + this.offsetX },
-    ty(y) { return y * this.scaleY + this.offsetY },
-    tw(w) { return w * this.scaleX },
-    th(h) { return h * this.scaleY },
+    onViewWheel(e) {
+      e.preventDefault()
+      const canvas = this.$refs.canvas
+      if (!canvas) return
+      const rect = canvas.getBoundingClientRect()
+      const mx = (e.clientX - rect.left) * (this.canvasWidth / rect.width)
+      const my = (e.clientY - rect.top) * (this.canvasHeight / rect.height)
+      const factor = e.deltaY < 0 ? 1.12 : 1 / 1.12
+      const next = Math.min(5, Math.max(0.6, this.viewScale * factor))
+      const k = next / this.viewScale
+      // 以鼠标位置为锚点缩放
+      this.viewX = mx - (mx - this.viewX) * k
+      this.viewY = my - (my - this.viewY) * k
+      this.viewScale = next
+    },
+
+    onViewPanStart(e) {
+      if (e.button !== 0) return
+      this.panning = true
+      this._panStart = { x: e.clientX, y: e.clientY, vx: this.viewX, vy: this.viewY }
+      e.preventDefault()
+    },
+
+    onViewPanMove(e) {
+      if (!this.panning || !this._panStart) return
+      this.viewX = this._panStart.vx + (e.clientX - this._panStart.x)
+      this.viewY = this._panStart.vy + (e.clientY - this._panStart.y)
+    },
+
+    onViewPanEnd() {
+      this.panning = false
+      this._panStart = null
+    },
+
+    resetView() {
+      this.viewScale = 1
+      this.viewX = 0
+      this.viewY = 0
+    },
+
+    tx(x) { return (x * this.scaleX + this.offsetX) * this.viewScale + this.viewX },
+    ty(y) { return (y * this.scaleY + this.offsetY) * this.viewScale + this.viewY },
+    tw(w) { return w * this.scaleX * this.viewScale },
+    th(h) { return h * this.scaleY * this.viewScale },
 
     buildScene() {
       this.drawAll()
@@ -279,17 +350,24 @@ export default {
       const ctx = canvas.getContext('2d')
       ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight)
 
-      // 背景
-      ctx.fillStyle = '#1a1a2e'
+      // 背景：中心略亮的径向渐变，避免整屏死黑
+      const bg = ctx.createRadialGradient(
+        this.canvasWidth * 0.5, this.canvasHeight * 0.45, 60,
+        this.canvasWidth * 0.5, this.canvasHeight * 0.45,
+        Math.max(this.canvasWidth, this.canvasHeight) * 0.75
+      )
+      bg.addColorStop(0, '#1c2130')
+      bg.addColorStop(1, '#12131d')
+      ctx.fillStyle = bg
       ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight)
 
-      // 画网格
-      ctx.strokeStyle = 'rgba(255,255,255,0.03)'
+      // 网格（淡）
+      ctx.strokeStyle = 'rgba(255,255,255,0.022)'
       ctx.lineWidth = 1
-      for (let i = 0; i < this.canvasWidth; i += 40) {
+      for (let i = 0; i < this.canvasWidth; i += 32) {
         ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, this.canvasHeight); ctx.stroke()
       }
-      for (let j = 0; j < this.canvasHeight; j += 40) {
+      for (let j = 0; j < this.canvasHeight; j += 32) {
         ctx.beginPath(); ctx.moveTo(0, j); ctx.lineTo(this.canvasWidth, j); ctx.stroke()
       }
 
@@ -326,32 +404,67 @@ export default {
       ctx.restore()
     },
 
+    roundRectPath(ctx, x, y, w, h, r) {
+      const rr = Math.max(0, Math.min(r, Math.abs(w) / 2, Math.abs(h) / 2))
+      ctx.beginPath()
+      ctx.moveTo(x + rr, y)
+      ctx.arcTo(x + w, y, x + w, y + h, rr)
+      ctx.arcTo(x + w, y + h, x, y + h, rr)
+      ctx.arcTo(x, y + h, x, y, rr)
+      ctx.arcTo(x, y, x + w, y, rr)
+      ctx.closePath()
+    },
+
     drawRunways(ctx) {
       const runways = this.layoutData.runways || []
       for (const r of runways) {
         const rx = this.tx(r.x), ry = this.ty(r.y), rw = this.tw(r.w), rh = this.th(r.h)
-        ctx.fillStyle = '#3a3a5c'
-        ctx.fillRect(rx, ry, rw, rh)
-        ctx.strokeStyle = '#5a5a8c'
-        ctx.lineWidth = 2
-        ctx.strokeRect(rx, ry, rw, rh)
 
-        // 跑道中线
-        ctx.setLineDash([12, 8])
-        ctx.strokeStyle = '#8a8abc'
+        // 道面：轻微渐变 + 圆角，避免纯色块
+        const grad = ctx.createLinearGradient(0, ry, 0, ry + rh)
+        grad.addColorStop(0, '#2a2e3a')
+        grad.addColorStop(1, '#1f222b')
+        ctx.fillStyle = grad
+        this.roundRectPath(ctx, rx, ry, rw, rh, Math.min(6, rh * 0.12))
+        ctx.fill()
+        ctx.strokeStyle = 'rgba(140,160,190,0.32)'
         ctx.lineWidth = 1
-        ctx.beginPath()
-        ctx.moveTo(rx + 10, ry + rh / 2)
-        ctx.lineTo(rx + rw - 10, ry + rh / 2)
         ctx.stroke()
-        ctx.setLineDash([])
 
-        // 标签
+        // 中线
+        ctx.save()
+        ctx.setLineDash([Math.max(7, rw * 0.012), 11])
+        ctx.strokeStyle = 'rgba(230,235,245,0.5)'
+        ctx.lineWidth = 1.2
+        ctx.beginPath()
+        ctx.moveTo(rx + rw * 0.06, ry + rh / 2)
+        ctx.lineTo(rx + rw * 0.94, ry + rh / 2)
+        ctx.stroke()
+        ctx.restore()
+
+        // 两端阈值条纹
+        const stripeH = rh * 0.55
+        const stripeW = Math.max(2, rw * 0.004)
+        const gap = stripeW * 1.8
+        ctx.fillStyle = 'rgba(240,244,250,0.7)'
+        for (let k = 0; k < 6; k++) {
+          const off = rw * 0.028 + k * gap
+          ctx.fillRect(rx + off, ry + (rh - stripeH) / 2, stripeW, stripeH)
+          ctx.fillRect(rx + rw - off - stripeW, ry + (rh - stripeH) / 2, stripeW, stripeH)
+        }
+
+        // 跑道名（小胶囊）
         if (r.text) {
-          ctx.fillStyle = '#aaa'
-          ctx.font = `${Math.max(12, rh * 0.7)}px sans-serif`
+          const fs = Math.max(10, Math.min(13, rh * 0.6))
+          ctx.font = `600 ${fs}px "Microsoft YaHei", sans-serif`
           ctx.textAlign = 'center'
-          ctx.fillText(r.text, rx + rw / 2, ry - 6)
+          ctx.textBaseline = 'middle'
+          const tw2 = ctx.measureText(r.text).width + 12
+          ctx.fillStyle = 'rgba(8,12,20,0.72)'
+          this.roundRectPath(ctx, rx + rw / 2 - tw2 / 2, ry - 20, tw2, 15, 7)
+          ctx.fill()
+          ctx.fillStyle = 'rgba(205,214,244,0.9)'
+          ctx.fillText(r.text, rx + rw / 2, ry - 12.5)
         }
       }
     },
@@ -360,11 +473,12 @@ export default {
       const piers = this.layoutData.piers || []
       for (const p of piers) {
         const px = this.tx(p.x), py = this.ty(p.y), pw = this.tw(p.w), ph = this.th(p.h)
-        ctx.fillStyle = '#3d5060'
-        ctx.fillRect(px, py, pw, ph)
-        ctx.strokeStyle = '#5a7a90'
-        ctx.lineWidth = 1.5
-        ctx.strokeRect(px, py, pw, ph)
+        ctx.fillStyle = '#32465a'
+        this.roundRectPath(ctx, px, py, pw, ph, 4)
+        ctx.fill()
+        ctx.strokeStyle = 'rgba(96,132,158,0.75)'
+        ctx.lineWidth = 1.2
+        ctx.stroke()
       }
     },
 
@@ -374,18 +488,26 @@ export default {
         const tx = this.tx(t.x), ty2 = this.ty(t.y), tw = this.tw(t.w), th = this.th(t.h)
         // 航站楼主体
         const grad = ctx.createLinearGradient(tx, ty2, tx, ty2 + th)
-        grad.addColorStop(0, '#2c4a6e')
-        grad.addColorStop(1, '#1a3350')
+        grad.addColorStop(0, '#2d4260')
+        grad.addColorStop(1, '#172536')
         ctx.fillStyle = grad
-        ctx.fillRect(tx, ty2, tw, th)
-        ctx.strokeStyle = '#4a8ab5'
-        ctx.lineWidth = 2.5
-        ctx.strokeRect(tx, ty2, tw, th)
+        this.roundRectPath(ctx, tx, ty2, tw, th, Math.min(9, th * 0.22))
+        ctx.fill()
+        ctx.strokeStyle = 'rgba(110,160,195,0.6)'
+        ctx.lineWidth = 1.5
+        ctx.stroke()
+        // 顶部高光
+        ctx.strokeStyle = 'rgba(255,255,255,0.12)'
+        ctx.lineWidth = 1
+        ctx.beginPath()
+        ctx.moveTo(tx + 8, ty2 + 1.5)
+        ctx.lineTo(tx + tw - 8, ty2 + 1.5)
+        ctx.stroke()
 
         // 标签
         if (t.terminal_name) {
           ctx.fillStyle = '#fff'
-          ctx.font = `bold ${Math.max(13, th * 0.55)}px sans-serif`
+          ctx.font = `600 ${Math.max(12, Math.min(18, th * 0.5))}px "Microsoft YaHei", sans-serif`
           ctx.textAlign = 'center'
           ctx.textBaseline = 'middle'
           ctx.fillText(t.terminal_name, tx + tw / 2, ty2 + th / 2)
@@ -420,9 +542,10 @@ export default {
             ctx.fillStyle = '#4e342e'
             ctx.strokeStyle = '#ff9800'
           }
-          ctx.lineWidth = 1.5
-          ctx.fillRect(-rectW / 2, -rectH / 2, rectW, rectH)
-          ctx.strokeRect(-rectW / 2, -rectH / 2, rectW, rectH)
+          ctx.lineWidth = 1.2
+          this.roundRectPath(ctx, -rectW / 2, -rectH / 2, rectW, rectH, 3)
+          ctx.fill()
+          ctx.stroke()
 
           // 标签文字（旋转回来正向显示）
           ctx.rotate(-rotDeg * Math.PI / 180)
@@ -434,26 +557,28 @@ export default {
           ctx.fillText(isEntry ? '入口' : '出口', 0, 0)
         } else {
           // 矩形登机口
-          ctx.fillStyle = '#557a95'
-          ctx.fillRect(-gw / 2, -gh / 2, gw, gh)
-          ctx.strokeStyle = '#7aaac0'
+          ctx.fillStyle = '#4d6d84'
+          this.roundRectPath(ctx, -gw / 2, -gh / 2, gw, gh, 3)
+          ctx.fill()
+          ctx.strokeStyle = 'rgba(140,180,205,0.55)'
           ctx.lineWidth = 0.8
-          ctx.strokeRect(-gw / 2, -gh / 2, gw, gh)
+          ctx.stroke()
         }
         ctx.restore()
 
-        // 标注名称（所有 gate）
-        ctx.save()
-        ctx.fillStyle = '#ffd54f'
-        const fontSize = Math.max(7, Math.min(10, gh * 0.3))
-        ctx.font = `bold ${fontSize}px monospace`
-        ctx.textAlign = 'center'
-        ctx.textBaseline = 'top'
-        // 获取简短名称
-        let label = g.name || ''
-        label = label.replace('箭头: ', '')
-        ctx.fillText(label, cx, cy + gh * 0.55)
-        ctx.restore()
+        // 登机口编号：默认视图太密，放大到 1.4x 以上才显示
+        if (this.viewScale >= 1.4) {
+          ctx.save()
+          ctx.fillStyle = 'rgba(255,213,79,0.75)'
+          const fontSize = Math.max(7, Math.min(10, gh * 0.3))
+          ctx.font = `600 ${fontSize}px monospace`
+          ctx.textAlign = 'center'
+          ctx.textBaseline = 'top'
+          let label = g.name || ''
+          label = label.replace('箭头: ', '')
+          ctx.fillText(label, cx, cy + gh * 0.55)
+          ctx.restore()
+        }
       }
     },
 
@@ -909,13 +1034,18 @@ export default {
       let tickCount = 0
       const animate = (timestamp) => {
         frameCount++
+        // 非活动 tab（display:none）时只跳过绘制，模拟仍继续推进，切回后立即重绘
+        const canvasEl = this.$refs.canvas
+        const hidden = !!(canvasEl && canvasEl.getClientRects().length === 0)
         try {
           // 模拟引擎 tick（异步跳转期间跳过，由 jumpToTime 内部驱动）
-          if (this.simState.running && !this.simState.paused && !this._jumpInProgress) {
+          if (!hidden && this.simState.running && !this.simState.paused && !this._jumpInProgress) {
             const elapsed = timestamp - this.lastSimTick
             const tickInterval = Math.max(30, 200 / this.simState.speed)
             if (elapsed >= tickInterval) {
               this.lastSimTick = timestamp
+              this._lastTickAt = performance.now()
+              this._lastTickInterval = tickInterval
               tickCount++
               if (tickCount <= 5 || tickCount % 10 === 0) {
                 console.log('[DEBUG] simTick #' + tickCount + ' at t=' + this.simState.currentTime.toFixed(1) + ' frame=' + frameCount + ' pax=' + this.passengers.length + ' planes=' + this.airplanes.length)
@@ -927,15 +1057,20 @@ export default {
           if (frameCount <= 3) {
             console.log('[DEBUG] draw frame #' + frameCount + ' canvas=' + (this.$refs.canvas ? (this.$refs.canvas.width + 'x' + this.$refs.canvas.height) : 'NULL') + ' running=' + this.simState.running + ' paused=' + this.simState.paused)
           }
-          this.drawAll()
-          this.drawCorridors()
-          if (this.congestion.enabled) {
-            this.drawHeatmapOverlay()
+
+          // 快进期间隔帧绘制：把主线程让给模拟推进，画面仍保持约 25–30 FPS 的更新
+          const skipDraw = this._jumpInProgress && (frameCount & 1) === 0
+          if (!hidden && !skipDraw) {
+            this.drawAll()
+            this.drawCorridors()
+            if (this.congestion.enabled) {
+              this.drawHeatmapOverlay()
+            }
+            this.drawGateOverlays()
+            this.drawAirplanes()
+            this.drawWaitingStats()
+            this.drawPassengers()
           }
-          this.drawGateOverlays()
-          this.drawAirplanes()
-          this.drawWaitingStats()
-          this.drawPassengers()
         } catch (e) {
           console.error('[TerminalLayout] animation error:', e)
         }
@@ -1022,7 +1157,7 @@ export default {
     },
 
     setSpeed(speed) {
-      this.simState.speed = Math.max(1, Math.min(10, speed))
+      this.simState.speed = Math.max(0.25, Math.min(10, speed))
     },
 
     // 显式设置模拟运行状态（不重置时间/旅客/飞机），供统一时钟对齐时使用
@@ -1042,6 +1177,8 @@ export default {
       const savedSpeed = this.simState.speed
       const savedRunning = this.simState.running
       const savedPaused = this.simState.paused
+      // 快进时用较粗的时间步长，避免 tick 数翻倍把主线程拖慢
+      const savedTimePerTick = this.simState.timePerTick
       const beforeTime = this.simState.currentTime
       // 手动拖动过进度条：当天播放完成后不自动切天，画面定格等待用户操作
       this._manualIntervention = true
@@ -1072,18 +1209,23 @@ export default {
 
         // 快进期间用标准速度，避免倍速导致动画位移失真
         this.simState.speed = 1
+        this.simState.timePerTick = 0.2
         this.simState.running = true
         this.simState.paused = false
 
         // 异步分批次快进：每批最多 TICKS_PER_BATCH 次 simTick()，
         // 然后 await requestAnimationFrame 让出主线程执行渲染，
         // 避免同步 while 循环长时间阻塞导致画面冻结（飞机"卡住"）。
-        const TICKS_PER_BATCH = 80
         let guard = 0
         let tickErrors = 0
         while (this.simState.currentTime < target && guard < 80000) {
-          const batchEnd = Math.min(guard + TICKS_PER_BATCH, 80000)
-          for (; guard < batchEnd && this.simState.currentTime < target; guard++) {
+          // 按时间预算分片：每批最多占用 20ms 主线程，保证快进期间仍能流畅出帧
+          const deadline = performance.now() + 20
+          while (
+            this.simState.currentTime < target &&
+            guard < 80000 &&
+            performance.now() < deadline
+          ) {
             try {
               this.simTick()
             } catch (te) {
@@ -1092,6 +1234,7 @@ export default {
                 console.error('[JUMP] simTick #' + guard + ' 异常 (t=' + this.simState.currentTime.toFixed(1) + '):', te)
               }
             }
+            guard++
           }
           // 每批次后让浏览器渲染一帧
           if (this.simState.currentTime < target) {
@@ -1111,6 +1254,7 @@ export default {
           this.simState.currentTime = target
         }
         this.simState.speed = savedSpeed
+        this.simState.timePerTick = savedTimePerTick
         this.simState.running = savedRunning
         this.simState.paused = savedPaused
         console.log('[JUMP] 状态恢复: running=' + this.simState.running + ' paused=' + this.simState.paused + ' currentTime=' + this.simState.currentTime.toFixed(1))
@@ -1236,11 +1380,10 @@ export default {
     // 成功后优先使用后端数据；若当前日期不在后端日期中，自动切换到最早日期并重建模拟。
     async loadPaxflowSchedule() {
       try {
-        const res = await fetch('/api/paxflow/schedule?disrupted=true')
-        const json = await res.json()
-        if (json.code === 0 && json.data && json.data.schedule) {
-          this.paxflowSchedule = json.data.schedule
-          this.paxflowDates = json.data.dates || []
+        const data = await api.getPaxflowSchedule(true)
+        if (data && data.schedule) {
+          this.paxflowSchedule = data.schedule
+          this.paxflowDates = data.dates || []
           const totalFlights = Object.keys(this.paxflowSchedule)
             .reduce((n, d) => n + this.paxflowSchedule[d].length, 0)
           console.log('[SIM] 已加载后端航班调度: ' + this.paxflowDates.length + ' 天，' +
@@ -1285,15 +1428,12 @@ export default {
     // 匹配不到（未生成数据/航班号不同）则返回空，粒子投放时用 _resolvePaxId 生成兜底编号。
     async loadPaxManifests(flightNos) {
       try {
-        const res = await fetch('/api/paxflow/manifests', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ date: this.currentDate, flights: flightNos }),
+        const data = await api.getPaxflowManifests({
+          date: this.currentDate, flights: flightNos,
         })
-        const json = await res.json()
-        if (json.code === 0 && json.data && json.data.manifests) {
+        if (data && data.manifests) {
           const got = {}
-          for (const m of json.data.manifests) {
+          for (const m of data.manifests) {
             if (m.pax_ids && m.pax_ids.length) got[m.flight_no] = m.pax_ids
           }
           this._paxManifest = got
@@ -2023,6 +2163,7 @@ export default {
         // 疏散模式下加速
         const speedMul = this.evacuation.active ? 2.5 : 1
 
+        p._prevProgress = p.progress
         p.progress += p.speed * speedMul
 
         // entering 状态：到达主干道区域（约 0.3 进度）转为候机
@@ -3401,66 +3542,69 @@ export default {
       const canvas = this.$refs.canvas
       if (!canvas) return
       const ctx = canvas.getContext('2d')
-      const now = Date.now()
+      const dense = this.passengers.length > 300
 
+      // 按颜色/状态分组，每组一次性 fill：上千名旅客时避免上千次 arc+fill+stroke 拖垮合成
+      // 两次模拟 tick 之间按时间比例插值，画面刷新 60fps，旅客不再每 200ms 跳一格
+      const tickGap = this._lastTickInterval || 200
+      const tickFrac = this._lastTickAt
+        ? Math.min(1, Math.max(0, (performance.now() - this._lastTickAt) / tickGap))
+        : 1
+
+      const groups = new Map()
       for (const p of this.passengers) {
         let sx, sy
-
         if (p.status === 'waiting') {
-          // 候机旅客：显示在航站楼候机区，带呼吸脉冲
           sx = this.tx(p.waitX)
           sy = this.ty(p.waitY)
         } else {
           const rc = this.routeCorridors[p.corridorIdx]
           if (!rc) continue
-          // 下客旅客使用自定义 waypoints（现有走廊反转+末端出口门），其余用走廊默认
           const wps = p.waypoints || rc.waypoints
-          const pos = this.interpolateRoute(wps, p.progress, p.laneOffset, (p.waypoints ? 5 : rc.width) * 0.85)
+          let prog = p.progress
+          if (tickFrac < 1 && p._prevProgress != null && p.status !== 'arrived' && Math.abs(p.progress - p._prevProgress) < 0.3) {
+            prog = p._prevProgress + (p.progress - p._prevProgress) * tickFrac
+          }
+          const pos = this.interpolateRoute(wps, prog, p.laneOffset, (p.waypoints ? 5 : rc.width) * 0.85)
           sx = this.tx(pos.x)
           sy = this.ty(pos.y)
         }
+        const key = p.status === 'waiting' ? p.color + '|w' : p.color
+        let arr = groups.get(key)
+        if (!arr) { arr = []; groups.set(key, arr) }
+        arr.push(sx, sy)
+      }
 
-        const isWaiting = p.status === 'waiting'
-        const isEntering = p.status === 'entering'
-        const pulse = isWaiting ? 0.7 + 0.3 * Math.sin(now / 600 + (p.id || '0').charCodeAt(0 || 0)) : 1
-        const r = isWaiting ? 4 : 3
-
-        if (!isWaiting && !isEntering) {
-          // 外发光（walking/boarding 等移动状态）
-          ctx.beginPath()
-          const glowR = r + 2.5
-          ctx.arc(sx, sy, glowR, 0, Math.PI * 2)
-          ctx.fillStyle = p.color + '40'
-          ctx.fill()
+      for (const [key, pts] of groups) {
+        const waiting = key.endsWith('|w')
+        const color = waiting ? key.slice(0, -2) : key
+        const r = waiting ? 4 : 3
+        ctx.beginPath()
+        for (let i = 0; i < pts.length; i += 2) {
+          ctx.moveTo(pts[i] + r, pts[i + 1])
+          ctx.arc(pts[i], pts[i + 1], r, 0, Math.PI * 2)
         }
+        ctx.fillStyle = color
+        ctx.fill()
+        if (!dense) {
+          ctx.strokeStyle = waiting ? '#ffffcc' : '#fff'
+          ctx.lineWidth = waiting ? 1.0 : 0.6
+          ctx.stroke()
+        }
+      }
 
-        if (isWaiting) {
-          // 外发光（脉动）
+      // 候机光晕只在人数较少时绘制（人多了视觉上也分不出来）
+      if (!dense) {
+        const now = Date.now()
+        for (const p of this.passengers) {
+          if (p.status !== 'waiting') continue
+          const pulse = 0.7 + 0.3 * Math.sin(now / 600 + (p.id || '0').charCodeAt(0 || 0))
+          const sx = this.tx(p.waitX)
+          const sy = this.ty(p.waitY)
           ctx.beginPath()
-          const glowR = r + 4
-          ctx.arc(sx, sy, glowR, 0, Math.PI * 2)
+          ctx.arc(sx, sy, 8, 0, Math.PI * 2)
           ctx.fillStyle = p.color + Math.floor(30 * pulse).toString(16).padStart(2, '0')
           ctx.fill()
-        }
-
-        // 主体
-        ctx.beginPath()
-        ctx.arc(sx, sy, r, 0, Math.PI * 2)
-        ctx.fillStyle = p.color
-        ctx.fill()
-
-        // 边框
-        ctx.strokeStyle = isWaiting ? '#ffffcc' : '#fff'
-        ctx.lineWidth = isWaiting ? 1.0 : 0.6
-        ctx.stroke()
-
-        // 等待旅客：额外白色小点脉冲
-        if (isWaiting && pulse > 0.92) {
-          ctx.beginPath()
-          ctx.arc(sx, sy, r + 2, 0, Math.PI * 2)
-          ctx.strokeStyle = '#ffffff' + Math.floor(50 * (pulse - 0.92) / 0.08).toString(16).padStart(2, '0')
-          ctx.lineWidth = 0.8
-          ctx.stroke()
         }
       }
     },
@@ -3513,5 +3657,23 @@ export default {
 
 .layout-canvas {
   display: block;
+  cursor: grab;
+}
+
+.layout-canvas:active {
+  cursor: grabbing;
+}
+
+.zoom-hint {
+  position: absolute;
+  right: 10px;
+  bottom: 8px;
+  padding: 2px 8px;
+  font-size: 11px;
+  color: rgba(205, 214, 244, 0.55);
+  background: rgba(10, 15, 30, 0.55);
+  border-radius: 4px;
+  pointer-events: none;
+  user-select: none;
 }
 </style>

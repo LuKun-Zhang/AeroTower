@@ -38,6 +38,10 @@
         <el-button type="success" size="small" @click="saveRunway" :disabled="!date" style="width:100%">保存跑道调度</el-button>
       </div>
 
+      <div class="control-group btn-row">
+        <el-button size="small" type="primary" plain icon="el-icon-data-analysis" @click="openCharts" style="width:100%">图表</el-button>
+      </div>
+
       <div class="stats-box" v-if="runwayStats">
         <div class="stat-item"><span class="stat-val">{{ runwayCount }}</span>条跑道</div>
         <div class="stat-item"><span class="stat-val">{{ schedule.length }}</span>航班</div>
@@ -125,19 +129,26 @@
         </div>
       </div>
     </div>
+
+    <chart-overlay :visible.sync="chartsOpen" :charts="chartList" title="跑道调度" />
   </div>
 </template>
 
 <script>
 import api from '@/api'
+import ChartOverlay from '@/components/ChartOverlay'
+import { buildRunwayCharts } from '@/utils/charts/runwayView'
 
 const START_HOUR = 0
 const END_HOUR = 30
 const TOTAL_MIN = (END_HOUR - START_HOUR) * 60
 
 export default {
+  components: { ChartOverlay },
   data() {
     return {
+      chartsOpen: false,
+      chartList: [],
       filteredReady: false,
       airport: '',
       date: '',
@@ -180,6 +191,10 @@ export default {
     },
   },
   methods: {
+    openCharts() {
+      this.chartList = buildRunwayCharts(this)
+      this.chartsOpen = true
+    },
     runwaySchedule(r) {
       return this.schedule.filter(i => i.runway === r)
     },

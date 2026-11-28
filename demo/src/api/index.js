@@ -1,9 +1,18 @@
 /** API 请求封装 */
+import { scoped, currentScope } from './scope'
+
 const BASE_URL = '/api'
 
 export async function request(url, options = {}) {
+  let username = ''
+  try {
+    username = JSON.parse(localStorage.getItem('current_user') || '{}').username || ''
+  } catch (e) {}
   const config = {
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      ...(username ? { 'X-Username': username } : {}),
+    },
     ...options,
   }
 
@@ -436,11 +445,11 @@ export default {
     return request(`/anomaly/audit-log?${params.toString()}`)
   },
 
-  // ========== 模拟引擎 API ==========
+  // ========== 模拟引擎 API（自动识别 live / replay 作用域） ==========
 
   /** 初始化仿真 */
   initSimulation(airport) {
-    return request('/simulation/init', {
+    return request(scoped('/init', '/simulation/init'), {
       method: 'POST',
       body: JSON.stringify({ airport }),
     })
@@ -448,32 +457,32 @@ export default {
 
   /** 启动仿真 */
   startSimulation() {
-    return request('/simulation/start', { method: 'POST' })
+    return request(scoped('/start', '/simulation/start'), { method: 'POST' })
   },
 
   /** 暂停仿真 */
   pauseSimulation() {
-    return request('/simulation/pause', { method: 'POST' })
+    return request(scoped('/pause', '/simulation/pause'), { method: 'POST' })
   },
 
   /** 恢复仿真 */
   resumeSimulation() {
-    return request('/simulation/resume', { method: 'POST' })
+    return request(scoped('/resume', '/simulation/resume'), { method: 'POST' })
   },
 
   /** 停止仿真 */
   stopSimulation() {
-    return request('/simulation/stop', { method: 'POST' })
+    return request(scoped('/stop', '/simulation/stop'), { method: 'POST' })
   },
 
   /** 单步执行 */
   stepSimulation() {
-    return request('/simulation/step', { method: 'POST' })
+    return request(scoped('/step', '/simulation/step'), { method: 'POST' })
   },
 
   /** 设置倍速 */
   setSimSpeed(speed) {
-    return request('/simulation/speed', {
+    return request(scoped('/speed', '/simulation/speed'), {
       method: 'POST',
       body: JSON.stringify({ speed }),
     })
@@ -481,7 +490,7 @@ export default {
 
   /** 跳转到指定进度 */
   jumpSimulation(progressPct) {
-    return request('/simulation/jump', {
+    return request(scoped('/jump', '/simulation/jump'), {
       method: 'POST',
       body: JSON.stringify({ progress_pct: progressPct }),
     })
@@ -489,7 +498,7 @@ export default {
 
   /** 按绝对业务分钟同步引擎时钟（供「模拟大引擎」统一时钟驱动） */
   syncSimTime(currentMinutes) {
-    return request('/simulation/sync_time', {
+    return request(scoped('/sync', '/simulation/sync_time'), {
       method: 'POST',
       body: JSON.stringify({ current_minutes: currentMinutes }),
     })
@@ -497,32 +506,41 @@ export default {
 
   /** 获取仿真快照 */
   getSimSnapshot() {
-    return request('/simulation/snapshot')
+    return request(scoped('/snapshot', '/simulation/snapshot'))
   },
 
   /** 获取航班状态 */
   getSimFlights() {
-    return request('/simulation/flights')
+    return request(scoped('/flights', '/simulation/flights'))
   },
 
   /** 获取 KPI */
   getSimKpi() {
-    return request('/simulation/kpi')
+    return request(scoped('/kpi', '/simulation/kpi'))
   },
 
   /** 获取天气 */
   getSimWeather(airport) {
     const qs = airport ? `?airport=${encodeURIComponent(airport)}` : ''
-    return request('/simulation/weather' + qs)
+    return request(scoped('/weather', '/simulation/weather') + qs)
   },
 
   /** 获取仿真上下文（机场/飞机/基地） */
   getSimContext() {
-    return request('/simulation/context')
+    return request(scoped('/context', '/simulation/context'))
+  },
+
+  _rejectInReplay() {
+    if (currentScope()) {
+      return Promise.reject(new Error('回放模式不支持注入事件'))
+    }
+    return null
   },
 
   /** 注入机场异常 */
   injectAirportAnomaly(airport, capacityRatio, durationMin) {
+    const reject = this._rejectInReplay()
+    if (reject) return reject
     return request('/simulation/inject/airport', {
       method: 'POST',
       body: JSON.stringify({ airport, capacity_ratio: capacityRatio, duration_min: durationMin }),
@@ -531,6 +549,8 @@ export default {
 
   /** 注入机组请假 */
   injectCrewAbsence(crewNames, base) {
+    const reject = this._rejectInReplay()
+    if (reject) return reject
     return request('/simulation/inject/crew', {
       method: 'POST',
       body: JSON.stringify({ crew_names: crewNames, base }),
@@ -539,6 +559,8 @@ export default {
 
   /** 注入飞机故障 */
   injectAircraftFailure(tailNo, durationMin) {
+    const reject = this._rejectInReplay()
+    if (reject) return reject
     return request('/simulation/inject/aircraft', {
       method: 'POST',
       body: JSON.stringify({ tail_no: tailNo, duration_min: durationMin }),
@@ -547,12 +569,33 @@ export default {
 
   /** 获取活跃事件 */
   getSimEvents() {
-    return request('/simulation/events')
+    return request(scoped('/events', '/simulation/events'))
   },
 
   /** 移除事件 */
   removeSimEvent(index) {
-    return request(`/simulation/events/${index}`, { method: 'DELETE' })
+    return request(scoped(`/events/${index}`, `/simulation/events/${index}`), { method: 'DELETE' })
+  },
+
+  // ========== 旅客流 / 天气中断（带作用域） ==========
+
+  /** 获取旅客流调度；回放时读实验工件 */
+  getPaxflowSchedule(disrupted = true) {
+    const live = '/paxflow/schedule' + (disrupted ? '?disrupted=true' : '')
+    return request(scoped('/paxflow', live))
+  },
+
+  /** 获取旅客编号清单；回放时返回空清单，前端用兜底编号 */
+  getPaxflowManifests(payload) {
+    return request(scoped('/manifests', '/paxflow/manifests'), {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    })
+  },
+
+  /** 读取当前天气中断计划（回放时读实验情景） */
+  getWeatherDisruption() {
+    return request(scoped('/weather_disruption', '/weather/disruption'))
   },
 
   // ========== 天气中断联动 API ==========
@@ -563,10 +606,5 @@ export default {
       method: 'POST',
       body: JSON.stringify(payload),
     })
-  },
-
-  /** 读取当前天气中断计划（回显/调试） */
-  getWeatherDisruption() {
-    return request('/weather/disruption')
   },
 }

@@ -29,6 +29,24 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
+    path: '/experiments',
+    name: 'ExperimentList',
+    component: () => import('../views/ExperimentListView.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/experiments/new',
+    name: 'ExperimentCreate',
+    component: () => import('../views/ExperimentCreateView.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/experiments/:id',
+    name: 'ExperimentDetail',
+    component: () => import('../views/ExperimentDetailView.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
     path: '/plane-preview',
     name: 'PlaneModelPreview',
     component: () => import('../views/PlaneModelPreview.vue')

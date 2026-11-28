@@ -23,7 +23,7 @@
         <SimMapView ref="flightPane" :embedded="true" />
       </div>
       <div v-show="activeTab === 'weather'" class="hub-pane">
-        <WeatherMap3D ref="weatherMap" :weatherData="{}" :currentTime="''" />
+        <WeatherMap3D ref="weatherMap" :weatherData="emptyWeather" :currentTime="''" />
       </div>
       <div v-show="activeTab === 'paxflow'" class="hub-pane">
         <TerminalFlowView ref="paxPane" :embedded="true" />
@@ -108,6 +108,8 @@ export default {
       _streamTimer: null,
       _lastMoveEmit: 0,
       _lastBackendSync: 0,
+      _lastStreamAt: 0,
+      emptyWeather: Object.freeze({}),
     }
   },
   computed: {
@@ -164,10 +166,11 @@ export default {
       if (clock) {
         this.hubPhase = clock.current_phase || 0
         this.clockText = clock.current_time || this.clockText
-        // 航班页显示时间即时跟随统一时钟（轻量，无后端请求）
-        this._pushClockToFlightPane()
-        // 节流同步后端引擎时间，保证航班起降状态与统一时钟一致
-        this._throttledBackendSync()
+        // 仅航班 tab 激活时才驱动航班页，避免隐藏页持续更新与请求
+        if (this.activeTab === 'flight') {
+          this._pushClockToFlightPane()
+          this._throttledBackendSync()
+        }
       }
     },
     _pushClockToFlightPane() {
@@ -223,6 +226,10 @@ export default {
     async _pushStream() {
       const wm = this.$refs.weatherMap
       if (!wm) return
+      // 天气 tab 可见时 2s 回传一次；其他 tab 降为 6s，减少主线程计算与后端压力
+      const now = Date.now()
+      if (this.activeTab !== 'weather' && now - this._lastStreamAt < 6000) return
+      this._lastStreamAt = now
       try {
         const clock = wm.getBusinessClock()
         const predicted = wm.predictProvinceTimeline(10080)
