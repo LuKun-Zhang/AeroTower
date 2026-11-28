@@ -166,7 +166,7 @@ export default {
       try {
         const res = await fetch('/api/generate/data?type=stats')
         const json = await res.json()
-        if (json.code !== 0) {
+        if (json.code !== 0 || !json.data) {
           this.$message.warning(json.msg || '暂无数据')
           return
         }

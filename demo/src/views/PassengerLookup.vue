@@ -155,7 +155,7 @@ export default {
       try {
         const res = await fetch(`/api/generate/data?type=passengers&pax_id=${encodeURIComponent(id)}`)
         const json = await res.json()
-        if (json.code === 0) {
+        if (json.code === 0 && json.data) {
           this.passenger = json.data
         }
       } catch (e) {
@@ -168,7 +168,7 @@ export default {
       try {
         const res = await fetch('/api/generate/data?type=passengers&limit=6')
         const json = await res.json()
-        if (json.code === 0 && json.data.length) {
+        if (json.code === 0 && Array.isArray(json.data) && json.data.length) {
           this.sampleIds = json.data.map(p => p.pax_id)
         }
       } catch (e) { /* ignore */ }

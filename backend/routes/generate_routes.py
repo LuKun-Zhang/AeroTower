@@ -150,10 +150,17 @@ def get_generated_data():
     支持 ?type=stats|chains|flights|passengers&limit=N&offset=N&flight_id=X&pax_id=X
     """
     data = state.get_generated_data()
-    if not data:
-        return jsonify({'code': 1, 'msg': '暂无生成数据，请先生成航班计划'}), 404
-
     data_type = request.args.get('type', 'stats')
+    if not data:
+        # 没有生成数据属于正常空态，不应返回 404（前端会当成接口错误并刷控制台）
+        msg = '暂无生成数据，请先生成航班计划'
+        if data_type == 'chains':
+            return jsonify({'code': 0, 'data': [], 'empty': True, 'msg': msg})
+        if data_type in ('flights', 'passengers') and not (
+            request.args.get('flight_id') or request.args.get('pax_id')
+        ):
+            return jsonify({'code': 0, 'data': [], 'total': 0, 'empty': True, 'msg': msg})
+        return jsonify({'code': 0, 'data': None, 'empty': True, 'msg': msg})
     limit = int(request.args.get('limit') or 50)
     offset = int(request.args.get('offset') or 0)
     flight_id = request.args.get('flight_id', '')

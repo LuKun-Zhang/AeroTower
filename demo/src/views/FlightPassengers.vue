@@ -209,7 +209,7 @@ export default {
       try {
         const res = await fetch(`/api/generate/data?type=flights&flight_id=${this.flightId}`)
         const json = await res.json()
-        if (json.code !== 0) return
+        if (json.code !== 0 || !json.data) return
         this.flight = json.data
 
         const manifest = this.flight.passenger_manifest || {}
