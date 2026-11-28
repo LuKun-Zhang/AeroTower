@@ -350,17 +350,24 @@ export default {
       const ctx = canvas.getContext('2d')
       ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight)
 
-      // 背景
-      ctx.fillStyle = '#1a1a2e'
+      // 背景：中心略亮的径向渐变，避免整屏死黑
+      const bg = ctx.createRadialGradient(
+        this.canvasWidth * 0.5, this.canvasHeight * 0.45, 60,
+        this.canvasWidth * 0.5, this.canvasHeight * 0.45,
+        Math.max(this.canvasWidth, this.canvasHeight) * 0.75
+      )
+      bg.addColorStop(0, '#1c2130')
+      bg.addColorStop(1, '#12131d')
+      ctx.fillStyle = bg
       ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight)
 
-      // 画网格
-      ctx.strokeStyle = 'rgba(255,255,255,0.03)'
+      // 网格（淡）
+      ctx.strokeStyle = 'rgba(255,255,255,0.022)'
       ctx.lineWidth = 1
-      for (let i = 0; i < this.canvasWidth; i += 40) {
+      for (let i = 0; i < this.canvasWidth; i += 32) {
         ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, this.canvasHeight); ctx.stroke()
       }
-      for (let j = 0; j < this.canvasHeight; j += 40) {
+      for (let j = 0; j < this.canvasHeight; j += 32) {
         ctx.beginPath(); ctx.moveTo(0, j); ctx.lineTo(this.canvasWidth, j); ctx.stroke()
       }
 
@@ -397,32 +404,67 @@ export default {
       ctx.restore()
     },
 
+    roundRectPath(ctx, x, y, w, h, r) {
+      const rr = Math.max(0, Math.min(r, Math.abs(w) / 2, Math.abs(h) / 2))
+      ctx.beginPath()
+      ctx.moveTo(x + rr, y)
+      ctx.arcTo(x + w, y, x + w, y + h, rr)
+      ctx.arcTo(x + w, y + h, x, y + h, rr)
+      ctx.arcTo(x, y + h, x, y, rr)
+      ctx.arcTo(x, y, x + w, y, rr)
+      ctx.closePath()
+    },
+
     drawRunways(ctx) {
       const runways = this.layoutData.runways || []
       for (const r of runways) {
         const rx = this.tx(r.x), ry = this.ty(r.y), rw = this.tw(r.w), rh = this.th(r.h)
-        ctx.fillStyle = '#3a3a5c'
-        ctx.fillRect(rx, ry, rw, rh)
-        ctx.strokeStyle = '#5a5a8c'
-        ctx.lineWidth = 2
-        ctx.strokeRect(rx, ry, rw, rh)
 
-        // 跑道中线
-        ctx.setLineDash([12, 8])
-        ctx.strokeStyle = '#8a8abc'
+        // 道面：轻微渐变 + 圆角，避免纯色块
+        const grad = ctx.createLinearGradient(0, ry, 0, ry + rh)
+        grad.addColorStop(0, '#2a2e3a')
+        grad.addColorStop(1, '#1f222b')
+        ctx.fillStyle = grad
+        this.roundRectPath(ctx, rx, ry, rw, rh, Math.min(6, rh * 0.12))
+        ctx.fill()
+        ctx.strokeStyle = 'rgba(140,160,190,0.32)'
         ctx.lineWidth = 1
-        ctx.beginPath()
-        ctx.moveTo(rx + 10, ry + rh / 2)
-        ctx.lineTo(rx + rw - 10, ry + rh / 2)
         ctx.stroke()
-        ctx.setLineDash([])
 
-        // 标签
+        // 中线
+        ctx.save()
+        ctx.setLineDash([Math.max(7, rw * 0.012), 11])
+        ctx.strokeStyle = 'rgba(230,235,245,0.5)'
+        ctx.lineWidth = 1.2
+        ctx.beginPath()
+        ctx.moveTo(rx + rw * 0.06, ry + rh / 2)
+        ctx.lineTo(rx + rw * 0.94, ry + rh / 2)
+        ctx.stroke()
+        ctx.restore()
+
+        // 两端阈值条纹
+        const stripeH = rh * 0.55
+        const stripeW = Math.max(2, rw * 0.004)
+        const gap = stripeW * 1.8
+        ctx.fillStyle = 'rgba(240,244,250,0.7)'
+        for (let k = 0; k < 6; k++) {
+          const off = rw * 0.028 + k * gap
+          ctx.fillRect(rx + off, ry + (rh - stripeH) / 2, stripeW, stripeH)
+          ctx.fillRect(rx + rw - off - stripeW, ry + (rh - stripeH) / 2, stripeW, stripeH)
+        }
+
+        // 跑道名（小胶囊）
         if (r.text) {
-          ctx.fillStyle = '#aaa'
-          ctx.font = `${Math.max(12, rh * 0.7)}px sans-serif`
+          const fs = Math.max(10, Math.min(13, rh * 0.6))
+          ctx.font = `600 ${fs}px "Microsoft YaHei", sans-serif`
           ctx.textAlign = 'center'
-          ctx.fillText(r.text, rx + rw / 2, ry - 6)
+          ctx.textBaseline = 'middle'
+          const tw2 = ctx.measureText(r.text).width + 12
+          ctx.fillStyle = 'rgba(8,12,20,0.72)'
+          this.roundRectPath(ctx, rx + rw / 2 - tw2 / 2, ry - 20, tw2, 15, 7)
+          ctx.fill()
+          ctx.fillStyle = 'rgba(205,214,244,0.9)'
+          ctx.fillText(r.text, rx + rw / 2, ry - 12.5)
         }
       }
     },
@@ -431,11 +473,12 @@ export default {
       const piers = this.layoutData.piers || []
       for (const p of piers) {
         const px = this.tx(p.x), py = this.ty(p.y), pw = this.tw(p.w), ph = this.th(p.h)
-        ctx.fillStyle = '#3d5060'
-        ctx.fillRect(px, py, pw, ph)
-        ctx.strokeStyle = '#5a7a90'
-        ctx.lineWidth = 1.5
-        ctx.strokeRect(px, py, pw, ph)
+        ctx.fillStyle = '#32465a'
+        this.roundRectPath(ctx, px, py, pw, ph, 4)
+        ctx.fill()
+        ctx.strokeStyle = 'rgba(96,132,158,0.75)'
+        ctx.lineWidth = 1.2
+        ctx.stroke()
       }
     },
 
@@ -445,18 +488,26 @@ export default {
         const tx = this.tx(t.x), ty2 = this.ty(t.y), tw = this.tw(t.w), th = this.th(t.h)
         // 航站楼主体
         const grad = ctx.createLinearGradient(tx, ty2, tx, ty2 + th)
-        grad.addColorStop(0, '#2c4a6e')
-        grad.addColorStop(1, '#1a3350')
+        grad.addColorStop(0, '#2d4260')
+        grad.addColorStop(1, '#172536')
         ctx.fillStyle = grad
-        ctx.fillRect(tx, ty2, tw, th)
-        ctx.strokeStyle = '#4a8ab5'
-        ctx.lineWidth = 2.5
-        ctx.strokeRect(tx, ty2, tw, th)
+        this.roundRectPath(ctx, tx, ty2, tw, th, Math.min(9, th * 0.22))
+        ctx.fill()
+        ctx.strokeStyle = 'rgba(110,160,195,0.6)'
+        ctx.lineWidth = 1.5
+        ctx.stroke()
+        // 顶部高光
+        ctx.strokeStyle = 'rgba(255,255,255,0.12)'
+        ctx.lineWidth = 1
+        ctx.beginPath()
+        ctx.moveTo(tx + 8, ty2 + 1.5)
+        ctx.lineTo(tx + tw - 8, ty2 + 1.5)
+        ctx.stroke()
 
         // 标签
         if (t.terminal_name) {
           ctx.fillStyle = '#fff'
-          ctx.font = `bold ${Math.max(13, th * 0.55)}px sans-serif`
+          ctx.font = `600 ${Math.max(12, Math.min(18, th * 0.5))}px "Microsoft YaHei", sans-serif`
           ctx.textAlign = 'center'
           ctx.textBaseline = 'middle'
           ctx.fillText(t.terminal_name, tx + tw / 2, ty2 + th / 2)
@@ -491,9 +542,10 @@ export default {
             ctx.fillStyle = '#4e342e'
             ctx.strokeStyle = '#ff9800'
           }
-          ctx.lineWidth = 1.5
-          ctx.fillRect(-rectW / 2, -rectH / 2, rectW, rectH)
-          ctx.strokeRect(-rectW / 2, -rectH / 2, rectW, rectH)
+          ctx.lineWidth = 1.2
+          this.roundRectPath(ctx, -rectW / 2, -rectH / 2, rectW, rectH, 3)
+          ctx.fill()
+          ctx.stroke()
 
           // 标签文字（旋转回来正向显示）
           ctx.rotate(-rotDeg * Math.PI / 180)
@@ -505,26 +557,28 @@ export default {
           ctx.fillText(isEntry ? '入口' : '出口', 0, 0)
         } else {
           // 矩形登机口
-          ctx.fillStyle = '#557a95'
-          ctx.fillRect(-gw / 2, -gh / 2, gw, gh)
-          ctx.strokeStyle = '#7aaac0'
+          ctx.fillStyle = '#4d6d84'
+          this.roundRectPath(ctx, -gw / 2, -gh / 2, gw, gh, 3)
+          ctx.fill()
+          ctx.strokeStyle = 'rgba(140,180,205,0.55)'
           ctx.lineWidth = 0.8
-          ctx.strokeRect(-gw / 2, -gh / 2, gw, gh)
+          ctx.stroke()
         }
         ctx.restore()
 
-        // 标注名称（所有 gate）
-        ctx.save()
-        ctx.fillStyle = '#ffd54f'
-        const fontSize = Math.max(7, Math.min(10, gh * 0.3))
-        ctx.font = `bold ${fontSize}px monospace`
-        ctx.textAlign = 'center'
-        ctx.textBaseline = 'top'
-        // 获取简短名称
-        let label = g.name || ''
-        label = label.replace('箭头: ', '')
-        ctx.fillText(label, cx, cy + gh * 0.55)
-        ctx.restore()
+        // 登机口编号：默认视图太密，放大到 1.4x 以上才显示
+        if (this.viewScale >= 1.4) {
+          ctx.save()
+          ctx.fillStyle = 'rgba(255,213,79,0.75)'
+          const fontSize = Math.max(7, Math.min(10, gh * 0.3))
+          ctx.font = `600 ${fontSize}px monospace`
+          ctx.textAlign = 'center'
+          ctx.textBaseline = 'top'
+          let label = g.name || ''
+          label = label.replace('箭头: ', '')
+          ctx.fillText(label, cx, cy + gh * 0.55)
+          ctx.restore()
+        }
       }
     },
 
