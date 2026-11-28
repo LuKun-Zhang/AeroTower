@@ -96,7 +96,7 @@ export default {
       sizeIndex: 0,
       manualTheme: null,
       detectedTheme: 'dark',
-      autoRefresh: false,
+      autoRefresh: true,
       emptyMsg: '',
       pos: null,
       dragging: null,
@@ -154,7 +154,10 @@ export default {
     visible(val) {
       if (val) {
         // 等 DOM 落地再测底色，否则浮层显隐状态和页面尺寸都还是上一帧的
-        this.$nextTick(() => { this.detectTheme(); this.ensureChart(); this.render() })
+        this.$nextTick(() => {
+          this.detectTheme(); this.ensureChart(); this.render()
+          if (this.autoRefresh) this.startTimer()
+        })
       } else {
         this.stopTimer()
         this.autoRefresh = false
@@ -289,9 +292,11 @@ export default {
     toggleRefresh() {
       this.autoRefresh = !this.autoRefresh
       this.stopTimer()
-      if (this.autoRefresh) {
-        this.refreshTimer = setInterval(() => { if (this.visible) this.render() }, 1000)
-      }
+      if (this.autoRefresh) this.startTimer()
+    },
+    startTimer() {
+      this.stopTimer()
+      this.refreshTimer = setInterval(() => { if (this.visible) this.render() }, 1000)
     },
     stopTimer() {
       if (this.refreshTimer) { clearInterval(this.refreshTimer); this.refreshTimer = null }

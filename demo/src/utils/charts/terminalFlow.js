@@ -101,7 +101,7 @@ export function buildTerminalFlowCharts(vm) {
     {
       id: 'tf-paxcount',
       title: '在场旅客数时序',
-      note: 'paxCount=航站楼层在场旅客粒子数，planeCount=在场飞机数，均取自 TerminalLayout 轮询快照，按业务分钟攒历史',
+      note: 'paxCount=在场旅客数，planeCount=在场飞机数（已排除未到时刻的预置飞机），均取自 TerminalLayout 轮询快照；曲线只记录浮层打开后的采样，凌晨无航班时段为 0 属正常',
       build: () => {
         const ts = bizMinute(vm)
         if (ts === null) return noData('仿真还没启动或时间轴未推进——请先启动旅客流仿真')

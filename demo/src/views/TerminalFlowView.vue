@@ -108,6 +108,7 @@ import ProvinceWeatherPanel from '@/components/ProvinceWeatherPanel'
 import ChartOverlay from '@/components/ChartOverlay'
 import { buildTerminalFlowCharts } from '@/utils/charts/terminalFlow'
 import { SCHEDULE_DATES } from '@/data/multiDaySchedule'
+import { resetSamples } from '@/utils/chartBase'
 import api from '@/api'
 
 const DEFAULT_PAX_PARAMS = {
@@ -246,10 +247,10 @@ export default {
       const L = this.$refs.layout
       if (!L) return
       // 嵌入模式：后端调度加载完成后，一次性把旅客流速度对齐到统一时钟
-      // （5 业务分钟/秒 ≈ speed 5），保证日常播放与天气/航班模拟速度一致
+      // （统一时钟 1 业务分钟/秒；timePerTick=0.1，speed 2 ≈ 10 tick/秒）
       if (this.embedded && !this._speedSynced && L.paxflowDates && L.paxflowDates.length) {
         this._speedSynced = true
-        if (typeof L.setSpeed === 'function') L.setSpeed(5)
+        if (typeof L.setSpeed === 'function') L.setSpeed(2)
       }
       this.simRunning = L.simState.running
       this.simPaused = L.simState.paused
@@ -257,7 +258,12 @@ export default {
       this.simTime = L.simState.currentTime
       this.simFlights = L.simFlights ? [...L.simFlights] : []
       this.paxCount = L.passengers ? L.passengers.length : 0
-      this.planeCount = L.airplanes ? L.airplanes.length : 0
+      // 只统计真正在场上/滑行中的飞机：airplanes 里包含当天全部计划飞机，
+      // 未到时刻的 alpha=0，直接取 length 会恒等于总班次（看起来像“在场 189 架”）
+      const IDLE_PLANE = { IN_FLIGHT: 1, PRELOADED: 1, PRELOADED_AT_GATE: 1, AWAITING_ARRIVAL: 1 }
+      this.planeCount = L.airplanes
+        ? L.airplanes.filter(p => p.alpha > 0 && !IDLE_PLANE[p.status]).length
+        : 0
       this.gateStates = { ...L.gateStates }
       this.entryGates = L.entryGates ? [...L.entryGates] : []
       this.exitGates = L.exitGates ? [...L.exitGates] : []
@@ -303,6 +309,8 @@ export default {
 
     onDateChange(date) {
       if (!this.$refs.layout || date === this.currentDate) return
+      // 换天/换数据源后清空趋势采样，避免把不同日期的曲线连在一起
+      ;['pax-count', 'tflow-cong', 'evac'].forEach(k => resetSamples(k))
       this.$refs.layout.setDate(date)
     },
     onPrevDay() {
